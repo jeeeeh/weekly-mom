@@ -5,8 +5,8 @@
 <meta name="color-scheme" content="only light">
 <meta name="supported-color-schemes" content="light only">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>이번주도 다다다와 함께</title>
-<!-- 발송 2026-10-17 #5 -->
+<title>10월 4주차 다다다</title>
+<!-- 발송 2026-10-17 #6 -->
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
 <style>
@@ -66,8 +66,8 @@ h2 .e{display:inline-grid;place-items:center;width:34px;height:34px;border-radiu
 
 /* 탭 */
 .tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:8px;display:flex;flex-direction:column;gap:8px}
-.tabrow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.tab{all:unset;cursor:pointer;text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:10px 4px;font-family:var(--display);font-size:16px;line-height:1.2}
+.tabrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.tab{all:unset;cursor:pointer;text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:10px 2px;font-family:var(--display);font-size:15px;line-height:1.2;min-width:0}
 .tab small{display:block;font-family:var(--body);font-size:11px;color:var(--muted)}
 .tab[aria-selected="true"]{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 4px 0 #e5604f}
 .tab[aria-selected="true"] small{color:var(--paper);opacity:.9}
@@ -122,6 +122,10 @@ h2 .e{display:inline-grid;place-items:center;width:34px;height:34px;border-radiu
 .dhead small{display:block;color:var(--muted);font-size:12px}.dhead b{font-family:var(--display);font-weight:400;font-size:26px}
 .dare p{margin:0;font-size:14px}.dare h3{font-family:var(--display);font-weight:400;font-size:19px;margin:4px 0 0}.dare h3 span{font-family:var(--body);font-size:12px;color:var(--muted)}
 .ladder{display:flex;flex-wrap:wrap;gap:6px}.ladder span{font-size:13px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.thumb{display:block;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/9;background:var(--sun-soft)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb::after{content:"▶";position:absolute;inset:0;margin:auto;width:48px;height:48px;border-radius:50%;background:rgba(255,127,110,.92);color:#fff;display:grid;place-items:center;font-size:18px;padding-left:3px;box-sizing:border-box}
+.card .ch{font-size:12px;color:var(--muted)}
 /* 폰 브라우저 강제 다크모드에서도 밝게 */
 html,body{color-scheme:only light;forced-color-adjust:none;}
 </style>
@@ -133,8 +137,8 @@ html,body{color-scheme:only light;forced-color-adjust:none;}
 <header class="cover">
   <div class="issue"><span class="pill">VOL.01 · 시안</span><span>2026년 10월 19일(월) – 25일(일)</span></div>
   <span class="floaty" style="right:20px;top:30px">🎨</span><span class="floaty" style="right:58px;top:72px">🍂</span><span class="floaty" style="right:16px;top:104px">🧁</span>
-  <h1>이번주도<br><span>다다다</span>와 함께❤️</h1>
-  <p>다연·다솔·다정이와 이번 주에 해 볼 만들기·요리 놀이, 도전 재료, 나들이, 지금 나이에 챙길 것을 한 장에 모았어요.</p>
+  <h1>10월 4주차<br><span>다다다</span>❤️</h1>
+  <p>다연·다솔·다정이와 이번 주에 해 볼 만들기·요리 놀이, 도전 재료, 같이 볼 영상, 나들이, 지금 나이에 챙길 것을 한 장에 모았어요.</p>
   <svg class="deco" viewBox="0 0 128 128" aria-hidden="true">
     <path d="M70 18 L76 40 L96 30 L88 52 L110 56 L90 68 L102 86 L80 82 L76 104 L64 86 L52 104 L48 82 L26 86 L38 68 L18 56 L40 52 L32 30 L52 40 Z" fill="var(--sun-soft)" stroke="var(--coral)" stroke-width="3" stroke-linejoin="round"/>
     <path d="M64 50 L64 112" stroke="var(--coral)" stroke-width="3" stroke-linecap="round"/>
@@ -229,11 +233,12 @@ const SRC=[
  ["편식 교정과 반복 노출 (육아크루)","https://www.yugacrew.com/yugawiki/%ED%8E%B8%EC%8B%9D%EA%B5%90%EC%A0%95"],
  ["반복 노출과 채소 수용 연구 (PubMed)","https://pubmed.ncbi.nlm.nih.gov/18585415/"]
 ];
-const TABS=[{id:"play",name:"🎨 놀이",sub:"만들기·요리"},{id:"go",name:"🚗 체험",sub:"나들이"},{id:"grow",name:"🌱 건강",sub:"발달·챙길 것"}];
+const TABS=[{id:"play",name:"🎨 놀이",sub:"만들기·요리"},{id:"video",name:"📺 영상",sub:"유튜브"},{id:"go",name:"🚗 체험",sub:"나들이"},{id:"grow",name:"🌱 건강",sub:"챙길 것"}];
 const WHO={k4:"👭 다솔·다정",k9:"🎒 다연",all:"💛 셋이 함께"};
-const KIND={make:"✂️ 만들기",cook:"🍳 요리",sci:"🔬 수학·실험",move:"🏃 몸놀이"};
+const KIND={make:"✂️ 만들기",cook:"🍳 요리",sci:"🔬 수학·실험",move:"🏃 몸놀이",know:"🔍 지식",story:"📖 이야기",how:"✂️ 만들기 영상"};
 const LEAD={
  play:"만들기를 좋아하는 세 아이라 이번 주는 낙엽 만들기와 가을 간식 요리로 짰어요. 다솔·다정이 놀이는 재료를 두 세트 준비하면 다툼이 줄어요.",
+ video:"이번 주 놀이와 이어지는 이야기·지식 영상으로 골랐어요(짧은 노래 영상은 빼요). WHO는 3~4세 영상 시청을 하루 1시간 이내로 권해요. 한 편 보고, 영상 속 걸 바로 놀이로 해 보면 좋아요.",
  go:"은행잎이 노랗게 물들기 시작했어요. 가까운 은행나무길과 단풍길을 지금 한 번, 절정에 한 번 걸어 보면 좋아요.",
  grow:"이번 주는 세 아이 독감 무료접종을 먼저 챙기세요. 다솔·다정이는 생일이 같아서 검진과 접종을 한 번에 예약할 수 있어요."
 };
@@ -248,6 +253,13 @@ const D=[
  ["play","all","cook","고구마 경단","셋이 역할 나누기","찐 고구마를 으깨 동글동글 굴리고 카스텔라 가루를 묻혀요. 찌는 과정을 빼면 아이들이 대부분 직접 할 수 있어요.",["주말 40분","쉬움"],["찐 고구마 4~5개","우유 조금","카스텔라"],["다연: 고구마 으깨고 우유 조금 넣어 반죽하기","다연: 카스텔라 겉면 떼고 체에 내려 가루 만들기","다솔·다정: 한 숟갈씩 떠서 동그랗게 굴리고 가루 묻히기"],"레시피의 통견과는 만 4세에게 목에 걸릴 수 있어서 빼는 게 좋아요. 다솔·다정이 접시는 따로 두고 각자 몇 개 만들었는지 세어 보게 해요.",[["레시피 참고","https://www.10000recipe.com/recipe/7042108"]],1],
  ["play","all","make","귤 호박 얼굴","할로윈 미리 준비","귤 껍질에 유성 네임펜으로 호박 얼굴을 그려요. 다 그리면 사진 찍고 까서 먹어요.",["평일 저녁 15분","쉬움"],["귤 3개","유성 네임펜"],["귤 꼭지를 위로 놓기","눈·코·입 그리기 (웃는 얼굴, 놀란 얼굴…)","셋이 나란히 놓고 사진 찍기"],"다연이에게는 표정 이름을 영어로 붙여 보게 해도 좋아요. happy, surprised, sleepy.",[]],
  ["play","all","make","낙엽 왕관","언니가 리더","다연이가 다솔·다정이 머리 둘레를 재서 띠를 자르고, 다솔·다정이는 각자 낙엽을 붙여요.",["주말 30분","쉬움"],["두꺼운 종이 띠 3장","양면테이프","낙엽","스테이플러"],["다연: 줄자로 다솔·다정이 머리 둘레 재고 띠 자르기","다솔·다정: 양면테이프 위에 낙엽 붙이기","다연: 스테이플러로 끝 고정, 마지막에 자기 왕관도"],"왕관 안쪽에 각자 이름을 써 두면 \"내 거\" 다툼이 줄어요.",[]],
+ ["video","all","know","잠자리의 눈으로 세상을 본다면?","에그박사의 동물 도감 · KBS","가을 하늘에 많은 잠자리의 커다란 눈 이야기예요. 에그박사가 곤충을 직접 보여 주며 설명해 줘요.",["자연","관찰"],[],[],"토요일 은행나무길 산책에서 잠자리 찾기 미션으로 이어 보세요.",[["유튜브에서 보기","https://www.youtube.com/watch?v=uisjsGe4nGE"]],1,"uisjsGe4nGE","KBSKids"],
+ ["video","all","how","단풍 낙엽 리스 만들기","엄마가 먼저 보는 만들기 영상","낙엽으로 둥근 리스를 만드는 자연 미술놀이예요. 낙엽 콜라주·왕관이 끝나고 한 번 더 하고 싶을 때 좋아요.",["만들기","엄마용"],[],[],"종이 접시 가운데를 오려 틀로 쓰면 다솔·다정이도 붙이기 쉬워요. 다연이는 리본 매듭 담당!",[["유튜브에서 보기","https://www.youtube.com/watch?v=xqK2wGZafEM"]],0,"xqK2wGZafEM","어디든학교"],
+ ["video","k4","story","콩순이와 친구들 \"할로윈 파티\"","애니메이션 2화 이어보기","콩순이와 친구들이 할로윈 파티를 준비하는 이야기예요. 10.31 유치원 행사 전에 미리 보여 주기 좋아요.",["할로윈","이야기"],[],[],"\"할로윈에 뭐로 변신하고 싶어?\" 한 명씩 따로 물어보세요.",[["유튜브에서 보기","https://www.youtube.com/watch?v=RNaXtwwp0d0"]],1,"RNaXtwwp0d0","콩순이"],
+ ["video","k4","story","아기 공룡에게 엄마를 찾아주세요","지니키즈 신나는 공룡탐험","엄마를 잃은 아기 공룡의 엄마를 찾아 나서는 탐험 이야기예요.",["공룡","탐험"],[],[],"낙엽 동물 콜라주로 \"엄마 공룡, 아기 공룡\"을 만들어 보세요.",[["유튜브에서 보기","https://www.youtube.com/watch?v=IYDpIoA75us"]],0,"IYDpIoA75us","지니어드벤쳐"],
+ ["video","k9","know","원의 중심, 반지름, 지름","easy 교과서 수학 · 3학년 2학기 3단원","교과서 3-2 '원' 단원의 첫 내용을 차근차근 설명해요.",["수학","학교 연계"],[],[],"실과 연필로 원 만다라를 그리면 \"실 길이 = 반지름\"이 바로 연결돼요.",[["유튜브에서 보기","https://www.youtube.com/watch?v=GXMfluhrO9o"]],1,"GXMfluhrO9o","easy수학"],
+ ["video","k9","know","독도는 언제 생겨났을까?","초등 독도계기교육 ① · 10.25 독도의 날","독도가 어떻게 생겨난 섬인지 초등학생 눈높이로 알려 줘요.",["사회","독도의 날"],[],[],"도서관에서 빌린 독도 책과 같이 보고, 일요일에 다솔·다정이에게 설명해 주기 미션으로 이어요.",[["유튜브에서 보기","https://www.youtube.com/watch?v=oxkimJWx7Q8"]],0,"oxkimJWx7Q8","보물섬독도TV"],
+ ["video","k9","know","단풍은 왜 생기는 걸까?","단풍이 드는 이유 · 색이 다른 이유","잎이 왜 빨강·노랑으로 변하는지 과학으로 풀어 줘요.",["과학","가을"],[],[],"주워 온 낙엽을 색깔별로 나누고 \"이건 무슨 색소 때문일까?\" 다연이가 설명해 보게 해요.",[["유튜브에서 보기","https://www.youtube.com/watch?v=mOKeEv2o8t4"]],0,"mOKeEv2o8t4","태뿌리"],
 
  ["go","all","","곡교천 은행나무길 산책","아산 염치읍 · 무료","350여 그루 은행나무가 늘어선 약 2.1km 길이에요. 차가 다니지 않는 평지라 다솔·다정이도 걷기 좋아요.",["1~2시간","주차 무료"],[],[],"절정은 11월 중순 예상. 이번 주에 같은 자리에서 셋이 사진 한 장 찍어 두고 절정 때 비교해 보세요. 주차는 곡교천 캠핑장 주차장이 가장 넓어요.",[["안내 보기","https://www.telltrip.com/domestic-travel/asan-gokgyocheon-ginkgo-tree-walking-trail/"]],1],
  ["go","all","","독립기념관 단풍나무숲길","천안 · 입장 무료","3.2km 단풍 터널이에요. 단풍은 10월 중순부터 11월 초가 가장 붐벼요.",["다 걸으면 약 1시간","주차 유료"],[],[],"다솔·다정이와는 일부 구간만 걷고 돌아와도 충분해요. 야간개장 여부는 올해 공지를 확인하세요.",[["안내 보기","https://www.telltrip.com/domestic-travel/cheonan-independence-hall-maple-path-night/"]]],
@@ -277,11 +289,12 @@ function render(){
   const T=TABS.find(t=>t.id===tab);
   $("lead").innerHTML=`<b>${T.name} · ${rows.length}개</b>${LEAD[tab]}`;
   $("grid").innerHTML=rows.map(r=>`<article class="card${r[11]?" hot":""}">
+    ${r[12]?`<a class="thumb" href="https://www.youtube.com/watch?v=${esc(r[12])}" target="_blank" rel="noopener" aria-label="${esc(r[3])} 유튜브에서 보기"><img src="https://i.ytimg.com/vi/${esc(r[12])}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"></a>`:""}
     <div class="top">${r[11]?'<span class="star">이번 주 픽</span>':""}<span class="who ${r[1]}">${WHO[r[1]]}</span>${r[2]?`<span class="kind">${KIND[r[2]]}</span>`:""}${r[6].map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
-    <h3>${esc(r[3])}</h3><div class="by">${esc(r[4])}</div><p>${esc(r[5])}</p>
+    <h3>${esc(r[3])}</h3><div class="by">${esc(r[4])}</div>${r[13]?`<div class="ch">📺 ${esc(r[13])}</div>`:""}<p>${esc(r[5])}</p>
     ${r[7].length?`<div class="mats">${r[7].map(m=>`<span>${esc(m)}</span>`).join("")}</div>`:""}
     ${r[8].length?`<ol class="steps">${r[8].map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`:""}
-    ${r[9]?`<div class="tip"><b>💡 엄마 팁</b> ${esc(r[9])}</div>`:""}
+    ${r[9]?`<div class="tip"><b>💡 ${r[0]==="video"?"보고 나서":"엄마 팁"}</b> ${esc(r[9])}</div>`:""}
     ${r[10].length?`<div class="links">${r[10].map(([l,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div>`:""}
   </article>`).join("")||`<p class="note">이번 주엔 이 조합의 내용이 없어요.</p>`;
   try{localStorage.setItem("dadada",JSON.stringify({tab,who}))}catch(e){}
