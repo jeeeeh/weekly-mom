@@ -3,29 +3,28 @@
 <head>
 <meta charset="utf-8">
 <title>10월 4주차 아기호랑이 학습지</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
 <style>
 /* A4 2쪽 학습지. 소식지 📚 배움 탭과 짝. 흑백 인쇄해도 보이게 선은 진하게, 따라쓰기 글씨는 연회색 */
 @page{size:A4;margin:0}
 :root{--fg:#3a3040;--muted:#857a88;--line:#3a3040;--trace:#d6d0d8;--coral:#ff7f6e;--sun:#ffbf3c;--sky:#4fa3e8;--leaf:#3fb37f;--grape:#a98bff;--soft:#fff8f1}
 *{box-sizing:border-box}
-body{margin:0;font-family:"Gowun Dodum","Noto Sans CJK KR","Noto Sans KR",sans-serif;color:var(--fg);-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.page{width:210mm;height:297mm;padding:10mm 12mm;display:flex;flex-direction:column;gap:4mm;page-break-after:always;overflow:hidden;position:relative}
+body{margin:0;font-family:"Noto Sans CJK KR","Noto Sans KR",sans-serif;font-weight:400;color:var(--fg);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;padding:9mm 12mm;display:flex;flex-direction:column;gap:3.5mm;page-break-after:always;overflow:hidden;position:relative}
 .page:last-child{page-break-after:auto}
 .top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid var(--coral);padding-bottom:3mm}
-.top h1{font-family:"Jua",sans-serif;font-weight:400;font-size:24pt;margin:0;line-height:1.1}
+.top h1{font-weight:700;letter-spacing:-.02em;font-size:24pt;margin:0;line-height:1.1}
 .top h1 small{display:block;font-family:inherit;font-size:11pt;color:var(--muted)}
 .who{font-size:11pt;display:flex;gap:6mm}
 .who span{border-bottom:1.5px solid var(--line);min-width:32mm;display:inline-block;padding-bottom:1mm}
 .sec{border:2px solid var(--line);border-radius:5mm;padding:3.5mm 5mm;display:flex;flex-direction:column;gap:3mm}
-.sec h2{font-family:"Jua",sans-serif;font-weight:400;font-size:15pt;margin:0;display:flex;align-items:center;gap:2mm}
-.sec h2 i{font-style:normal;font-size:10pt;font-family:inherit;color:#fff;border-radius:99px;padding:.5mm 3mm}
-.sec h2 em{font-style:normal;font-family:"Gowun Dodum",sans-serif;font-size:10pt;color:var(--muted);margin-left:auto}
+.sec h2{font-weight:700;letter-spacing:-.02em;font-size:15pt;margin:0;display:flex;align-items:center;gap:2mm}
+.sec h2 i{font-style:normal;font-size:10pt;font-weight:500;color:#fff;border-radius:99px;padding:.5mm 3mm}
+.sec h2 em{font-style:normal;font-weight:400;font-size:10pt;color:var(--muted);margin-left:auto}
 .ko i{background:var(--coral)}.ma i{background:var(--sky)}.en i{background:var(--leaf)}.id i{background:var(--grape)}
 .q{font-size:11.5pt;margin:0}
 /* 자모 합치기 표 */
 table.jamo{border-collapse:collapse;align-self:center}
-.jamo td,.jamo th{border:2px solid var(--line);width:22mm;height:13.5mm;text-align:center;font-size:21pt;font-family:"Jua",sans-serif;font-weight:400}
+.jamo td,.jamo th{border:2px solid var(--line);width:22mm;height:13.5mm;text-align:center;font-size:21pt;font-weight:500}
 .jamo th{background:#fff3d4;font-size:18pt}
 .jamo td.ex{color:var(--coral)}
 /* 따라쓰기 칸 */
@@ -33,7 +32,7 @@ table.jamo{border-collapse:collapse;align-self:center}
 .row{display:flex;align-items:center;gap:3mm}
 .row .pic{font-size:22pt;width:12mm;text-align:center}
 .cells{display:flex;gap:0}
-.cell{width:16mm;height:16mm;border:1.5px solid var(--line);margin-left:-1.5px;display:grid;place-items:center;font-size:28pt;line-height:1;font-family:"Noto Sans CJK KR",sans-serif;font-weight:300;color:var(--trace);position:relative}
+.cell{width:16mm;height:16mm;border:1.5px solid var(--line);margin-left:-1.5px;display:grid;place-items:center;font-size:28pt;line-height:1;font-weight:400;color:var(--trace);position:relative}
 .cell::before,.cell::after{content:"";position:absolute;background:none;border:0 dashed #c9c2cc}
 .cell::before{left:50%;top:0;bottom:0;border-left-width:1px}
 .cell::after{top:50%;left:0;right:0;border-top-width:1px}
@@ -44,7 +43,7 @@ table.jamo{border-collapse:collapse;align-self:center}
 .m10 .dots{font-size:13pt;letter-spacing:-1px;min-width:52mm}
 .box{display:inline-block;width:11mm;height:11mm;border:2px solid var(--line);border-radius:2mm;vertical-align:middle}
 .numline{display:flex;gap:0;align-self:center}
-.numline div{width:14mm;height:13mm;border:2px solid var(--line);margin-left:-2px;display:grid;place-items:center;font-size:18pt;font-family:"Jua",sans-serif}
+.numline div{width:14mm;height:13mm;border:2px solid var(--line);margin-left:-2px;display:grid;place-items:center;font-size:18pt;font-weight:500}
 .pat{display:flex;gap:2mm;align-items:center;font-size:21pt;align-self:center}
 .pat .box{width:13mm;height:13mm}
 /* 영어 */
@@ -56,9 +55,9 @@ table.jamo{border-collapse:collapse;align-self:center}
 .four line{stroke:#3a3040;stroke-width:1.3}
 .four line.d{stroke:#bdb5c1;stroke-dasharray:4 4;stroke-width:1}
 .four line.b{stroke:#3a3040;stroke-width:1.6}
-.four text{font-family:"Helvetica Neue",Arial,"Liberation Sans",sans-serif;font-size:50px;fill:#d6d0d8}
+.four text{font-family:"Noto Sans","Noto Sans CJK KR",sans-serif;font-weight:400;font-size:50px;fill:#d6d0d8}
 .like{font-size:16pt;display:flex;align-items:flex-end;gap:2mm}
-.like b{font-weight:400;color:var(--trace);font-family:"Helvetica Neue",Arial,sans-serif;font-size:22pt}
+.like b{font-weight:400;color:var(--trace);font-size:22pt}
 .like .blank{flex:1;border-bottom:2px solid var(--line);height:10mm}
 /* 창의력 */
 .story{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}

@@ -16,8 +16,8 @@ jobs:
       - name: 보낼 파일 찾기
         id: pick
         run: |
-          FILE=$(git diff --name-only HEAD~1 HEAD -- 'tiger/20*.html' 2>/dev/null | sort | tail -n 1)
-          if [ -z "$FILE" ]; then FILE=$(ls tiger/20*.html | sort | tail -n 1); fi
+          FILE=$(git diff --name-only HEAD~1 HEAD -- 'tiger/20*.html' 2>/dev/null | grep -v -- '-print' | sort | tail -n 1)
+          if [ -z "$FILE" ]; then FILE=$(ls tiger/20*.html | grep -v -- '-print' | sort | tail -n 1); fi
           echo "file=$FILE" >> "$GITHUB_OUTPUT"
       - name: 텔레그램 발송
         env:

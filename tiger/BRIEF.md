@@ -13,7 +13,7 @@
 
 ## 파일
 - `tiger/YYYY-MM-DD.html` (YYYY-MM-DD = 기간 시작 월요일) 소식지.
-- `tiger/YYYY-MM-DD-print.html` → `node tools/print-pdf.js tiger/YYYY-MM-DD-print.html` 로 `tiger/YYYY-MM-DD-print.pdf` (A4 2쪽 학습지) 생성. 가장 최근 *-print.html 구조를 그대로 재사용하고, 그 주 📚 배움 활동과 짝을 맞춰 한글·수학·영어·창의력 문제를 새로 채움. "A4를 넘쳐요" 경고가 나오면 줄여서 다시 만들고, /tmp/print-preview-1.png·-2.png 를 Read로 열어 겹침·잘림이 없는지 확인. 흑백 인쇄해도 보이게. 저작권 있는 캐릭터·그림은 쓰지 않고 이모지와 도형만.
+- `tiger/YYYY-MM-DD-print.html` → `node tools/print-pdf.js tiger/YYYY-MM-DD-print.html` 로 `tiger/YYYY-MM-DD-print.pdf` (A4 2쪽 학습지) 생성. 가장 최근 *-print.html 구조를 그대로 재사용하고, 그 주 📚 배움 활동과 짝을 맞춰 한글·수학·영어·창의력 문제를 새로 채움. "A4를 넘쳐요" 경고가 나오면 줄여서 다시 만들고, /tmp/print-preview-1.png·-2.png 를 Read로 열어 겹침·잘림이 없는지 확인. 흑백 인쇄해도 보이게. 글꼴은 설치된 Noto Sans CJK KR / Noto Sans만 사용 (Google Fonts는 만드는 환경에서 막혀 있어 섞여 보임). 저작권 있는 캐릭터·그림은 쓰지 않고 이모지와 도형만.
 - 소식지 HTML을 마지막에 커밋해야 발송됨(같은 커밋이면 됨). 발송 때 PDF도 같이 감. 가장 최근 tiger/YYYY-MM-DD.html의 디자인·코드 구조를 그대로 재사용 (완전한 HTML 문서, viewport·color-scheme 메타 포함).
 - 구성: 표지 → 이번 주 우리 아이(만4세반 발달 한 줄 + 👦 남아 픽 + 👧 여아 픽 + 🤝 공통 픽) → 한눈에 보는 7일(월~일) → 이번 주 도전 재료 → 탭(🎨 놀이 · 📚 배움 · 📺 영상 · 🍂 나들이 · 🌱 건강, 배움 탭 안에는 과목 칩 전체/🔤 한글/🔢 수학/💡 창의력/🌍 영어/🤸 체육) + 필터(✨ 전체 / 👦 남아 / 👧 여아 / 🤝 공통만) → 장보기 → 달력 → 출처.
 - 👦·👧은 "좋아하는 아이가 많은 쪽" 표시일 뿐이라는 안내 문구 유지.
