@@ -30,7 +30,7 @@ jobs:
           WEEK=$(basename "$FILE" .html)
           curl -sS --fail-with-body \
             -F chat_id="$CHAT" \
-            -F document=@"$FILE;filename=다다다랑뭐할까-$WEEK.html" \
-            -F caption="📮 이번주 다다다랑 뭐할까 ($WEEK 주)  파일을 열면 이번 주 놀이·체험·책·챙길 것이 나와요." \
+            -F document=@"$FILE;filename=다다다와함께-$WEEK.html" \
+            -F caption="❤️ 이번주도 다다다와 함께 ($WEEK 주)  파일을 열면 이번 주 놀이·도전 재료·체험·챙길 것이 나와요." \
             "https://api.telegram.org/bot$TOKEN/sendDocument" > /dev/null
           echo "보냈어요: $FILE"
