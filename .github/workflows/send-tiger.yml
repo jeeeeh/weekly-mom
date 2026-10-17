@@ -38,5 +38,13 @@ jobs:
               "https://api.telegram.org/bot$TOKEN/sendDocument")
             if echo "$RES" | grep -q '"ok":true'; then echo "::notice::보냄 ...${ID: -4}"
             else echo "::error::실패 ...${ID: -4} : $(echo "$RES" | sed -n 's/.*"description":"\([^"]*\)".*/\1/p')"; FAIL=1; fi
+            PDF="tiger/$WEEK-print.pdf"
+            if [ -f "$PDF" ]; then
+              RES=$(curl -sS -F chat_id="$ID" \
+                -F document=@"$PDF;filename=아기호랑이-학습지-$WEEK.pdf" \
+                -F caption="🖨️ 이번 주 학습지 (A4 2쪽) · 소식지 📚 배움 탭과 짝이에요" \
+                "https://api.telegram.org/bot$TOKEN/sendDocument")
+              if echo "$RES" | grep -q '"ok":true'; then echo "::notice::학습지 보냄 ...${ID: -4}"; else echo "::error::학습지 실패 ...${ID: -4}"; FAIL=1; fi
+            fi
           done
           exit $FAIL
