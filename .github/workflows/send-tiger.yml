@@ -1,0 +1,37 @@
+name: 아기호랑이 소식지를 내 텔레그램으로 보내기
+
+on:
+  push:
+    branches: [main]
+    paths: ["tiger/*-kakao.txt"]
+  workflow_dispatch: {}
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: 보낼 주 찾기
+        id: pick
+        run: |
+          TXT=$(git diff --name-only HEAD~1 HEAD -- 'tiger/*-kakao.txt' 2>/dev/null | sort | tail -n 1)
+          if [ -z "$TXT" ]; then TXT=$(ls tiger/*-kakao.txt | sort | tail -n 1); fi
+          echo "week=$(basename "$TXT" -kakao.txt)" >> "$GITHUB_OUTPUT"
+      - name: 텔레그램 발송 (내 방만)
+        env:
+          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WEEK: ${{ steps.pick.outputs.week }}
+        run: |
+          ME=$(echo "$CHAT" | tr ', ' '\n\n' | sed '/^$/d' | head -n 1)
+          TITLE=$(sed -n 's:.*<title>\(.*\)</title>.*:\1:p' "tiger/$WEEK.html" | head -n 1)
+          API="https://api.telegram.org/bot$TOKEN"
+          ok() { if echo "$1" | grep -q '"ok":true'; then echo "::notice::보냄 $2"; else echo "::error::실패 $2 : $(echo "$1" | sed -n 's/.*"description":"\([^"]*\)".*/\1/p')"; FAIL=1; fi; }
+          FAIL=0
+          ok "$(curl -sS -F chat_id="$ME" -F document=@"tiger/$WEEK-1.png;filename=아기호랑이-$WEEK-1.png" -F caption="🐯 $TITLE · 카톡용 이미지 1/2 (원본으로 보내 주세요)" "$API/sendDocument")" "이미지1"
+          ok "$(curl -sS -F chat_id="$ME" -F document=@"tiger/$WEEK-2.png;filename=아기호랑이-$WEEK-2.png" -F caption="카톡용 이미지 2/2" "$API/sendDocument")" "이미지2"
+          ok "$(curl -sS -F chat_id="$ME" -F document=@"tiger/$WEEK.html;filename=아기호랑이-$WEEK.html" -F caption="전체 소식지 파일 · 공유 링크: https://jeeeeh.github.io/weekly-mom/tiger/" "$API/sendDocument")" "소식지"
+          ok "$(curl -sS --data-urlencode chat_id="$ME" --data-urlencode text@"tiger/$WEEK-kakao.txt" --data-urlencode disable_web_page_preview=true "$API/sendMessage")" "카톡 메시지"
+          exit $FAIL
