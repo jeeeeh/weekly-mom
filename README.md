@@ -9,4 +9,5 @@
 필요한 비밀값 (Settings → Secrets and variables → Actions): `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, 단체방도 받으려면 `TELEGRAM_GROUP_CHAT_ID` (- 로 시작하는 숫자)
 
 ## 🐯 아기호랑이 소식지 (tiger/)
-전국 2022년생 친구 엄마들과 카톡으로 나누는 주간 소식지. 기준은 `tiger/BRIEF.md`. 매주 일요일 아침 9시쯤 내 텔레그램으로 카톡용 이미지 2장·소식지 파일·카톡 메시지가 와요 (`send-tiger.yml`). 공유 링크: https://jeeeeh.github.io/weekly-mom/tiger/ (GitHub Pages)
+전국 2022년생 친구 엄마들과 나누는 주간 소식지. 기준은 `tiger/BRIEF.md`. 매주 일요일 아침 9시쯤 아기호랑이 전용 봇이 HTML 파일을 보내요 (`send-tiger.yml`).
+비밀값: `TIGER_BOT_TOKEN`, `TIGER_CHAT_ID` (여러 방이면 쉼표로 구분, 단체방은 - 로 시작)

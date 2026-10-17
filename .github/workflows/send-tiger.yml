@@ -1,9 +1,9 @@
-name: 아기호랑이 소식지를 내 텔레그램으로 보내기
+name: 아기호랑이 소식지 보내기 (아기호랑이 전용 봇)
 
 on:
   push:
     branches: [main]
-    paths: ["tiger/*-kakao.txt"]
+    paths: ["tiger/20*.html"]
   workflow_dispatch: {}
 
 jobs:
@@ -13,25 +13,30 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - name: 보낼 주 찾기
+      - name: 보낼 파일 찾기
         id: pick
         run: |
-          TXT=$(git diff --name-only HEAD~1 HEAD -- 'tiger/*-kakao.txt' 2>/dev/null | sort | tail -n 1)
-          if [ -z "$TXT" ]; then TXT=$(ls tiger/*-kakao.txt | sort | tail -n 1); fi
-          echo "week=$(basename "$TXT" -kakao.txt)" >> "$GITHUB_OUTPUT"
-      - name: 텔레그램 발송 (내 방만)
+          FILE=$(git diff --name-only HEAD~1 HEAD -- 'tiger/20*.html' 2>/dev/null | sort | tail -n 1)
+          if [ -z "$FILE" ]; then FILE=$(ls tiger/20*.html | sort | tail -n 1); fi
+          echo "file=$FILE" >> "$GITHUB_OUTPUT"
+      - name: 텔레그램 발송
         env:
-          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
-          WEEK: ${{ steps.pick.outputs.week }}
+          TOKEN: ${{ secrets.TIGER_BOT_TOKEN }}
+          CHATS: ${{ secrets.TIGER_CHAT_ID }}
+          FILE: ${{ steps.pick.outputs.file }}
         run: |
-          ME=$(echo "$CHAT" | tr ', ' '\n\n' | sed '/^$/d' | head -n 1)
-          TITLE=$(sed -n 's:.*<title>\(.*\)</title>.*:\1:p' "tiger/$WEEK.html" | head -n 1)
-          API="https://api.telegram.org/bot$TOKEN"
-          ok() { if echo "$1" | grep -q '"ok":true'; then echo "::notice::보냄 $2"; else echo "::error::실패 $2 : $(echo "$1" | sed -n 's/.*"description":"\([^"]*\)".*/\1/p')"; FAIL=1; fi; }
+          if [ -z "$TOKEN" ] || [ -z "$CHATS" ]; then echo "::warning::비밀값 TIGER_BOT_TOKEN / TIGER_CHAT_ID 를 먼저 등록하세요 (이번엔 보내지 않음)"; exit 0; fi
+          WEEK=$(basename "$FILE" .html)
+          STAMP=$(TZ=Asia/Seoul date +%m%d-%H%M)
+          TITLE=$(sed -n 's:.*<title>\(.*\)</title>.*:\1:p' "$FILE" | head -n 1)
           FAIL=0
-          ok "$(curl -sS -F chat_id="$ME" -F document=@"tiger/$WEEK-1.png;filename=아기호랑이-$WEEK-1.png" -F caption="🐯 $TITLE · 카톡용 이미지 1/2 (원본으로 보내 주세요)" "$API/sendDocument")" "이미지1"
-          ok "$(curl -sS -F chat_id="$ME" -F document=@"tiger/$WEEK-2.png;filename=아기호랑이-$WEEK-2.png" -F caption="카톡용 이미지 2/2" "$API/sendDocument")" "이미지2"
-          ok "$(curl -sS -F chat_id="$ME" -F document=@"tiger/$WEEK.html;filename=아기호랑이-$WEEK.html" -F caption="전체 소식지 파일 · 공유 링크: https://jeeeeh.github.io/weekly-mom/tiger/" "$API/sendDocument")" "소식지"
-          ok "$(curl -sS --data-urlencode chat_id="$ME" --data-urlencode text@"tiger/$WEEK-kakao.txt" --data-urlencode disable_web_page_preview=true "$API/sendMessage")" "카톡 메시지"
+          # TIGER_CHAT_ID 에 쉼표·띄어쓰기·줄바꿈으로 여러 방 ID를 넣으면 모두에게 보냄
+          for ID in $(echo "$CHATS" | tr ', ' '\n\n' | sed '/^$/d' | sort -u); do
+            RES=$(curl -sS -F chat_id="$ID" \
+              -F document=@"$FILE;filename=아기호랑이-$WEEK-$STAMP.html" \
+              -F caption="🐯 $TITLE  파일을 열면 이번 주 놀이·도전 재료·영상·나들이·챙길 것이 나와요." \
+              "https://api.telegram.org/bot$TOKEN/sendDocument")
+            if echo "$RES" | grep -q '"ok":true'; then echo "::notice::보냄 ...${ID: -4}"
+            else echo "::error::실패 ...${ID: -4} : $(echo "$RES" | sed -n 's/.*"description":"\([^"]*\)".*/\1/p')"; FAIL=1; fi
+          done
           exit $FAIL
