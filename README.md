@@ -6,4 +6,4 @@
 - `BRIEF.md` : 매주 소식지를 만들 때 따르는 기준
 - `.github/workflows/send.yml` : `issues/`에 새 파일이 올라오면 텔레그램으로 보냄 (Actions 탭에서 수동 재발송도 가능)
 
-필요한 비밀값 (Settings → Secrets and variables → Actions): `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`
+필요한 비밀값 (Settings → Secrets and variables → Actions): `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, 단체방도 받으려면 `TELEGRAM_GROUP_CHAT_ID` (- 로 시작하는 숫자)
