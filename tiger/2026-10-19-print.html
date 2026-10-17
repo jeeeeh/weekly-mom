@@ -68,6 +68,23 @@ table.jamo{border-collapse:collapse;align-self:center}
 .stars{display:flex;gap:3mm;align-items:center;font-size:11pt;margin-top:auto}
 .stars i{width:11mm;height:11mm;border:2px dashed var(--sun);border-radius:50%;display:inline-block}
 .foot{font-size:9pt;color:var(--muted);text-align:right}
+/* 이번 호 추가: 줄 잇기 · 10 가르기 · 이야기 3칸 */
+.match{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm 30mm;align-self:center;align-items:center}
+.match .w{font-size:20pt;font-weight:500;display:flex;align-items:center;justify-content:flex-end;gap:3mm}
+.match .p{font-size:24pt;display:flex;align-items:center;gap:3mm}
+.match i{display:inline-block;width:3.5mm;height:3.5mm;border-radius:50%;background:var(--line)}
+.ten{display:inline-flex;gap:.7mm;flex:none}
+.ten b{width:4.8mm;height:4.8mm;border:1.6px solid var(--line);border-radius:50%;display:inline-block}
+.ten b.f{background:var(--line)}
+.sp{display:grid;grid-template-columns:1fr 1fr;gap:3mm 6mm}
+.sp .m10{gap:2mm;white-space:nowrap;font-size:12pt}
+.sp .box{width:10mm;height:10mm}
+.add{display:flex;gap:10mm;justify-content:center}
+.add .m10{font-size:13pt}
+.story3{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:4mm;align-items:stretch}
+.story3 .card{height:26mm;flex-direction:column;font-size:24pt;display:flex;align-items:center;justify-content:center;gap:1mm}
+.story3 .card small{font-size:9.5pt;color:var(--fg)}
+.story3 .draw{min-height:26mm}
 </style>
 </head>
 <body>
@@ -79,30 +96,33 @@ table.jamo{border-collapse:collapse;align-self:center}
   </div>
 
   <div class="sec ko">
-    <h2><i>한글</i>자음 + 모음을 합쳐 글자를 써요<em>소식지 📚 배움 · 자음+모음 합치기</em></h2>
-    <p class="q">첫 줄처럼 ㄱ과 ㅏ를 합치면 '가'! 빈칸에 글자를 써 보고 소리 내 읽어 봐요.</p>
+    <h2><i>한글</i>새 자음 + 모음을 합쳐 글자를 써요<em>소식지 📚 배움 · ㅅ·ㅇ·ㅈ·ㅎ 합치기</em></h2>
+    <p class="q">첫 줄처럼 ㅅ과 ㅓ를 합치면 '서'! 빈칸에 글자를 써 보고 소리 내 읽어 봐요.</p>
     <table class="jamo">
-      <tr><th></th><th>ㅏ</th><th>ㅗ</th><th>ㅜ</th></tr>
-      <tr><th>ㄱ</th><td class="ex">가</td><td class="ex">고</td><td class="ex">구</td></tr>
-      <tr><th>ㄴ</th><td></td><td></td><td></td></tr>
-      <tr><th>ㄷ</th><td></td><td></td><td></td></tr>
-      <tr><th>ㅁ</th><td></td><td></td><td></td></tr>
-      <tr><th>ㅂ</th><td></td><td></td><td></td></tr>
+      <tr><th></th><th>ㅓ</th><th>ㅣ</th><th>ㅡ</th></tr>
+      <tr><th>ㅅ</th><td class="ex">서</td><td class="ex">시</td><td class="ex">스</td></tr>
+      <tr><th>ㅇ</th><td></td><td></td><td></td></tr>
+      <tr><th>ㅈ</th><td></td><td></td><td></td></tr>
+      <tr><th>ㅎ</th><td></td><td></td><td></td></tr>
     </table>
   </div>
 
   <div class="sec ko">
-    <h2><i>한글</i>가을 낱말을 따라 써요<em>소식지 📚 배움 · 가을 낱말</em></h2>
+    <h2><i>한글</i>이번 주 낱말을 따라 써요<em>소식지 📚 배움 · 서리·모자·거미</em></h2>
     <div class="trace">
-      <div class="row"><span class="pic">🍠</span><div class="cells"><div class="cell">고</div><div class="cell">구</div><div class="cell">마</div></div><span class="gap"></span><div class="cells"><div class="cell">고</div><div class="cell">구</div><div class="cell">마</div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div><div class="cell"></div></div></div>
-      <div class="row"><span class="pic">🌳</span><div class="cells"><div class="cell">나</div><div class="cell">무</div></div><span class="gap"></span><div class="cells"><div class="cell">나</div><div class="cell">무</div></div><span class="gap"></span><div class="cells"><div class="cell">나</div><div class="cell">무</div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div></div></div>
-      <div class="row"><span class="pic">🌰</span><div class="cells"><div class="cell">도</div><div class="cell">토</div><div class="cell">리</div></div><span class="gap"></span><div class="cells"><div class="cell">도</div><div class="cell">토</div><div class="cell">리</div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div><div class="cell"></div></div></div>
+      <div class="row"><span class="pic">❄️</span><div class="cells"><div class="cell">서</div><div class="cell">리</div></div><span class="gap"></span><div class="cells"><div class="cell">서</div><div class="cell">리</div></div><span class="gap"></span><div class="cells"><div class="cell">서</div><div class="cell">리</div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div></div></div>
+      <div class="row"><span class="pic">🎩</span><div class="cells"><div class="cell">모</div><div class="cell">자</div></div><span class="gap"></span><div class="cells"><div class="cell">모</div><div class="cell">자</div></div><span class="gap"></span><div class="cells"><div class="cell">모</div><div class="cell">자</div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div></div></div>
+      <div class="row"><span class="pic">🕷️</span><div class="cells"><div class="cell">거</div><div class="cell">미</div></div><span class="gap"></span><div class="cells"><div class="cell">거</div><div class="cell">미</div></div><span class="gap"></span><div class="cells"><div class="cell">거</div><div class="cell">미</div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div></div></div>
     </div>
   </div>
 
   <div class="sec ko">
-    <h2><i>한글</i>내 이름을 써요</h2>
-    <div class="row"><div class="cells"><div class="cell"></div><div class="cell"></div><div class="cell"></div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div><div class="cell"></div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div><div class="cell"></div></div></div>
+    <h2><i>한글</i>소리 내 읽고 맞는 그림과 줄로 이어요<em>받침 없는 낱말</em></h2>
+    <div class="match">
+      <div class="w">하마 <i></i></div><div class="p"><i></i> 🚌</div>
+      <div class="w">오이 <i></i></div><div class="p"><i></i> 🦛</div>
+      <div class="w">버스 <i></i></div><div class="p"><i></i> 🥒</div>
+    </div>
   </div>
 
   <div class="stars">다 했으면 별 스티커를 붙여요 <i></i><i></i><i></i></div>
@@ -116,41 +136,42 @@ table.jamo{border-collapse:collapse;align-self:center}
   </div>
 
   <div class="sec ma">
-    <h2><i>수학</i>모두 합쳐 10개가 되려면?<em>소식지 📚 배움 · 10 모으기</em></h2>
-    <div class="make10">
-      <div class="m10"><span class="dots">🌰🌰🌰🌰🌰🌰🌰</span>+ <span class="box"></span> = 10</div>
-      <div class="m10"><span class="dots">🌰🌰🌰🌰</span>+ <span class="box"></span> = 10</div>
-      <div class="m10"><span class="dots">🌰🌰🌰🌰🌰🌰🌰🌰🌰</span>+ <span class="box"></span> = 10</div>
-      <div class="m10"><span class="dots">🌰🌰🌰🌰🌰🌰</span>+ <span class="box"></span> = 10</div>
+    <h2><i>수학</i>10은 몇과 몇? 색칠한 수와 빈 수를 세어요<em>소식지 📚 배움 · 10 가르기</em></h2>
+    <div class="sp">
+      <div class="m10"><span class="ten"><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b></b><b></b><b></b><b></b></span> 10 = 6 + <span class="box"></span></div>
+      <div class="m10"><span class="ten"><b class="f"></b><b class="f"></b><b class="f"></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></span> 10 = 3 + <span class="box"></span></div>
+      <div class="m10"><span class="ten"><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b></b><b></b></span> 10 = 8 + <span class="box"></span></div>
+      <div class="m10"><span class="ten"><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b></b><b></b><b></b><b></b><b></b></span> 10 = 5 + <span class="box"></span></div>
+    </div>
+    <h2 style="margin-top:1mm"><i>수학</i>모두 몇 개일까요?<em>소식지 📚 배움 · 더하기 이야기</em></h2>
+    <div class="add">
+      <div class="m10">🍎🍎🍎 + 🍎🍎 = <span class="box"></span></div>
+      <div class="m10">🍄🍄🍄🍄 + 🍄🍄🍄 = <span class="box"></span></div>
     </div>
   </div>
 
   <div class="sec ma">
-    <h2><i>수학</i>빈칸에 알맞은 수를 써요<em>11부터 20까지</em></h2>
-    <div class="numline"><div>11</div><div></div><div>13</div><div>14</div><div></div><div>16</div><div></div><div>18</div><div>19</div><div></div></div>
-    <h2 style="margin-top:2mm"><i>수학</i>규칙대로 다음에 올 것을 그려요<em>소식지 📚 배움 · ABC 규칙</em></h2>
-    <div class="pat">🍁 🎃 🍂 🍁 🎃 🍂 🍁 <span class="box"></span><span class="box"></span></div>
+    <h2><i>수학</i>20부터 거꾸로! 빈칸에 수를 써요<em>소식지 📚 배움 · 거꾸로 로켓 발사</em></h2>
+    <div class="numline"><div>20</div><div>19</div><div></div><div>17</div><div></div><div>15</div><div></div><div></div><div>12</div><div>11</div></div>
   </div>
 
   <div class="sec en">
-    <h2><i>영어</i>A · B · C 따라 쓰고 말해요<em>소식지 📚 배움 · A is for Apple</em></h2>
+    <h2><i>영어</i>D · E · F 따라 쓰고 말해요<em>소식지 📚 배움 · D is for Dog</em></h2>
     <div class="abc">
-      <div class="eline"><span class="pic">🍎</span><span class="word">apple</span><svg class="four" viewBox="0 0 600 58" preserveAspectRatio="xMinYMid meet"><line x1="0" x2="600" y1="8" y2="8"/><line class="d" x1="0" x2="600" y1="18" y2="18"/><line class="b" x1="0" x2="600" y1="44" y2="44"/><line x1="0" x2="600" y1="56" y2="56"/><text x="14" y="44">A</text><text x="76" y="44">a</text><text x="138" y="44">A</text><text x="200" y="44">a</text><text x="262" y="44">A</text><text x="324" y="44">a</text></svg></div>
-      <div class="eline"><span class="pic">⚽</span><span class="word">ball</span><svg class="four" viewBox="0 0 600 58" preserveAspectRatio="xMinYMid meet"><line x1="0" x2="600" y1="8" y2="8"/><line class="d" x1="0" x2="600" y1="18" y2="18"/><line class="b" x1="0" x2="600" y1="44" y2="44"/><line x1="0" x2="600" y1="56" y2="56"/><text x="14" y="44">B</text><text x="76" y="44">b</text><text x="138" y="44">B</text><text x="200" y="44">b</text><text x="262" y="44">B</text><text x="324" y="44">b</text></svg></div>
-      <div class="eline"><span class="pic">🥤</span><span class="word">cup</span><svg class="four" viewBox="0 0 600 58" preserveAspectRatio="xMinYMid meet"><line x1="0" x2="600" y1="8" y2="8"/><line class="d" x1="0" x2="600" y1="18" y2="18"/><line class="b" x1="0" x2="600" y1="44" y2="44"/><line x1="0" x2="600" y1="56" y2="56"/><text x="14" y="44">C</text><text x="76" y="44">c</text><text x="138" y="44">C</text><text x="200" y="44">c</text><text x="262" y="44">C</text><text x="324" y="44">c</text></svg></div>
+      <div class="eline"><span class="pic">🐶</span><span class="word">dog</span><svg class="four" viewBox="0 0 600 58" preserveAspectRatio="xMinYMid meet"><line x1="0" x2="600" y1="8" y2="8"/><line class="d" x1="0" x2="600" y1="18" y2="18"/><line class="b" x1="0" x2="600" y1="44" y2="44"/><line x1="0" x2="600" y1="56" y2="56"/><text x="14" y="44">D</text><text x="76" y="44">d</text><text x="138" y="44">D</text><text x="200" y="44">d</text><text x="262" y="44">D</text><text x="324" y="44">d</text></svg></div>
+      <div class="eline"><span class="pic">🥚</span><span class="word">egg</span><svg class="four" viewBox="0 0 600 58" preserveAspectRatio="xMinYMid meet"><line x1="0" x2="600" y1="8" y2="8"/><line class="d" x1="0" x2="600" y1="18" y2="18"/><line class="b" x1="0" x2="600" y1="44" y2="44"/><line x1="0" x2="600" y1="56" y2="56"/><text x="14" y="44">E</text><text x="76" y="44">e</text><text x="138" y="44">E</text><text x="200" y="44">e</text><text x="262" y="44">E</text><text x="324" y="44">e</text></svg></div>
+      <div class="eline"><span class="pic">🐟</span><span class="word">fish</span><svg class="four" viewBox="0 0 600 58" preserveAspectRatio="xMinYMid meet"><line x1="0" x2="600" y1="8" y2="8"/><line class="d" x1="0" x2="600" y1="18" y2="18"/><line class="b" x1="0" x2="600" y1="44" y2="44"/><line x1="0" x2="600" y1="56" y2="56"/><text x="14" y="44">F</text><text x="76" y="44">f</text><text x="138" y="44">F</text><text x="200" y="44">f</text><text x="262" y="44">F</text><text x="324" y="44">f</text></svg></div>
     </div>
-    <div class="like">I like <b>pumpkins</b> . &nbsp;→&nbsp; I like <span class="blank"></span> . <small style="font-size:9pt;color:var(--muted)">(좋아하는 것 그리기)</small></div>
+    <div class="like">I see a <b>dog</b> . &nbsp;→&nbsp; I see a <span class="blank"></span> . <small style="font-size:9pt;color:var(--muted)">(보이는 것 그리기)</small></div>
   </div>
 
   <div class="sec id">
-    <h2><i>창의력</i>순서대로 1·2·3·4 번호를 써요<em>소식지 📚 배움 · 4컷 이야기</em></h2>
-    <div class="story">
-      <div class="card"><span class="n"></span>🌳</div>
-      <div class="card"><span class="n"></span>🌰</div>
-      <div class="card"><span class="n"></span>🌿</div>
-      <div class="card"><span class="n"></span>🌱</div>
+    <h2><i>창의력</i>그다음엔 어떻게 됐을까? 그려 봐요<em>소식지 📚 배움 · 이야기 끝 바꾸기</em></h2>
+    <div class="story3">
+      <div class="card">🐿️🌰<small>① 다람쥐가 도토리를 숨겼어요</small></div>
+      <div class="card">🍂❄️<small>② 밤새 서리가 내렸어요</small></div>
+      <div class="draw"><span>③ 그다음엔?</span></div>
     </div>
-    <p class="q">다 맞혔으면 "도토리는 나중에 뭐가 될까?" 하고 이야기해 봐요.</p>
   </div>
 
   <div class="stars">다 했으면 별 스티커를 붙여요 <i></i><i></i><i></i></div>
