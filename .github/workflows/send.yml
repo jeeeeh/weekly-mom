@@ -36,5 +36,10 @@ jobs:
               -F caption="❤️ 이번주도 다다다와 함께 ($WEEK 주)  파일을 열면 이번 주 놀이·도전 재료·체험·챙길 것이 나와요." \
               "https://api.telegram.org/bot$TOKEN/sendDocument" > /dev/null
           }
-          send "$CHAT" && echo "내 방으로 보냈어요"
-          if [ -n "$GROUP" ]; then send "$GROUP" && echo "단체방으로 보냈어요"; else echo "단체방 비밀값이 없어 건너뜀"; fi
+          # TELEGRAM_CHAT_ID 에 쉼표·띄어쓰기·줄바꿈으로 여러 방 ID를 넣어도 각각 보냄
+          IDS=$(printf '%s\n%s' "$CHAT" "$GROUP" | tr ', ' '\n\n' | sed '/^$/d' | sort -u)
+          FAIL=0
+          for ID in $IDS; do
+            if send "$ID"; then echo "보냄: ...${ID: -4}"; else echo "실패: ...${ID: -4}"; FAIL=1; fi
+          done
+          exit $FAIL
