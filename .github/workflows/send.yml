@@ -1,0 +1,36 @@
+name: 텔레그램으로 이번 주 소식지 보내기
+
+on:
+  push:
+    branches: [main]
+    paths: ["issues/**.html"]
+  workflow_dispatch: {}
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: 보낼 파일 찾기
+        id: pick
+        run: |
+          FILE=$(git diff --name-only HEAD~1 HEAD -- 'issues/*.html' 2>/dev/null | sort | tail -n 1)
+          if [ -z "$FILE" ]; then FILE=$(ls issues/*.html | sort | tail -n 1); fi
+          echo "file=$FILE" >> "$GITHUB_OUTPUT"
+          echo "보낼 파일: $FILE"
+      - name: 텔레그램 발송
+        env:
+          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FILE: ${{ steps.pick.outputs.file }}
+        run: |
+          if [ -z "$TOKEN" ] || [ -z "$CHAT" ]; then echo "비밀값 TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID 를 먼저 등록하세요"; exit 1; fi
+          WEEK=$(basename "$FILE" .html)
+          curl -sS --fail-with-body \
+            -F chat_id="$CHAT" \
+            -F document=@"$FILE;filename=다다다랑뭐할까-$WEEK.html" \
+            -F caption="📮 이번주 다다다랑 뭐할까 ($WEEK 주)  파일을 열면 이번 주 놀이·체험·책·챙길 것이 나와요." \
+            "https://api.telegram.org/bot$TOKEN/sendDocument" > /dev/null
+          echo "보냈어요: $FILE"
