@@ -2,15 +2,17 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light only">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>이번주도 다다다와 함께</title>
-<!-- 발송 2026-10-17 #4 -->
+<!-- 발송 2026-10-17 #5 -->
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
 <style>
 /* Layout: 크레용 띠 표지 → 세 아이 요약 → 한눈에 보는 이번 주(요일표) → 고정 탭(엄마표 놀이·체험·책·발달) + 아이별 토글 → 둥근 카드 → 장보기 목록 → 달력 → 출처 */
 :root{
-  color-scheme:light;
+  color-scheme:only light;
   --bg:#fff8f1; --paper:#ffffff; --fg:#3a3040; --muted:#857a88; --line:#f1e4dc;
   --coral:#ff7f6e; --coral-soft:#ffe6e1; --sky:#4fa3e8; --sky-soft:#e1f0fd; --leaf:#3fb37f; --leaf-soft:#dff6ea; --sun:#ffbf3c; --sun-soft:#fff3d4; --grape:#a98bff; --grape-soft:#efe9ff;
   --display:"Jua","Gowun Dodum",system-ui,sans-serif;
@@ -120,6 +122,8 @@ h2 .e{display:inline-grid;place-items:center;width:34px;height:34px;border-radiu
 .dhead small{display:block;color:var(--muted);font-size:12px}.dhead b{font-family:var(--display);font-weight:400;font-size:26px}
 .dare p{margin:0;font-size:14px}.dare h3{font-family:var(--display);font-weight:400;font-size:19px;margin:4px 0 0}.dare h3 span{font-family:var(--body);font-size:12px;color:var(--muted)}
 .ladder{display:flex;flex-wrap:wrap;gap:6px}.ladder span{font-size:13px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+/* 폰 브라우저 강제 다크모드에서도 밝게 */
+html,body{color-scheme:only light;forced-color-adjust:none;}
 </style>
 </head>
 <body>
