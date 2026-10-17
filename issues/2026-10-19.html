@@ -9,30 +9,28 @@
 <style>
 /* Layout: 크레용 띠 표지 → 세 아이 요약 → 한눈에 보는 이번 주(요일표) → 고정 탭(엄마표 놀이·체험·책·발달) + 아이별 토글 → 둥근 카드 → 장보기 목록 → 달력 → 출처 */
 :root{
-  --bg:#f7f4ef; --paper:#fffdf9; --fg:#2f2a2a; --muted:#6f6866; --line:#e8e1d8;
-  --coral:#d9765b; --coral-soft:#fbe9e2; --sky:#5b8fbf; --sky-soft:#e5eef7; --leaf:#6f9e7d; --leaf-soft:#e6f0e8; --sun:#d9a43c; --sun-soft:#fbf1dc;
+  color-scheme:light;
+  --bg:#fff8f1; --paper:#ffffff; --fg:#3a3040; --muted:#857a88; --line:#f1e4dc;
+  --coral:#ff7f6e; --coral-soft:#ffe6e1; --sky:#4fa3e8; --sky-soft:#e1f0fd; --leaf:#3fb37f; --leaf-soft:#dff6ea; --sun:#ffbf3c; --sun-soft:#fff3d4; --grape:#a98bff; --grape-soft:#efe9ff;
   --display:"Jua","Gowun Dodum",system-ui,sans-serif;
   --body:"Gowun Dodum",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
-  --r:22px;
+  --r:24px; --shadow:0 4px 14px rgba(255,127,110,.12);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#1d1a19; --paper:#272322; --fg:#f0ebe8; --muted:#aca4a1; --line:#3a3432;
-  --coral:#f0a08a; --coral-soft:#3d2a25; --sky:#9cc0e3; --sky-soft:#25303b; --leaf:#a3cdb0; --leaf-soft:#263229; --sun:#ebc26c; --sun-soft:#3a3021; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#1d1a19; --paper:#272322; --fg:#f0ebe8; --muted:#aca4a1; --line:#3a3432;
-  --coral:#f0a08a; --coral-soft:#3d2a25; --sky:#9cc0e3; --sky-soft:#25303b; --leaf:#a3cdb0; --leaf-soft:#263229; --sun:#ebc26c; --sun-soft:#3a3021; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.65;
+body{background:var(--bg) radial-gradient(circle,#ffd9cf 1.4px,transparent 1.6px) 0 0/22px 22px;color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.65;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
 .wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
 a{color:inherit}
 a:focus-visible,button:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:8px}
 
 /* 표지 */
-.cover{background:var(--paper);border-radius:28px;padding:28px 22px 22px;position:relative;overflow:hidden;border:1px solid var(--line)}
-.cover::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;
-  background:linear-gradient(90deg,var(--coral) 0 25%,var(--sun) 25% 50%,var(--leaf) 50% 75%,var(--sky) 75% 100%);opacity:.75}
-.issue{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.cover{background:linear-gradient(160deg,#fff 0%,#fff1ec 60%,#fff6dc 100%);border-radius:30px;padding:30px 22px 24px;position:relative;overflow:hidden;border:2px solid #ffd6cc;box-shadow:var(--shadow)}
+.floaty{position:absolute;font-size:26px;opacity:.9;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.floaty{animation:bob 3.2s ease-in-out infinite}.floaty:nth-of-type(2n){animation-delay:-1.4s}}
+@keyframes bob{50%{transform:translateY(-6px) rotate(6deg)}}
+.cover::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;
+  background:linear-gradient(90deg,var(--coral) 0 20%,var(--sun) 20% 40%,var(--leaf) 40% 60%,var(--sky) 60% 80%,var(--grape) 80% 100%)}
+.issue{padding-right:90px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
 .pill{display:inline-block;border-radius:999px;padding:2px 12px;font-size:12px;background:var(--coral-soft);color:var(--fg)}
 .cover h1{font-family:var(--display);font-weight:400;font-size:clamp(36px,10vw,58px);line-height:1;margin:12px 0 6px;letter-spacing:-.01em}
 .cover h1 span{color:var(--coral)}
@@ -40,13 +38,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--sky);outline-offset
 .deco{position:absolute;right:-8px;bottom:-16px;width:104px;height:104px;pointer-events:none;opacity:.95}
 @media (min-width:560px){.cover p{padding-right:0}.deco{width:128px;height:128px}}
 
-h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 10px}
+h2{font-family:var(--display);font-weight:400;font-size:23px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+h2 .e{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--paper);box-shadow:var(--shadow);font-size:18px}
 .cap{font-size:12px;color:var(--muted);margin-top:8px}
 
 /* 세 아이 */
 .kids{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-.kid{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;min-width:0}
-.kid .dot{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-size:14px;color:#fff;line-height:1.05;text-align:center}
+.kid{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;min-width:0}
+.kid .dot{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:26px;line-height:1}
 .kid b{font-family:var(--display);font-weight:400;font-size:17px;display:block;line-height:1.3}
 .kid small{display:block;color:var(--muted);font-size:12px;margin-bottom:2px}
 .kid p{margin:2px 0 0;font-size:14px}
@@ -54,6 +53,7 @@ h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 10px}
 /* 요일표 */
 .plan ul{margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .plan li{list-style:none;display:grid;grid-template-columns:62px 1fr;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:9px 14px;align-items:baseline}
+.plan li{box-shadow:var(--shadow)}
 .plan li.we{background:var(--sun-soft)}
 .plan .d{font-family:var(--display);font-size:16px;color:var(--coral);white-space:nowrap}
 .plan .d small{display:block;font-family:var(--body);font-size:11px;color:var(--muted)}
@@ -66,18 +66,18 @@ h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 10px}
 .tabrow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .tab{all:unset;cursor:pointer;text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:10px 4px;font-family:var(--display);font-size:16px;line-height:1.2}
 .tab small{display:block;font-family:var(--body);font-size:11px;color:var(--muted)}
-.tab[aria-selected="true"]{background:var(--coral);border-color:var(--coral);color:var(--paper)}
+.tab[aria-selected="true"]{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 4px 0 #e5604f}
 .tab[aria-selected="true"] small{color:var(--paper);opacity:.9}
 .seg{display:flex;gap:6px;flex-wrap:wrap}
 .seg button{all:unset;cursor:pointer;font-size:13px;padding:4px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper)}
-.seg button[aria-pressed="true"]{background:var(--fg);border-color:var(--fg);color:var(--paper)}
+.seg button[aria-pressed="true"]{background:var(--grape);border-color:var(--grape);color:#fff}
 
-.lead{background:var(--leaf-soft);border-radius:var(--r);padding:14px 16px;font-size:14px}
+.lead{background:var(--grape-soft);border-radius:var(--r);padding:14px 16px;font-size:14px}
 .lead b{font-family:var(--display);font-weight:400;font-size:18px;display:block}
 
 /* 카드 */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .card .top{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .who{font-size:11px;border-radius:999px;padding:1px 9px}
 .who.k4{background:var(--coral-soft)} .who.k9{background:var(--sky-soft)} .who.all{background:var(--leaf-soft)}
@@ -95,7 +95,7 @@ h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 10px}
 .links a{font-size:13px;text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
 .links a:hover{border-color:var(--coral)}
 .hot{border:2px solid var(--coral)}
-.hot .star{font-size:11px;color:#fff;background:var(--coral);border-radius:999px;padding:1px 9px}
+.hot .star{font-size:11px;color:#fff;background:linear-gradient(90deg,var(--coral),var(--sun));border-radius:999px;padding:1px 9px}
 
 /* 장보기 */
 .shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
@@ -126,7 +126,8 @@ h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 10px}
 
 <div class="wrap">
 <header class="cover">
-  <div class="issue"><span class="pill">VOL.01 · 시안</span><span>2026년 10월 19일(월) – 25일(일) · 매주 화요일 밤 9시 도착</span></div>
+  <div class="issue"><span class="pill">VOL.01 · 시안</span><span>2026년 10월 19일(월) – 25일(일)</span></div>
+  <span class="floaty" style="right:20px;top:30px">🎨</span><span class="floaty" style="right:58px;top:72px">🍂</span><span class="floaty" style="right:16px;top:104px">🧁</span>
   <h1>이번주도<br><span>다다다</span>와 함께❤️</h1>
   <p>다연·다솔·다정이와 이번 주에 해 볼 만들기·요리 놀이, 도전 재료, 나들이, 지금 나이에 챙길 것을 한 장에 모았어요.</p>
   <svg class="deco" viewBox="0 0 128 128" aria-hidden="true">
@@ -137,30 +138,30 @@ h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 10px}
 </header>
 
 <section aria-label="이번 주 세 아이">
-  <h2>이번 주 세 아이</h2>
+  <h2><span class="e">👧</span>이번 주 세 아이</h2>
   <div class="kids">
-    <div class="kid"><span class="dot" style="background:var(--coral);font-size:12px">다솔<br>다정</span><div><small>다솔·다정 · 2022년생 쌍둥이 · 만4세반</small><b>하루 있었던 일을 말로 꺼내는 시기</b><p>재료는 두 세트로, 결과물은 각자 이름을 써서 따로 보관해요.</p></div></div>
-    <div class="kid"><span class="dot" style="background:var(--sky)">다연</span><div><small>다연 · 2017년생 · 초등 3학년</small><b>2학기 수학 '원'과 '분수' 즈음</b><p>계량 요리로 들이·무게를 미리 해 보고, 동생들 놀이의 리더를 맡겨요.</p></div></div>
-    <div class="kid"><span class="dot" style="background:var(--leaf)">셋이</span><div><small>이번 주 함께하는 것</small><b>일요일 고구마 경단</b><p>다연이는 으깨고, 다솔·다정이는 동글동글 굴려요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--coral-soft)">👭</span><div><small>다솔·다정 · 2022년생 쌍둥이 · 만4세반</small><b>하루 있었던 일을 말로 꺼내는 시기</b><p>재료는 두 세트로, 결과물은 각자 이름을 써서 따로 보관해요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--sky-soft)">🎒</span><div><small>다연 · 2017년생 · 초등 3학년</small><b>2학기 수학 '원'과 '분수' 즈음</b><p>계량 요리로 들이·무게를 미리 해 보고, 동생들 놀이의 리더를 맡겨요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--leaf-soft)">💛</span><div><small>이번 주 함께하는 것</small><b>일요일 고구마 경단</b><p>다연이는 으깨고, 다솔·다정이는 동글동글 굴려요.</p></div></div>
   </div>
 </section>
 
 <section class="plan" aria-label="한눈에 보는 이번 주">
-  <h2>한눈에 보는 이번 주</h2>
+  <h2><span class="e">🗓️</span>한눈에 보는 이번 주</h2>
   <ul>
-    <li><span class="d">월<small>10.19</small></span><span class="t"><i class="iall">셋이</i>하원길에 낙엽 한 봉지 줍기 · 은행잎은 두꺼운 책 사이에 끼워 두기</span></li>
-    <li><span class="d">화<small>10.20</small></span><span class="t"><i class="i4">다솔·다정</i>낙엽 동물 콜라주 <i class="i9">다연</i>실과 연필로 원 만다라</span></li>
-    <li><span class="d">수<small>10.21</small></span><span class="t"><i class="i4">다솔·다정</i>크레용 나뭇잎 탁본 </span></li>
-    <li><span class="d">목<small>10.22</small></span><span class="t"><i class="iall">셋이</i>귤 호박 얼굴 그리기 <i class="i9">다연</i>은행잎 책갈피 마무리</span></li>
-    <li><span class="d">금<small>10.23</small></span><span class="t"><i class="iall">셋이</i>🎃 도전 재료 단호박 피자 · 독감 접종 병원 예약 확인</span></li>
-    <li class="we"><span class="d">토<small>10.24</small></span><span class="t"><i class="iall">셋이</i>곡교천 은행나무길 산책 · 도토리 미션 · 돌아와서 낙엽 왕관</span></li>
-    <li class="we"><span class="d">일<small>10.25</small></span><span class="t"><i class="iall">셋이</i>고구마 경단 <i class="i9">다연</i>계량 핫케이크</span></li>
+    <li><span class="d">월<small>10.19</small></span><span class="t"><i class="iall">💛 셋이</i>하원길에 낙엽 한 봉지 줍기 · 은행잎은 두꺼운 책 사이에 끼워 두기</span></li>
+    <li><span class="d">화<small>10.20</small></span><span class="t"><i class="i4">👭 다솔·다정</i>낙엽 동물 콜라주 <i class="i9">🎒 다연</i>실과 연필로 원 만다라</span></li>
+    <li><span class="d">수<small>10.21</small></span><span class="t"><i class="i4">👭 다솔·다정</i>크레용 나뭇잎 탁본 </span></li>
+    <li><span class="d">목<small>10.22</small></span><span class="t"><i class="iall">💛 셋이</i>귤 호박 얼굴 그리기 <i class="i9">🎒 다연</i>은행잎 책갈피 마무리</span></li>
+    <li><span class="d">금<small>10.23</small></span><span class="t"><i class="iall">💛 셋이</i>🎃 도전 재료 단호박 피자 · 독감 접종 병원 예약 확인</span></li>
+    <li class="we"><span class="d">토<small>10.24</small></span><span class="t"><i class="iall">💛 셋이</i>곡교천 은행나무길 산책 · 도토리 미션 · 돌아와서 낙엽 왕관</span></li>
+    <li class="we"><span class="d">일<small>10.25</small></span><span class="t"><i class="iall">💛 셋이</i>고구마 경단 <i class="i9">🎒 다연</i>계량 핫케이크</span></li>
   </ul>
   <p class="cap">평일은 저녁 20분 안쪽 놀이로, 손이 많이 가는 건 주말로 몰았어요.</p>
 </section>
 
 <section class="dare" aria-label="이번 주 도전 재료">
-  <h2>이번 주 도전 재료</h2>
+  <h2><span class="e">🥄</span>이번 주 도전 재료</h2>
   <div class="dcard">
     <div class="dhead"><span class="demo">🎃</span><div><small>가을이 제철 · 달콤해서 첫 도전으로 좋아요</small><b>단호박</b></div></div>
     <p>노랗고 달아서 낯선 채소 중에선 거부감이 적은 편이에요. 이번 주엔 "다 먹기"가 아니라 "만져 보고, 냄새 맡고, 한 입"이 목표예요.</p>
@@ -182,7 +183,7 @@ h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 10px}
 <div class="grid" id="grid"></div>
 
 <section aria-label="이번 주 장보기">
-  <h2>이번 주 장보기</h2>
+  <h2><span class="e">🧺</span>이번 주 장보기</h2>
   <div class="shop">
     <div><b>🛒 마트</b><ul><li>고구마 4~5개</li><li>카스텔라 1개</li><li>귤 3개 이상</li><li>핫케이크 가루 · 우유 · 달걀</li><li>미니 단호박 1개 · 피자 치즈</li></ul></div>
     <div><b>✏️ 문구</b><ul><li>도화지, 딱풀 2개 (다솔·다정 각자)</li><li>크레용, 사인펜, 유성 네임펜</li><li>양면테이프, 스테이플러</li><li>손코팅지, 실, 리본</li></ul></div>
@@ -191,7 +192,7 @@ h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 10px}
 </section>
 
 <section class="cal" aria-label="이번 주 달력">
-  <h2>이번 주 달력</h2>
+  <h2><span class="e">📌</span>이번 주 달력</h2>
   <ul>
     <li><span class="d">~ 내년 4.30</span><span>어린이 독감 무료접종 진행 중. 세 아이 모두 대상이에요. 처음 맞는 9세 미만은 4주 간격 2회. <a href="https://www.medicaldaily.co.kr/post/22538" target="_blank" rel="noopener">접종 안내</a></span></li>
     <li><span class="d">10.25 (일)</span><span>독도의 날. 다연이가 지도에서 독도를 찾아 다솔·다정이에게 설명해 주기</span></li>
@@ -201,7 +202,7 @@ h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 10px}
 </section>
 
 <section class="sources" aria-label="출처">
-  <h2>이번 호를 만든 자료</h2>
+  <h2><span class="e">🔗</span>이번 호를 만든 자료</h2>
   <ul id="srclist"></ul>
   <p class="note">놀이는 집에 있는 재료로 Claude가 짠 거예요. 발달 내용은 일반적인 기준이라 아이마다 빠르고 느릴 수 있어요. 걱정되는 점은 소아청소년과와 상담해 주세요. 반과 학년은 출생연도로 계산하고 매년 3월에 자동으로 올라가요.</p>
 </section>
@@ -223,8 +224,8 @@ const SRC=[
  ["편식 교정과 반복 노출 (육아크루)","https://www.yugacrew.com/yugawiki/%ED%8E%B8%EC%8B%9D%EA%B5%90%EC%A0%95"],
  ["반복 노출과 채소 수용 연구 (PubMed)","https://pubmed.ncbi.nlm.nih.gov/18585415/"]
 ];
-const TABS=[{id:"play",name:"놀이",sub:"만들기·요리"},{id:"go",name:"체험",sub:"나들이"},{id:"grow",name:"발달·건강",sub:"챙길 것"}];
-const WHO={k4:"다솔·다정",k9:"다연",all:"셋이 함께"};
+const TABS=[{id:"play",name:"🎨 놀이",sub:"만들기·요리"},{id:"go",name:"🚗 체험",sub:"나들이"},{id:"grow",name:"🌱 건강",sub:"발달·챙길 것"}];
+const WHO={k4:"👭 다솔·다정",k9:"🎒 다연",all:"💛 셋이 함께"};
 const KIND={make:"✂️ 만들기",cook:"🍳 요리",sci:"🔬 수학·실험",move:"🏃 몸놀이"};
 const LEAD={
  play:"만들기를 좋아하는 세 아이라 이번 주는 낙엽 만들기와 가을 간식 요리로 짰어요. 다솔·다정이 놀이는 재료를 두 세트 준비하면 다툼이 줄어요.",
@@ -266,7 +267,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 const pass=r=>who==="all"?true:who==="together"?r[1]==="all":(r[1]===who||r[1]==="all");
 function render(){
   $("tabs").innerHTML=TABS.map(t=>`<button class="tab" role="tab" aria-selected="${t.id===tab}" data-tab="${t.id}">${t.name}<small>${t.sub} · ${D.filter(r=>r[0]===t.id&&pass(r)).length}</small></button>`).join("");
-  $("seg").innerHTML=[["all","전체"],["k4","다솔·다정"],["k9","다연"],["together","셋이 함께"]].map(([k,l])=>`<button aria-pressed="${k===who}" data-who="${k}">${l}</button>`).join("");
+  $("seg").innerHTML=[["all","✨ 전체"],["k4","👭 다솔·다정"],["k9","🎒 다연"],["together","💛 셋이"]].map(([k,l])=>`<button aria-pressed="${k===who}" data-who="${k}">${l}</button>`).join("");
   const rows=D.filter(r=>r[0]===tab&&pass(r)).sort((a,b)=>(b[11]||0)-(a[11]||0));
   const T=TABS.find(t=>t.id===tab);
   $("lead").innerHTML=`<b>${T.name} · ${rows.length}개</b>${LEAD[tab]}`;
@@ -275,7 +276,7 @@ function render(){
     <h3>${esc(r[3])}</h3><div class="by">${esc(r[4])}</div><p>${esc(r[5])}</p>
     ${r[7].length?`<div class="mats">${r[7].map(m=>`<span>${esc(m)}</span>`).join("")}</div>`:""}
     ${r[8].length?`<ol class="steps">${r[8].map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`:""}
-    ${r[9]?`<div class="tip"><b>엄마 팁</b> ${esc(r[9])}</div>`:""}
+    ${r[9]?`<div class="tip"><b>💡 엄마 팁</b> ${esc(r[9])}</div>`:""}
     ${r[10].length?`<div class="links">${r[10].map(([l,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div>`:""}
   </article>`).join("")||`<p class="note">이번 주엔 이 조합의 내용이 없어요.</p>`;
   try{localStorage.setItem("dadada",JSON.stringify({tab,who}))}catch(e){}
