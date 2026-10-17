@@ -29,10 +29,11 @@ jobs:
         run: |
           if [ -z "$TOKEN" ] || [ -z "$CHAT" ]; then echo "비밀값 TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID 를 먼저 등록하세요"; exit 1; fi
           WEEK=$(basename "$FILE" .html)
+          STAMP=$(TZ=Asia/Seoul date +%m%d-%H%M)
           send() {
             RES=$(curl -sS \
               -F chat_id="$1" \
-              -F document=@"$FILE;filename=다다다와함께-$WEEK.html" \
+              -F document=@"$FILE;filename=다다다와함께-$WEEK-$STAMP.html" \
               -F caption="❤️ 이번주도 다다다와 함께 ($WEEK 주)  파일을 열면 이번 주 놀이·도전 재료·체험·챙길 것이 나와요." \
               "https://api.telegram.org/bot$TOKEN/sendDocument")
             if echo "$RES" | grep -q '"ok":true'; then echo "::notice::보냄 ...${1: -4}"; return 0; fi
