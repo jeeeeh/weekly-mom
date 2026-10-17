@@ -30,16 +30,20 @@ jobs:
           if [ -z "$TOKEN" ] || [ -z "$CHAT" ]; then echo "비밀값 TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID 를 먼저 등록하세요"; exit 1; fi
           WEEK=$(basename "$FILE" .html)
           send() {
-            curl -sS --fail-with-body \
+            RES=$(curl -sS \
               -F chat_id="$1" \
               -F document=@"$FILE;filename=다다다와함께-$WEEK.html" \
               -F caption="❤️ 이번주도 다다다와 함께 ($WEEK 주)  파일을 열면 이번 주 놀이·도전 재료·체험·챙길 것이 나와요." \
-              "https://api.telegram.org/bot$TOKEN/sendDocument" > /dev/null
+              "https://api.telegram.org/bot$TOKEN/sendDocument")
+            if echo "$RES" | grep -q '"ok":true'; then echo "::notice::보냄 ...${1: -4}"; return 0; fi
+            DESC=$(echo "$RES" | sed -n 's/.*"description":"\([^"]*\)".*/\1/p')
+            echo "::error::실패 ...${1: -4} : $DESC"; return 1
           }
           # TELEGRAM_CHAT_ID 에 쉼표·띄어쓰기·줄바꿈으로 여러 방 ID를 넣어도 각각 보냄
           IDS=$(printf '%s\n%s' "$CHAT" "$GROUP" | tr ', ' '\n\n' | sed '/^$/d' | sort -u)
+          echo "::notice::받을 방 $(echo "$IDS" | wc -l)곳"
           FAIL=0
           for ID in $IDS; do
-            if send "$ID"; then echo "보냄: ...${ID: -4}"; else echo "실패: ...${ID: -4}"; FAIL=1; fi
+            send "$ID" || FAIL=1
           done
           exit $FAIL
