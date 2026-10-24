@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>10월 5주차 아기호랑이 학습지</title>
+<style>
+/* A4 2쪽 학습지. 소식지 📚 배움 탭과 짝. 흑백 인쇄해도 보이게 선은 진하게, 따라쓰기 글씨는 연회색 */
+@page{size:A4;margin:0}
+:root{--fg:#3a3040;--muted:#857a88;--line:#3a3040;--trace:#d6d0d8;--coral:#ff7f6e;--sun:#ffbf3c;--sky:#4fa3e8;--leaf:#3fb37f;--grape:#a98bff;--soft:#fff8f1}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans CJK KR","Noto Sans KR",sans-serif;font-weight:400;color:var(--fg);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;padding:9mm 12mm;display:flex;flex-direction:column;gap:3.5mm;page-break-after:always;overflow:hidden;position:relative}
+.page:last-child{page-break-after:auto}
+.top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid var(--coral);padding-bottom:3mm}
+.top h1{font-weight:700;letter-spacing:-.02em;font-size:24pt;margin:0;line-height:1.1}
+.top h1 small{display:block;font-family:inherit;font-size:11pt;color:var(--muted)}
+.who{font-size:11pt;display:flex;gap:6mm}
+.who span{border-bottom:1.5px solid var(--line);min-width:32mm;display:inline-block;padding-bottom:1mm}
+.sec{border:2px solid var(--line);border-radius:5mm;padding:3.5mm 5mm;display:flex;flex-direction:column;gap:3mm}
+.sec h2{font-weight:700;letter-spacing:-.02em;font-size:15pt;margin:0;display:flex;align-items:center;gap:2mm}
+.sec h2 i{font-style:normal;font-size:10pt;font-weight:500;color:#fff;border-radius:99px;padding:.5mm 3mm}
+.sec h2 em{font-style:normal;font-weight:400;font-size:10pt;color:var(--muted);margin-left:auto}
+.ko i{background:var(--coral)}.ma i{background:var(--sky)}.en i{background:var(--leaf)}.id i{background:var(--grape)}
+.q{font-size:11.5pt;margin:0}
+/* 자모 합치기 표 */
+table.jamo{border-collapse:collapse;align-self:center}
+.jamo td,.jamo th{border:2px solid var(--line);width:22mm;height:13.5mm;text-align:center;font-size:21pt;font-weight:500}
+.jamo th{background:#fff3d4;font-size:18pt}
+.jamo td.ex{color:var(--coral)}
+/* 따라쓰기 칸 */
+.trace{display:flex;flex-direction:column;gap:2.5mm}
+.row{display:flex;align-items:center;gap:3mm}
+.row .pic{font-size:22pt;width:12mm;text-align:center}
+.cells{display:flex;gap:0}
+.cell{width:16mm;height:16mm;border:1.5px solid var(--line);margin-left:-1.5px;display:grid;place-items:center;font-size:28pt;line-height:1;font-weight:400;color:var(--trace);position:relative}
+.cell::before,.cell::after{content:"";position:absolute;background:none;border:0 dashed #c9c2cc}
+.cell::before{left:50%;top:0;bottom:0;border-left-width:1px}
+.cell::after{top:50%;left:0;right:0;border-top-width:1px}
+.gap{width:4mm}
+/* 수학 */
+.make10{display:grid;grid-template-columns:1fr 1fr;gap:3mm 6mm}
+.m10{display:flex;align-items:center;gap:2mm;font-size:13pt}
+.m10 .dots{font-size:13pt;letter-spacing:-1px;min-width:52mm}
+.box{display:inline-block;width:11mm;height:11mm;border:2px solid var(--line);border-radius:2mm;vertical-align:middle}
+.numline{display:flex;gap:0;align-self:center}
+.numline div{width:14mm;height:13mm;border:2px solid var(--line);margin-left:-2px;display:grid;place-items:center;font-size:18pt;font-weight:500}
+.pat{display:flex;gap:2mm;align-items:center;font-size:21pt;align-self:center}
+.pat .box{width:13mm;height:13mm}
+/* 영어 */
+.abc{display:flex;flex-direction:column;gap:2mm}
+.eline{display:flex;align-items:center;gap:3mm}
+.eline .pic{font-size:20pt;width:11mm;text-align:center}
+.eline .word{font-size:12pt;width:16mm;color:var(--muted)}
+.four{flex:1;height:13.5mm;overflow:visible}
+.four line{stroke:#3a3040;stroke-width:1.3}
+.four line.d{stroke:#bdb5c1;stroke-dasharray:4 4;stroke-width:1}
+.four line.b{stroke:#3a3040;stroke-width:1.6}
+.four text{font-family:"Noto Sans","Noto Sans CJK KR",sans-serif;font-weight:400;font-size:50px;fill:#d6d0d8}
+.like{font-size:16pt;display:flex;align-items:flex-end;gap:2mm}
+.like b{font-weight:400;color:var(--trace);font-size:22pt}
+.like .blank{flex:1;border-bottom:2px solid var(--line);height:10mm}
+/* 창의력 */
+.story{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}
+.card{border:2px solid var(--line);border-radius:4mm;height:22mm;position:relative;display:grid;place-items:center;font-size:30pt}
+.card .n{position:absolute;left:2mm;top:2mm;width:9mm;height:9mm;border:2px solid var(--line);border-radius:50%}
+.draw{border:2px dashed var(--line);border-radius:4mm;flex:1;min-height:22mm;position:relative}
+.draw span{position:absolute;left:3mm;top:2mm;font-size:10pt;color:var(--muted)}
+.stars{display:flex;gap:3mm;align-items:center;font-size:11pt;margin-top:auto}
+.stars i{width:11mm;height:11mm;border:2px dashed var(--sun);border-radius:50%;display:inline-block}
+.foot{font-size:9pt;color:var(--muted);text-align:right}
+/* 이번 호 추가: 줄 잇기 · 10 가르기 · 이야기 3칸 */
+.match{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm 30mm;align-self:center;align-items:center}
+.match .w{font-size:20pt;font-weight:500;display:flex;align-items:center;justify-content:flex-end;gap:3mm}
+.match .p{font-size:24pt;display:flex;align-items:center;gap:3mm}
+.match i{display:inline-block;width:3.5mm;height:3.5mm;border-radius:50%;background:var(--line)}
+.ten{display:inline-flex;gap:.7mm;flex:none}
+.ten b{width:4.8mm;height:4.8mm;border:1.6px solid var(--line);border-radius:50%;display:inline-block}
+.ten b.f{background:var(--line)}
+.sp{display:grid;grid-template-columns:1fr 1fr;gap:3mm 6mm}
+.sp .m10{gap:2mm;white-space:nowrap;font-size:12pt}
+.sp .box{width:10mm;height:10mm}
+.add{display:flex;gap:10mm;justify-content:center}
+.add .m10{font-size:13pt}
+.story3{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:4mm;align-items:stretch}
+.story3 .card{height:26mm;flex-direction:column;font-size:24pt;display:flex;align-items:center;justify-content:center;gap:1mm}
+.story3 .card small{font-size:9.5pt;color:var(--fg)}
+.story3 .draw{min-height:26mm}
+</style>
+<style>
+/* 이번 호 추가: 받침 ㅇ · 10과 몇 · 규칙 · 순서 카드 */
+.bat{display:grid;grid-template-columns:1fr 1fr;gap:3mm 10mm;align-self:center}
+.bat .m10{font-size:20pt;font-weight:500;gap:3mm}
+.bat .box{width:15mm;height:15mm}
+.bat .ex{color:var(--coral)}
+.tenp{display:grid;grid-template-columns:1fr 1fr;gap:3mm 6mm}
+.tenp .m10{white-space:nowrap;font-size:13pt;gap:2.5mm}
+.tenp .box{width:10mm;height:10mm}
+.ten.s{display:inline-grid;grid-template-columns:repeat(5,4.6mm);gap:.8mm}
+.ten.s b{width:4.6mm;height:4.6mm}
+.loose{display:inline-flex;gap:.7mm}
+.loose b{width:4.6mm;height:4.6mm;border-radius:50%;background:var(--line);display:inline-block}
+.subp{display:flex;gap:10mm;justify-content:center}
+.subp .m10{font-size:13pt}
+.subp s{text-decoration:none;position:relative;display:inline-block}
+.subp s::after{content:"";position:absolute;left:-1mm;right:-1mm;top:50%;border-top:2.2px solid var(--line);transform:rotate(-35deg)}
+.order{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}
+.order .card{height:27mm;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:24pt;gap:1mm}
+.order .card small{font-size:9.5pt}
+.order .card .n{left:2mm;top:2mm}
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="top">
+    <h1><small>🐯 10월 5주차 아기호랑이와 함께</small>이번 주 학습지 ①</h1>
+    <div class="who">이름 <span></span> 날짜 <span></span></div>
+  </div>
+
+  <div class="sec ko">
+    <h2><i>한글</i>거센소리 + 모음을 합쳐 글자를 써요<em>소식지 📚 배움 · ㅊ·ㅋ·ㅌ·ㅍ 합치기</em></h2>
+    <p class="q">ㄱ에 획 하나를 더하면 ㅋ! 첫 줄처럼 ㅋ과 ㅏ를 합치면 '카'. 빈칸에 글자를 써 보고 소리 내 읽어 봐요.</p>
+    <table class="jamo">
+      <tr><th></th><th>ㅏ</th><th>ㅗ</th><th>ㅣ</th></tr>
+      <tr><th>ㅋ</th><td class="ex">카</td><td class="ex">코</td><td class="ex">키</td></tr>
+      <tr><th>ㅌ</th><td></td><td></td><td></td></tr>
+      <tr><th>ㅍ</th><td></td><td></td><td></td></tr>
+      <tr><th>ㅊ</th><td></td><td></td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="sec ko">
+    <h2><i>한글</i>이번 주 낱말을 따라 써요<em>소식지 📚 배움 · 포도·치마·토마토</em></h2>
+    <div class="trace">
+      <div class="row"><span class="pic">🍇</span><div class="cells"><div class="cell">포</div><div class="cell">도</div></div><span class="gap"></span><div class="cells"><div class="cell">포</div><div class="cell">도</div></div><span class="gap"></span><div class="cells"><div class="cell">포</div><div class="cell">도</div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div></div></div>
+      <div class="row"><span class="pic">👗</span><div class="cells"><div class="cell">치</div><div class="cell">마</div></div><span class="gap"></span><div class="cells"><div class="cell">치</div><div class="cell">마</div></div><span class="gap"></span><div class="cells"><div class="cell">치</div><div class="cell">마</div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div></div></div>
+      <div class="row"><span class="pic">🍅</span><div class="cells"><div class="cell">토</div><div class="cell">마</div><div class="cell">토</div></div><span class="gap"></span><div class="cells"><div class="cell">토</div><div class="cell">마</div><div class="cell">토</div></div><span class="gap"></span><div class="cells"><div class="cell"></div><div class="cell"></div><div class="cell"></div></div></div>
+    </div>
+  </div>
+
+  <div class="sec ko">
+    <h2><i>한글</i>받침 ㅇ을 붙이면 어떤 글자가 될까요?<em>소식지 📚 배움 · 고 + ㅇ = 공 ★★★</em></h2>
+    <div class="bat">
+      <div class="m10">⚽ 고 + ㅇ = <span class="ex">공</span></div>
+      <div class="m10">바 + ㅇ = <span class="box"></span></div>
+      <div class="m10">사 + ㅇ = <span class="box"></span></div>
+      <div class="m10">가 + ㅇ = <span class="box"></span></div>
+    </div>
+  </div>
+
+  <div class="stars">다 했으면 별 스티커를 붙여요 <i></i><i></i><i></i></div>
+  <div class="foot">이번주에 뭐 하지?🐯 · 2022년생 만4세반</div>
+</section>
+
+<section class="page">
+  <div class="top">
+    <h1><small>🐯 10월 5주차 아기호랑이와 함께</small>이번 주 학습지 ②</h1>
+    <div class="who">이름 <span></span></div>
+  </div>
+
+  <div class="sec ma">
+    <h2><i>수학</i>10 묶음과 낱개, 모두 몇 개일까요?<em>소식지 📚 배움 · 10과 몇</em></h2>
+    <div class="tenp">
+      <div class="m10"><span class="ten s"><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b></span> + <span class="loose"><b></b><b></b><b></b></span> = <span class="box"></span></div>
+      <div class="m10"><span class="ten s"><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b></span> + <span class="loose"><b></b><b></b><b></b><b></b><b></b></span> = <span class="box"></span></div>
+      <div class="m10"><span class="ten s"><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b></span> + <span class="loose"><b></b></span> = <span class="box"></span></div>
+      <div class="m10"><span class="ten s"><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b></span> + <span class="loose"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></span> = <span class="box"></span></div>
+    </div>
+    <h2 style="margin-top:1mm"><i>수학</i>먹은 사탕(빗금)을 빼면 몇 개 남을까요?<em>소식지 📚 배움 · 사탕 빼기 이야기</em></h2>
+    <div class="subp">
+      <div class="m10">🍬🍬🍬<s>🍬</s><s>🍬</s> &nbsp;5 − 2 = <span class="box"></span></div>
+      <div class="m10">🍭🍭🍭🍭<s>🍭</s><s>🍭</s><s>🍭</s> &nbsp;7 − 3 = <span class="box"></span></div>
+    </div>
+  </div>
+
+  <div class="sec ma">
+    <h2><i>수학</i>규칙을 찾아 빈칸에 그려요<em>소식지 📚 배움 · 🎃👻🦇 규칙</em></h2>
+    <div class="pat">🎃 👻 🦇 🎃 👻 <span class="box"></span> 🎃 <span class="box"></span> 🦇 <span class="box"></span> 👻</div>
+  </div>
+
+  <div class="sec en">
+    <h2><i>영어</i>G · H · I 따라 쓰고 말해요<em>소식지 📚 배움 · G is for Ghost</em></h2>
+    <div class="abc">
+      <div class="eline"><span class="pic">👻</span><span class="word">ghost</span><svg class="four" viewBox="0 0 600 58" preserveAspectRatio="xMinYMid meet"><line x1="0" x2="600" y1="8" y2="8"/><line class="d" x1="0" x2="600" y1="18" y2="18"/><line class="b" x1="0" x2="600" y1="44" y2="44"/><line x1="0" x2="600" y1="56" y2="56"/><text x="14" y="44">G</text><text x="76" y="44">g</text><text x="138" y="44">G</text><text x="200" y="44">g</text><text x="262" y="44">G</text><text x="324" y="44">g</text></svg></div>
+      <div class="eline"><span class="pic">🎩</span><span class="word">hat</span><svg class="four" viewBox="0 0 600 58" preserveAspectRatio="xMinYMid meet"><line x1="0" x2="600" y1="8" y2="8"/><line class="d" x1="0" x2="600" y1="18" y2="18"/><line class="b" x1="0" x2="600" y1="44" y2="44"/><line x1="0" x2="600" y1="56" y2="56"/><text x="14" y="44">H</text><text x="76" y="44">h</text><text x="138" y="44">H</text><text x="200" y="44">h</text><text x="262" y="44">H</text><text x="324" y="44">h</text></svg></div>
+      <div class="eline"><span class="pic">🐛</span><span class="word">insect</span><svg class="four" viewBox="0 0 600 58" preserveAspectRatio="xMinYMid meet"><line x1="0" x2="600" y1="8" y2="8"/><line class="d" x1="0" x2="600" y1="18" y2="18"/><line class="b" x1="0" x2="600" y1="44" y2="44"/><line x1="0" x2="600" y1="56" y2="56"/><text x="14" y="44">I</text><text x="76" y="44">i</text><text x="138" y="44">I</text><text x="200" y="44">i</text><text x="262" y="44">I</text><text x="324" y="44">i</text></svg></div>
+    </div>
+    <div class="like">It's a <b>hat</b> . &nbsp;→&nbsp; It's a <span class="blank"></span> . <small style="font-size:9pt;color:var(--muted)">(가방 속 물건 그리기)</small></div>
+  </div>
+
+  <div class="sec id">
+    <h2><i>창의력</i>단호박 볼 만드는 순서대로 동그라미에 번호를 써요<em>소식지 📚 배움 · 순서 맞히기</em></h2>
+    <div class="order">
+      <div class="card"><span class="n"></span>✋<small>동글동글 빚기</small></div>
+      <div class="card"><span class="n"></span>🔥<small>엄마가 익히기</small></div>
+      <div class="card"><span class="n"></span>😋<small>얼굴 붙여 먹기</small></div>
+      <div class="card"><span class="n"></span>🥄<small>포크로 으깨기</small></div>
+    </div>
+    <p class="q" style="font-size:10pt;color:var(--muted)">왜 그 순서인지 엄마에게 이유를 말해 봐요.</p>
+  </div>
+
+  <div class="stars">다 했으면 별 스티커를 붙여요 <i></i><i></i><i></i></div>
+</section>
+
+</body>
+</html>
