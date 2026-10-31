@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light only">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>11월 1주차 아기호랑이와 함께</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+/* Layout: 표지 → 이번 주 픽(남아·여아·공통) → 한눈에 보는 7일 → 도전 재료 → 탭(놀이·영상·나들이·건강) + 남아/여아/공통 필터 → 장보기 → 달력 → 출처 */
+:root{
+  color-scheme:only light;
+  --bg:#fff8f1; --paper:#ffffff; --fg:#3a3040; --muted:#857a88; --line:#f1e4dc;
+  --coral:#ff7f6e; --coral-soft:#ffe6e1; --sky:#4fa3e8; --sky-soft:#e1f0fd; --leaf:#3fb37f; --leaf-soft:#dff6ea; --sun:#ffbf3c; --sun-soft:#fff3d4; --grape:#a98bff; --grape-soft:#efe9ff;
+  --display:"Jua","Gowun Dodum",system-ui,sans-serif;
+  --body:"Gowun Dodum",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
+  --r:24px; --shadow:0 4px 14px rgba(255,127,110,.12);
+}
+*{box-sizing:border-box}
+body{background:var(--bg) radial-gradient(circle,#ffd9cf 1.4px,transparent 1.6px) 0 0/22px 22px;color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:8px}
+
+/* 표지 */
+.cover{background:linear-gradient(160deg,#fff 0%,#fff1ec 60%,#fff6dc 100%);border-radius:30px;padding:30px 22px 24px;position:relative;overflow:hidden;border:2px solid #ffd6cc;box-shadow:var(--shadow)}
+.floaty{position:absolute;font-size:26px;opacity:.9;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.floaty{animation:bob 3.2s ease-in-out infinite}.floaty:nth-of-type(2n){animation-delay:-1.4s}}
+@keyframes bob{50%{transform:translateY(-6px) rotate(6deg)}}
+.cover::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;
+  background:linear-gradient(90deg,var(--coral) 0 20%,var(--sun) 20% 40%,var(--leaf) 40% 60%,var(--sky) 60% 80%,var(--grape) 80% 100%)}
+.issue{padding-right:90px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.pill{display:inline-block;border-radius:999px;padding:2px 12px;font-size:12px;background:var(--coral-soft);color:var(--fg)}
+.cover h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,10vw,58px);line-height:1;margin:12px 0 6px;letter-spacing:-.01em}
+.cover h1 span{color:var(--coral)}
+.cover h1 .nw{font-style:normal;white-space:nowrap}
+.cover p{margin:0;color:var(--muted);max-width:46ch;position:relative;z-index:1;padding-right:64px}
+.deco{position:absolute;right:-8px;bottom:-16px;width:104px;height:104px;pointer-events:none;opacity:.95}
+@media (min-width:560px){.cover p{padding-right:0}.deco{width:128px;height:128px}}
+
+h2{font-family:var(--display);font-weight:400;font-size:23px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+h2 .e{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--paper);box-shadow:var(--shadow);font-size:18px}
+.cap{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* 세 아이 */
+.kids{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.kid{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;min-width:0}
+.kid .dot{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:26px;line-height:1}
+.kid b{font-family:var(--display);font-weight:400;font-size:17px;display:block;line-height:1.3}
+.kid small{display:block;color:var(--muted);font-size:12px;margin-bottom:2px}
+.kid p{margin:2px 0 0;font-size:14px}
+
+/* 요일표 */
+.plan ul{margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.plan li{list-style:none;display:grid;grid-template-columns:62px 1fr;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:9px 14px;align-items:baseline}
+.plan li{box-shadow:var(--shadow)}
+.plan li.we{background:var(--sun-soft)}
+.plan .d{font-family:var(--display);font-size:16px;color:var(--coral);white-space:nowrap}
+.plan .d small{display:block;font-family:var(--body);font-size:11px;color:var(--muted)}
+.plan .t{font-size:14px;min-width:0}
+.plan .t i{font-style:normal;font-size:11px;border-radius:999px;padding:0 7px;margin-right:4px;white-space:nowrap}
+.ib{background:var(--sky-soft)} .ig{background:var(--coral-soft)} .iall{background:var(--leaf-soft)}
+
+/* 탭 */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:8px;display:flex;flex-direction:column;gap:8px}
+.tabrow{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.tab .ti{display:block;font-size:20px;line-height:1.2;margin-bottom:1px}
+#subj{display:none}#subj.on{display:flex}
+#subj button[aria-pressed="true"]{background:var(--sky);border-color:var(--sky);color:#fff}
+.tab{all:unset;cursor:pointer;text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:8px 1px;font-family:var(--display);font-size:14px;line-height:1.2;min-width:0}
+.tab small{display:block;font-family:var(--body);font-size:11px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 4px 0 #e5604f}
+.tab[aria-selected="true"] small{color:var(--paper);opacity:.9}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{all:unset;cursor:pointer;font-size:13px;padding:4px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper)}
+.seg button[aria-pressed="true"]{background:var(--grape);border-color:var(--grape);color:#fff}
+
+.lead{background:var(--grape-soft);border-radius:var(--r);padding:14px 16px;font-size:14px}
+.lead b{font-family:var(--display);font-weight:400;font-size:18px;display:block}
+
+/* 카드 */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card .top{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.who{font-size:11px;border-radius:999px;padding:1px 9px}
+.who.b{background:var(--sky-soft)} .who.g{background:var(--coral-soft)} .who.all{background:var(--leaf-soft)}
+.kind{font-size:11px;border-radius:999px;padding:1px 9px;background:var(--sun-soft)}
+.tag{font-size:11px;border-radius:999px;padding:1px 9px;border:1px dashed var(--line);color:var(--muted)}
+.card h3{font-family:var(--display);font-weight:400;font-size:19px;line-height:1.3;margin:0;overflow-wrap:anywhere}
+.card .by{font-size:13px;color:var(--muted);margin-top:-4px}
+.card p{margin:0;font-size:14px}
+.mats{display:flex;flex-wrap:wrap;gap:5px}
+.mats span{font-size:12px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:1px 8px}
+.steps{margin:0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:2px}
+.tip{font-size:13px;background:var(--bg);border-radius:12px;padding:8px 10px}
+.tip b{font-weight:400;color:var(--coral)}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.links a{font-size:13px;text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+.links a:hover{border-color:var(--coral)}
+.hot{border:2px solid var(--coral)}
+.hot .star{font-size:11px;color:#fff;background:linear-gradient(90deg,var(--coral),var(--sun));border-radius:999px;padding:1px 9px}
+
+/* 장보기 */
+.shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.shop div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;min-width:0}
+.shop b{font-family:var(--display);font-weight:400;font-size:17px;display:block;margin-bottom:4px}
+.shop ul{margin:0;padding-left:18px;font-size:14px}
+
+/* 달력 */
+.cal ul{margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.cal li{list-style:none;display:grid;grid-template-columns:84px 1fr;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:10px 14px}
+.cal .d{font-family:var(--display);color:var(--coral);font-variant-numeric:tabular-nums}
+.cal a{color:var(--sky)}
+
+.sources{font-size:13px;color:var(--muted)}
+.sources ul{padding-left:18px;margin:6px 0 0;display:flex;flex-direction:column;gap:3px}
+.sources a{color:var(--sky)}
+.note{font-size:12px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
+.dare .dcard{background:var(--sun-soft);border:2px solid var(--sun);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px}
+.dhead{display:flex;gap:12px;align-items:center}.demo{font-size:34px;line-height:1}
+.dhead small{display:block;color:var(--muted);font-size:12px}.dhead b{font-family:var(--display);font-weight:400;font-size:26px}
+.dare p{margin:0;font-size:14px}.dare h3{font-family:var(--display);font-weight:400;font-size:19px;margin:4px 0 0}.dare h3 span{font-family:var(--body);font-size:12px;color:var(--muted)}
+.ladder{display:flex;flex-wrap:wrap;gap:6px}.ladder span{font-size:13px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.thumb{display:block;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/9;background:var(--sun-soft)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb::after{content:"▶";position:absolute;inset:0;margin:auto;width:48px;height:48px;border-radius:50%;background:rgba(255,127,110,.92);color:#fff;display:grid;place-items:center;font-size:18px;padding-left:3px;box-sizing:border-box}
+.card .ch{font-size:12px;color:var(--muted)}
+/* 폰 브라우저 강제 다크모드에서도 밝게 */
+html,body{color-scheme:only light;forced-color-adjust:none;}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header class="cover">
+  <div class="issue"><span class="pill">VOL.03</span><span>2026년 11월 2일(월) – 11월 8일(일)</span></div>
+  <span class="floaty" style="right:20px;top:30px">🚒</span><span class="floaty" style="right:58px;top:72px">🧣</span><span class="floaty" style="right:16px;top:104px">🥬</span>
+  <h1><em class="nw"><span>11월 1주차</span></em><br><em class="nw">아기호랑이와</em> <em class="nw">함께🐯</em></h1>
+  <p>토요일(11.7)이 입동이고, 11월은 불조심 강조의 달이에요. 상자 소방차·낮은 자세 대피 놀이, 배추 도전, 받침 ㅁ·ㄴ과 20까지 수 순서, 이번 주 유치원 우선모집 일정까지 한 장에 모았어요.</p>
+  <svg class="deco" viewBox="0 0 128 128" aria-hidden="true">
+    <ellipse cx="46" cy="70" rx="24" ry="40" fill="var(--leaf-soft)" stroke="var(--leaf)" stroke-width="3" transform="rotate(-14 46 70)"/>
+    <ellipse cx="82" cy="70" rx="24" ry="40" fill="var(--leaf-soft)" stroke="var(--leaf)" stroke-width="3" transform="rotate(14 82 70)"/>
+    <ellipse cx="64" cy="76" rx="22" ry="38" fill="#fffbe6" stroke="var(--leaf)" stroke-width="3"/>
+    <path d="M64 44 V112 M64 62 L52 54 M64 62 L76 54 M64 80 L50 72 M64 80 L78 72" fill="none" stroke="var(--leaf)" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="56" cy="92" r="3" fill="var(--coral)"/><circle cx="72" cy="92" r="3" fill="var(--coral)"/>
+  </svg>
+</header>
+
+<section aria-label="이번 주 우리 아이">
+  <h2><span class="e">🧒</span>이번 주 우리 아이</h2>
+  <div class="kids">
+    <div class="kid"><span class="dot" style="background:var(--sun-soft)">🌟</span><div><small>2022년생 · 2026학년도 만4세반</small><b>2~3단계 지시를 따라 하는 시기</b><p>"수건으로 입 막고, 낮게 기어서, 문까지!"처럼 두세 단계를 한 번에 말해 주고 순서대로 해 보게 하세요. 이번 주 대피 놀이가 딱 그 연습이에요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--sky-soft)">👦</span><div><small>남아 이번 주 픽</small><b>상자 소방차 만들기</b><p>택배 상자로 타고 끄는 소방차를 만들고 휴지심 사다리를 달아요. 다음 주 월요일(11.9)이 소방의 날이에요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--coral-soft)">👧</span><div><small>여아 이번 주 픽</small><b>털실 목도리 종이 인형</b><p>입동 주간이라 종이 인형에게 털실 목도리를 감아 줘요. 감은 횟수를 세고 색 규칙도 만들어요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--leaf-soft)">🤝</span><div><small>모두 함께</small><b>낮은 자세 비상구 탈출 + 알배추 돌돌 롤</b><p>수요일엔 거실에서 연기 아래로 기어 나가는 대피 놀이를, 입동 토요일엔 직접 만 배추 롤로 한 입 도전해요.</p></div></div>
+  </div>
+  <p class="cap">👦·👧 표시는 좋아하는 아이가 많은 쪽을 표시한 거예요. 아이 취향대로 마음껏 바꿔서 골라 주세요.</p>
+</section>
+
+<section class="plan" aria-label="한눈에 보는 이번 주">
+  <h2><span class="e">🗓️</span>한눈에 보는 이번 주</h2>
+  <ul>
+    <li><span class="d">월<small>11.2</small></span><span class="t"><i class="iall">🤝 공통</i>🥬 배추 잎 물들이기 꽂아 두기 (만지기) · 📚 받침 ㅁ·ㄴ · 유치원 우선모집 시작</span></li>
+    <li><span class="d">화<small>11.3</small></span><span class="t"><i class="ib">👦 남아</i>분무기 불끄기 과녁 <i class="ig">👧 여아</i>털실 목도리 인형 · 물든 배추 잎 관찰</span></li>
+    <li><span class="d">수<small>11.4</small></span><span class="t"><i class="iall">🤝 공통</i>낮은 자세 비상구 탈출 · 📚 대피 순서 카드 · 우선모집 마감</span></li>
+    <li><span class="d">목<small>11.5</small></span><span class="t"><i class="ib">👦 남아</i>종이비행기 블록 자로 재기 <i class="ig">👧 여아</i>빨대 규칙 팔찌 · 📚 J·K·L</span></li>
+    <li><span class="d">금<small>11.6</small></span><span class="t"><i class="iall">🤝 공통</i>종이컵 실 전화기 · 사과 속 별 찾기 간식</span></li>
+    <li class="we"><span class="d">토<small>11.7</small></span><span class="t"><i class="iall">🤝 공통</i>입동 🥬 알배추 돌돌 롤 <i class="ib">👦 남아</i>상자 소방차 <i class="ig">👧 여아</i>색종이 김장 소꿉</span></li>
+    <li class="we"><span class="d">일<small>11.8</small></span><span class="t"><i class="iall">🤝 공통</i>겨울옷 혼자 입기 경주 · 동네 비상구·소화기 찾기 산책 · 내일은 소방의 날</span></li>
+  </ul>
+  <p class="cap">평일은 저녁 20분 안쪽 놀이로, 손이 많이 가는 건 주말로 몰았어요. 유치원·어린이집 소방 훈련이나 김장 체험 날짜는 기관 안내문으로 확인해 주세요.</p>
+</section>
+
+<section class="dare" aria-label="이번 주 도전 재료">
+  <h2><span class="e">🥄</span>이번 주 도전 재료</h2>
+  <div class="dcard">
+    <div class="dhead"><span class="demo">🥬</span><div><small>가을배추가 쏟아지는 김장철 · 노란 속잎은 연하고 아삭해요</small><b>배추</b></div></div>
+    <p>김치 속 매운 배추만 알고 "배추는 매워!" 하는 아이가 많아요. 김장철을 앞두고 가을배추가 많이 나오는 이번 주에, 맵지 않은 배추를 먼저 만나게 해 주세요. 월요일엔 배추 잎을 색깔 물에 꽂아 만지고 냄새 맡고, 입동 토요일엔 자기 손으로 만 배추 롤로 "한 입"에 도전해요.</p>
+    <h3>🥬 알배추 돌돌 롤 <span>20분 · 전자레인지</span></h3>
+    <div class="mats"><span>알배추 속잎 5~6장</span><span>밥 1공기</span><span>참기름·소금 조금</span><span>김가루</span><span>슬라이스 치즈 1~2장</span><span>위생장갑</span></div>
+    <ol class="steps"><li>엄마: 배추 잎을 씻어 두꺼운 흰 줄기를 얇게 저미고, 전자레인지에 1분쯤 돌려 숨을 죽이기</li><li>아이: 볼에 밥·참기름·소금·김가루를 넣고 장갑 낀 손으로 조물조물 비비기</li><li>아이: 배추 잎을 펼쳐 밥을 얇게 펴고 치즈를 올린 뒤 끝에서부터 돌돌 말기</li><li>엄마: 한입 크기로 썰기 → 아이: 단면에 몇 겹이 보이는지 세고 접시에 꽃처럼 담기</li></ol>
+    <div class="tip"><b>편식 팁</b> 새 음식은 여러 번 만나야 익숙해지는 경우가 많아요. 처음엔 말기만 해도 충분하고, 엄마가 맛있게 먹는 모습을 보여 주세요. 롤이 어려우면 노란 속잎 한 조각을 날것으로 "아삭!" 소리 내며 먼저 맛보게 하고, 흰 줄기보다 잎 끝부터 도전하면 쉬워요.</div>
+    <div class="ladder"><span>👀 보기</span><span>✋ 만지기</span><span>👃 냄새</span><span>👅 핥아보기</span><span>😋 한 입</span></div>
+    <p class="cap">칼질과 전자레인지에서 꺼내기는 엄마가 하고(김이 뜨거워요), 비비기·말기·세기는 아이에게 맡겨 주세요. 남은 배추는 다음 날 된장국에 넣어 한 번 더 만나요.</p>
+  </div>
+</section>
+
+<nav class="tabs" aria-label="섹션">
+  <div class="tabrow" role="tablist" id="tabs"></div>
+  <div class="seg" id="seg"></div>
+  <div class="seg" id="subj"></div>
+</nav>
+
+<div class="lead" id="lead"></div>
+<div class="grid" id="grid"></div>
+
+<section aria-label="이번 주 장보기">
+  <h2><span class="e">🧺</span>이번 주 장보기</h2>
+  <div class="shop">
+    <div><b>🛒 마트</b><ul><li>알배추 1통 (물들이기 실험 + 돌돌 롤)</li><li>참기름 · 김가루 · 슬라이스 치즈</li><li>사과 2개</li><li>식용색소 빨강·파랑 (없으면 물감)</li></ul></div>
+    <div><b>✏️ 문구</b><ul><li>큰 택배 상자, 빨간 색종이, 병뚜껑 4개, 휴지심 2개, 끈</li><li>분무기 (물 쏘기용), 빨강·주황 색종이</li><li>털실 2색, 두꺼운 도화지</li><li>색이 다른 빨대 2~3가지, 굵은 실이나 털실</li><li>종이컵 2개, 실 3m, 이쑤시개 (엄마용)</li><li>A4 종이, 블록, 탱탱볼, 줄넘기 줄</li></ul></div>
+    <div><b>🧥 집에서 꺼내 두기</b><ul><li>겨울 점퍼·모자·장갑 (혼자 입기 경주)</li><li>작은 수건 (대피 놀이용)</li><li>담요나 이불 (연기 터널)</li><li>리본 끈 한 줄 (바람 탐정)</li></ul></div>
+  </div>
+</section>
+
+<section class="cal" aria-label="이번 주 달력">
+  <h2><span class="e">📌</span>이번 주 달력</h2>
+  <ul>
+    <li><span class="d">11.2~4 (월~수)</span><span>2027학년도 유치원 우선모집 접수(유보통합 포털), 일반모집은 11.17~23. 최대 3곳 지원, 추첨이에요. 교육청 발표 기준이라 지역 일정은 꼭 다시 확인해요. <a href="https://kbmaeil.com/article/20261028500282" target="_blank" rel="noopener">모집 일정</a></span></li>
+    <li><span class="d">11.7 (토)</span><span>입동. 겨울이 시작된다는 절기예요. 겨울옷과 이불을 꺼내 두는 주말로 잡아요. <a href="https://month2k.com/dates/division24/2026" target="_blank" rel="noopener">절기 날짜</a></span></li>
+    <li><span class="d">11월 한 달</span><span>불조심 강조의 달, 다음 주 월요일 11.9는 소방의 날이에요. 집 소화기 위치와 대피 길을 아이와 같이 확인해 두세요. <a href="https://www.yugacrew.com/crewletter/firefighters-day-november-9" target="_blank" rel="noopener">소방의 날</a></span></li>
+    <li><span class="d">진행 중</span><span>독감 유행주의보가 9월에 발령됐어요. 어린이 무료접종(생후 6개월~14세)은 2027.4.30까지예요. <a href="https://www.kdca.go.kr/bbs/kdca/41/312308/artclView.do" target="_blank" rel="noopener">질병관리청</a></span></li>
+  </ul>
+</section>
+
+<section class="sources" aria-label="출처">
+  <h2><span class="e">🔗</span>이번 호를 만든 자료</h2>
+  <ul id="srclist"></ul>
+  <p class="note">놀이는 집에 있는 재료로 Claude가 짠 거예요. 이번 주는 영상의 제목·채널 확인을 마치지 못해 영상을 싣지 않았고, 나머지 링크는 모두 열어 확인했어요. 발달 내용은 일반적인 기준이라 아이마다 빠르고 느릴 수 있어요. 걱정되는 점은 소아청소년과와 상담해 주세요. 반은 출생연도로 계산해서 매년 3월에 자동으로 올라가요.</p>
+</section>
+</div>
+
+<script>
+const SRC=[
+ ["2027학년도 유치원 모집 일정·유보통합 포털 (경북매일)","https://kbmaeil.com/article/20261028500282"],
+ ["2026년 24절기 날짜 (입동 11.7)","https://month2k.com/dates/division24/2026"],
+ ["가을배추 출하·김장철 배추값 전망 (경북매일)","https://kbmaeil.com/article/20261018500016"],
+ ["11월 불조심 강조의 달 (서울시 안전누리)","https://news.seoul.go.kr/safe/?p=515318"],
+ ["소방의 날 11월 9일과 아이와 할 일","https://www.yugacrew.com/crewletter/firefighters-day-november-9"],
+ ["어린이 화재 대피 행동 요령 (행정안전부)","https://mois.go.kr/chd/sub/a06/fire/screen.do"],
+ ["2026-27절기 인플루엔자 유행주의보 (약사공론)","https://www.kpanews.co.kr/news/articleView.html?idxno=543735"],
+ ["인플루엔자 국가예방접종 14세까지 확대 (질병관리청)","https://www.kdca.go.kr/bbs/kdca/41/312308/artclView.do"],
+ ["영유아 건강검진·구강검진 차수별 시기","https://secretlinker.co.kr/?p=5733"],
+ ["4세 발달 (KidsHealth)","https://www.kidshealth.org/en/parents/development-4yrs.html"],
+ ["3~4세 영상 시청 1시간 이내 권고 (WHO)","https://www.who.int/news/item/24-04-2019-to-grow-up-healthy-children-need-to-sit-less-and-play-more"]
+];
+const TABS=[{id:"play",ic:"🎨",name:"놀이"},{id:"learn",ic:"📚",name:"배움"},{id:"video",ic:"📺",name:"영상"},{id:"go",ic:"🍂",name:"나들이"},{id:"grow",ic:"🌱",name:"건강"}];
+const SUBJ=[["all","전체"],["hangul","🔤 한글"],["math","🔢 수학"],["idea","💡 창의력"],["en","🌍 영어"],["pe","🤸 체육"]];
+const WHO={b:"👦 남아",g:"👧 여아",all:"🤝 공통"};
+const KIND={hangul:"🔤 한글",math:"🔢 수학",idea:"💡 창의력",en:"🌍 영어",pe:"🤸 체육",make:"✂️ 만들기",cook:"🍳 요리",sci:"🔬 수·과학",move:"🏃 몸놀이",song:"🎵 동요",eng:"🔤 영어",know:"🔍 지식",story:"📖 이야기",how:"✂️ 만들기 영상"};
+const LEAD={
+ play:"불조심 강조의 달과 입동이 겹친 주라 소방차·대피 놀이와 겨울 준비 만들기, 배추 잎 실험으로 짰어요. 형제·친구와 같이 할 땐 재료를 아이 수만큼 따로 준비하면 다툼이 줄어요.",
+ video:"이번 주는 영상의 제목·채널을 확인하는 단계를 마치지 못해서, 확인된 영상만 싣는다는 원칙대로 영상을 쉬어 가요. 대신 화면 없이 귀와 손으로 즐기는 이야기 시간 두 가지를 넣었어요. WHO는 3~4세 영상 시청을 하루 1시간 이내(적을수록 좋음)로 권해요.",
+ go:"멀리 가지 않아도 동네 공원·놀이터·아파트 복도가 탐험 장소예요. 어느 지역에서나 할 수 있는 미션으로 골랐어요. 입동 무렵이라 아침저녁이 차니 모자와 겉옷을 챙겨요.",
+ learn:"지난주에서 한 단계 이었어요. 한글은 첫 받침 ㅇ 다음으로 받침 ㅁ·ㄴ과 새 모음 ㅐ·ㅜ(배추·고추), 수학은 10과 몇 → 11~20 수 순서·더할까 뺄까·AAB 규칙, 영어는 J·K·L과 \"Do you like…?\", 창의력은 대피 순서와 이유·말로 설계도 전하기, 체육은 튕긴 공 받기·발 바꿔 깨금발·뱀 줄 넘기예요. 과목별로 하루 10~15분, 한 단계 도전(★★, 가끔 ★★★) 수준이에요. 🖨️ 인쇄용 학습지 PDF(A4 2쪽)가 소식지와 함께 올라와요. 어려워하면 한 단계 내려도 괜찮아요.",
+ grow:"이번 주 월~수가 유치원 우선모집이에요. 독감 유행 중이니 접종 여부를 확인하고, 불조심 강조의 달을 맞아 집 대피 길도 같이 살펴보세요."
+};
+// [탭, 대상(b|g|all), 종류, 제목, 부제, 설명, 태그[], 준비물[], 순서[], 팁, 링크[[라벨,URL]], 픽, 유튜브ID, 채널]
+const D=[
+ ["play","b","make","상자 소방차 만들기","타고 끄는 소방차 · 사다리","큰 택배 상자에 빨간 색종이를 붙이고 병뚜껑 바퀴, 휴지심 사다리, 끈 호스를 달아 소방차를 만들어요.",["주말 40분","보통"],["큰 택배 상자","빨간 색종이","병뚜껑 4개","휴지심 2개","끈","테이프"],["엄마: 상자 위·아래 날개를 잘라 아이가 들어가 앉을 수 있게 만들기","아이: 빨간 색종이를 붙이고 병뚜껑 바퀴·창문 그리기","아이: 휴지심 2개를 이어 사다리, 끈으로 호스를 달고 \"119\" 번호판 붙이기"],"다 만들면 인형을 태워 \"구조 출동!\" 놀이를 해요. 다음 주 월요일 소방의 날에 \"소방관 선생님 고맙습니다\" 그림 편지를 붙여도 좋아요.",[],1],
+ ["play","b","move","분무기 불끄기 과녁","물 쏘기 · 개수 세기","욕실 벽에 빨강·주황 색종이 불꽃을 살짝 붙이고 분무기로 물을 쏴서 떨어뜨려요. 떨어진 불꽃을 세요.",["평일 저녁 15분","쉬움"],["분무기","빨강·주황 색종이","욕실 벽 (물에 젖으면 붙어요)"],["아이: 색종이를 불꽃 모양으로 오려 12~15개 만들기","엄마: 젖은 욕실 벽에 불꽃을 높이 낮이 섞어 붙이기","분무기로 쏴서 떨어뜨리기 → 떨어진 불꽃을 10개와 낱개로 세기"],"목욕 시간에 하면 정리가 쉬워요. \"10개 묶음 하나랑 3개!\"처럼 지난주 10과 몇으로 말해 보세요.",[]],
+ ["play","b","sci","종이비행기 블록 자로 재기","멀리 날리기 · 길이 재기","종이비행기를 접어 날리고, 떨어진 곳까지 블록을 줄지어 놓아 \"블록 몇 개만큼\" 날았는지 재요.",["평일 저녁 20분","쉬움"],["A4 종이 2~3장","블록 20개쯤","마스킹테이프 (출발선)"],["엄마와 함께 기본 종이비행기 접기","출발선에서 날리고 떨어진 자리에 테이프 표시","블록을 이어 놓아 몇 개인지 세기 → 날개 모양을 바꿔 다시 날리기"],"\"어떤 비행기가 더 멀리 갔어? 왜 그럴까?\" 이유를 물어보면 창의력 배움으로 이어져요. 11~20 수 세기 연습도 덤이에요.",[]],
+ ["play","g","make","털실 목도리 종이 인형","입동 겨울 준비 · 감기","두꺼운 도화지에 인형을 그려 오리고, 목 부분에 털실을 빙빙 감아 목도리를 둘러 줘요.",["평일 저녁 20분","쉬움"],["두꺼운 도화지","털실 2색","가위","테이프"],["아이: 도화지에 사람 모양을 그려 색칠하기 (머리·몸·팔·다리)","엄마: 오려 주고 목 양옆을 살짝 오목하게 잘라 실이 걸리게 하기","아이: 털실을 빨강 3번, 파랑 3번처럼 규칙대로 감기"],"감은 횟수를 같이 세 보세요. 인형 이름을 짓고 \"추워서 목도리를 했어\"처럼 이유를 넣어 이야기를 지어요.",[],1],
+ ["play","g","make","색종이 김장 소꿉","김장철 역할놀이","초록·연두 색종이를 배추처럼 구기고, 빨간 색종이를 잘게 찢어 \"고춧가루\"로 버무리는 김장 소꿉놀이예요.",["주말 30분","쉬움"],["초록·연두 색종이","빨간 색종이","쟁반이나 큰 그릇","위생장갑"],["아이: 초록 색종이를 길게 접어 배추 잎처럼 겹쳐 만들기","아이: 빨간 색종이를 잘게 찢어 고춧가루 만들기","장갑 끼고 쟁반에서 버무려 통에 담기 → 몇 포기 했나 세기"],"할머니·이웃이 김장하는 모습을 본 적 있다면 \"뭐부터 했지?\" 순서를 떠올려 보세요. 진짜 배추 롤 만들기 전 손 연습도 돼요.",[]],
+ ["play","g","make","빨대 규칙 팔찌","AAB 규칙 만들기","색이 다른 빨대를 2cm쯤 잘라 굵은 실에 빨-빨-노, 빨-빨-노 규칙대로 꿰어 팔찌를 만들어요.",["평일 저녁 20분","보통"],["색이 다른 빨대 2~3가지","굵은 실이나 털실","가위","테이프 (실 끝 감기)"],["엄마: 빨대를 2cm쯤 잘라 색별로 담아 두기","엄마: 실 끝을 테이프로 감아 바늘처럼 단단하게 만들기","아이: AAB 규칙을 정해 꿰기 → 손목에 맞으면 묶기"],"\"다음엔 무슨 색?\" 물으면 배움 탭의 AAB 규칙과 바로 이어져요. 빨대 조각은 작으니 놀이 후 바로 치워 주세요.",[]],
+ ["play","all","move","낮은 자세 비상구 탈출","불조심 대피 놀이","식탁 위에 담요를 덮어 \"연기 터널\"을 만들고, 수건으로 코와 입을 막은 채 팔과 무릎으로 기어 \"비상구\"까지 나가요.",["평일 저녁 20분","쉬움"],["담요나 이불","작은 수건","초록 종이에 그린 비상구 그림","테이프"],["아이: 초록 종이에 달려 나가는 사람을 그려 \"비상구\" 표시 만들기 → 현관에 붙이기","엄마가 \"불이야!\" 외치면 수건으로 코·입 막기","배를 바닥에 대지 말고 팔·무릎으로 기어 터널을 지나 비상구까지 → 한 손은 벽 짚기"],"행정안전부 어린이 대피 요령 그대로예요. 무섭게 하지 말고 \"연기는 위로 올라가니까 낮게!\" 이유를 알려 주세요. 엘리베이터 대신 계단으로 간다는 것도 함께 말해 줘요.",[["어린이 화재 대피 요령","https://mois.go.kr/chd/sub/a06/fire/screen.do"]],1],
+ ["play","all","sci","배추 잎 물들이기","도전 재료 미리 만지기","알배추 속잎을 색깔 물에 꽂아 두면 하루 뒤 잎 끝과 잎맥이 물들어요. 배추가 물을 빨아올리는 걸 눈으로 봐요.",["평일 저녁 10분 + 다음 날 관찰","쉬움"],["알배추 속잎 3장","컵 3개","식용색소 빨강·파랑 (없으면 물감)","물"],["컵에 물을 담고 색소를 넣어 빨강·파랑·맹물 세 컵 만들기","아이: 배추 잎을 만지고 냄새 맡은 뒤 줄기 쪽을 컵에 꽂기","다음 날 아침 어느 컵 잎이 어디까지 물들었나 비교하기"],"\"맹물 컵 잎은 왜 안 변했을까?\" 물어보세요. 만지고 냄새 맡은 것만으로도 도전 사다리 두 칸을 올라간 거예요.",[]],
+ ["play","all","sci","종이컵 실 전화기","소리가 실을 타고 가요","종이컵 두 개를 실로 이어 팽팽하게 당기고 말하면, 멀리서도 소리가 들려요.",["평일 저녁 20분","쉬움"],["종이컵 2개","실 3m","이쑤시개 (엄마만)","테이프"],["엄마: 종이컵 바닥 가운데에 이쑤시개로 작은 구멍 내기","실을 끼워 안쪽에서 매듭 → 테이프로 고정","실을 팽팽하게 당기고 번갈아 \"여보세요?\" → 실을 느슨하게 하면 어떻게 될까?"],"\"119죠? 우리 집 주소는…\" 하고 신고 연습도 해 보세요. 실을 손가락으로 잡으면 소리가 멈추는 것도 신기해해요.",[]],
+ ["play","all","cook","사과 속 별 찾기 간식","10분 과학 간식","사과를 위아래가 아닌 옆으로(허리를) 자르면 씨 자리가 별 모양으로 보여요. 별을 찾고 나눠 먹어요.",["10분","쉬움"],["사과 1~2개","도마와 칼 (엄마)","접시"],["\"사과 속에 별이 숨어 있대!\" 먼저 맞혀 보기","엄마: 사과를 옆으로 눕혀 가운데를 자르기","별 꼭짓점을 세고, 씨가 몇 개인지 세며 나눠 먹기"],"세로로도 하나 잘라 \"어느 쪽에 별이 있었지?\" 비교하면 같은 점·다른 점 말하기 연습이 돼요. 씨는 먹지 않도록 빼 주세요.",[]],
+ ["play","all","move","겨울옷 혼자 입기 경주","입동 자조 놀이","점퍼·모자·장갑을 바닥에 펼쳐 두고 \"준비, 시작!\" 하면 혼자 입어요. 엄마와 시간 겨루기를 해요.",["주말 15분","쉬움"],["겨울 점퍼","모자","장갑","타이머"],["점퍼를 바닥에 펼치고 머리 쪽에 서서 팔 넣고 머리 위로 휙 넘겨 입기","모자 → 장갑 순서로 입기","엄마가 \"10\"부터 거꾸로 세는 동안 성공하면 승리!"],"지퍼 끼우기는 엄마가 아래만 맞춰 주고 올리기는 아이가 해요. 다 입었으면 그대로 일요일 산책을 나가요.",[]],
+
+ ["learn","all","hangul","받침 ㅁ·ㄴ 붙이기: 바 + ㅁ = 밤","받침 있는 글자 넓히기","지난주 받침 ㅇ(공·방) 다음 단계예요. 받침 ㅁ은 입을 \"음\" 하고 다물고, ㄴ은 혀끝을 윗잇몸에 대요. 바+ㅁ=밤, 누+ㄴ=눈처럼 읽어요.",["10분","난이도 ★★"],["글자 카드 바·가·누·무·사","받침 카드 ㅁ·ㄴ"],["\"바\" 아래에 ㅁ을 놓고 \"바~음 → 밤!\" 소리 늘이기","가+ㅁ=감, 누+ㄴ=눈, 무+ㄴ=문, 사+ㄴ=산 읽기","같은 글자에 ㅇ·ㅁ·ㄴ을 바꿔 붙여 보기 (방·밤·반)"],"받침을 바꾸면 뜻이 달라진다는 걸 알면 큰 도약이에요. 🖨️ 학습지 1쪽과 이어져요.",[],1],
+ ["learn","all","hangul","배추·고추·소방차 읽고 쓰기","새 모음 ㅐ·ㅜ 낱말","이번 주 놀이에 나오는 낱말을 따라 써요. 배추의 ㅐ, 고추의 ㅜ는 처음 만나는 모음이고, 소방차의 \"방\"은 지난주 받침 ㅇ 복습이에요.",["10분","난이도 ★★"],["학습지 또는 종이","색연필"],["회색 글씨 위로 따라 쓰기","\"추\"가 두 번 나오는 낱말 찾기 (배추·고추)","받침 있는 글자(방)에 동그라미"],"마트에서 \"배추\" 글자를 찾아 읽어 보게 하세요. 장보기가 한글 놀이가 돼요.",[]],
+ ["learn","b","math","11~20 사다리 계단 번호","20까지 수 순서","소방차 사다리 그림 칸에 11부터 20까지 번호를 순서대로 써요. 빈칸 수를 채우고, 20부터 거꾸로도 읽어요.",["10분","난이도 ★★"],["학습지","블록 20개 (확인용)"],["11부터 20까지 손가락으로 짚으며 소리 내 읽기","빈칸에 들어갈 수 쓰기","20부터 거꾸로 \"20, 19, 18…\" 읽고 \"출동!\""],"지난주 10과 몇을 수 순서로 이은 단계예요. 15 다음이 헷갈리면 블록을 10개+5개로 놓고 하나 더 얹어 보세요.",[],1],
+ ["learn","g","math","더할까? 뺄까? 이야기","+와 − 골라 쓰기","\"인형이 3명 있었는데 2명이 더 왔어\"는 더하기, \"2명이 집에 갔어\"는 빼기. 이야기를 듣고 +와 − 중 맞는 걸 골라요.",["10분","난이도 ★★★"],["인형이나 블록 10개","+ − 카드"],["엄마가 이야기를 들려주며 인형을 놓거나 치우기","\"늘었어? 줄었어?\" 먼저 묻고 + 또는 − 카드 고르기","답을 세어 확인 → 아이가 이야기 문제 내기"],"\"더 왔어, 또 생겼어\"는 +, \"갔어, 먹었어\"는 −. 지난주 빼기 이야기에서 한 단계 더예요. 10 안에서만 해요.",[]],
+ ["learn","all","math","🔥🔥💧 AAB 규칙","두 번-한 번 반복","불-불-물, 불-불-물처럼 같은 게 두 번 나오고 다른 게 한 번 나오는 규칙을 찾아 빈칸을 채워요. 되면 ABB(불-물-물)도 해요.",["10분","난이도 ★★"],["학습지","블록 2색"],["엄마가 블록으로 빨-빨-파, 빨-빨-파 줄 세우기","\"다음엔 뭐가 올까?\" 맞히기","ABB로 바꿔 내 보기 → 아이가 새 규칙 만들기"],"지난주 ABC 규칙에서 \"같은 게 두 번\" 규칙으로 넓혔어요. 빨대 팔찌 놀이와 짝이에요.",[]],
+ ["learn","all","idea","불이 나면? 대피 순서와 이유","순서 말하기 + 왜","\"불이야!\" 외치기 → 코·입 막기 → 낮게 기기 → 계단으로 밖에 나가기. 카드 4장을 순서대로 놓고, 왜 그렇게 하는지 이유를 말해요.",["10분","난이도 ★★"],["학습지 순서 카드"],["카드를 섞어 놓고 \"불이 나면 뭐부터?\" 묻기","순서대로 놓고 번호 쓰기","\"왜 엘리베이터는 안 타?\", \"왜 낮게 가?\" 이유 말하기"],"정답보다 이유를 자기 말로 하는 게 목표예요. 수요일 대피 놀이를 한 다음에 하면 훨씬 잘해요.",[["어린이 화재 대피 요령","https://mois.go.kr/chd/sub/a06/fire/screen.do"]],1],
+ ["learn","all","idea","말로만 설계도","위·아래·옆 말로 전하기","아이가 블록 탑을 몰래 쌓고, 엄마가 안 보는 채로 아이 설명만 듣고 똑같이 쌓아요. \"빨간 거 위에 노란 거\"처럼 말해야 해요.",["15분","난이도 ★★★"],["블록 2세트 (같은 색 4~5개씩)","가림판 (책을 세워도 돼요)"],["가림판을 사이에 두고 아이가 4~5개 탑 쌓기","아이가 \"맨 아래는 파랑, 그 위에 빨강…\" 말로 설명","엄마가 쌓은 뒤 가림판 치우고 비교하기"],"지난주 그림 설계도 따라 쌓기 다음 단계로, 이번엔 말로만이에요. 틀린 곳이 나오면 \"어떻게 말하면 더 잘 알았을까?\" 같이 찾아요.",[]],
+ ["learn","all","en","J is for Jam","알파벳 J·K·L 첫소리","G·H·I 다음 순서로 J(jam), K(kite), L(leaf)의 이름과 첫소리를 말하고 따라 써요.",["10분","난이도 ★★"],["알파벳 카드 J·K·L"],["카드 보며 \"J says /j/, jam!\" 소리 내기","A부터 L까지 순서대로 카드 놓기","학습지 영어 칸 따라 쓰기"],"L은 혀끝을 윗잇몸에 대고 \"을-\" 하는 소리예요. 주말 산책에서 leaf를 주우며 \"L, leaf!\" 해 보세요.",[],1],
+ ["learn","all","en","Do you like ___?","Yes, I do. / No, I don't.","배추 롤을 먹기 전에 \"Do you like cabbage?\" 물어보고 \"Yes, I do!\" 또는 \"No, I don't.\"로 대답해요. 싫어도 괜찮아요.",["5분","난이도 ★★"],["음식 그림이나 진짜 음식 3~4가지"],["엄마가 \"Do you like apples?\" → \"Yes, I do!\" 시범","아이가 음식마다 대답하기 (cabbage·apple·rice)","역할 바꿔 아이가 엄마에게 묻기"],"\"No, I don't\"라고 해도 칭찬해 주세요. 그다음 \"Let's try one bite!\"로 도전 사다리와 이어요.",[]],
+ ["learn","b","pe","튕긴 공 받기 10번","한 번 튕겨서 두 손으로","엄마가 공을 바닥에 한 번 튕겨 주면 두 손으로 받아요. 되면 아이가 스스로 튕기고 받아요.",["10분","난이도 ★★"],["탱탱볼이나 큰 고무공"],["2걸음 거리에서 엄마가 튕겨 주면 받기 10번","거리를 3걸음으로 늘리기","혼자 튕기고 받기 → 몇 번 이어서 했나 세기"],"공을 끝까지 보라고 해 주세요. 큰 공을 잡는 건 4세 발달 이정표 중 하나예요.",[["4세 발달","https://www.kidshealth.org/en/parents/development-4yrs.html"]],1],
+ ["learn","g","pe","발 바꿔 깨금발","오른발 2번, 왼발 2번","지난주 한 발 연속 뛰기 다음 단계예요. 오른발로 2번 뛰고 왼발로 바꿔 2번, 쉬지 않고 이어서 앞으로 가요.",["5분","난이도 ★★★"],["바닥 테이프 (출발·도착선)"],["제자리에서 오른발 2번 → 왼발 2번 뛰기","앞으로 가면서 발 바꿔 뛰기","\"하나 둘, 바꿔!\" 엄마 구호에 맞춰 도착선까지"],"발 바꾸기가 어려우면 바꿀 때 두 발로 한 번 쉬어도 돼요. 스킵(깡충 걷기)으로 가는 준비 동작이에요.",[]],
+ ["learn","all","pe","뱀 줄 넘기","줄넘기 전 단계","엄마가 줄 끝을 잡고 바닥에서 뱀처럼 좌우로 흔들면, 아이가 줄에 닿지 않게 두 발로 넘어요.",["10분","난이도 ★★"],["줄넘기 줄이나 긴 끈"],["줄을 바닥에 가만히 두고 앞뒤로 넘기","엄마가 줄을 천천히 좌우로 흔들면 넘기","조금 빠르게 → 5번 연속 성공하면 기록"],"지난주 바닥 줄 연속 점프 다음 단계예요. 줄을 높이 들지 말고 바닥에서만 흔들어 주세요.",[]],
+
+ ["video","all","know","이번 주 영상은 쉬어 가요","확인된 영상만 싣는 원칙","영상은 제목과 채널을 직접 확인한 것만 싣고 있어요. 이번 주는 그 확인을 마치지 못해서 영상을 넣지 않았어요. 대신 아래 화면 없는 이야기 시간을 해 보세요.",["안내"],[],[],"다음 주에 확인된 영상으로 다시 채울게요. 영상은 하루 1시간 이내, 한 편 보고 끄기를 미리 약속해 두면 좋아요.",[["WHO 권고","https://www.who.int/news/item/24-04-2019-to-grow-up-healthy-children-need-to-sit-less-and-play-more"]],1],
+ ["video","b","story","소리로 듣는 소방차 출동 이야기","화면 없이 효과음 넣기","엄마가 \"오늘 소방차가 고양이를 구하러 출동했어요\"로 짧은 이야기를 들려주면, 아이가 사이렌·물소리·사다리 올라가는 소리를 입으로 넣어요.",["10분","화면 없음"],["상자 소방차 (있으면)"],["엄마가 이야기 한 줄 → 아이가 효과음","\"그다음엔 어떻게 됐을까?\" 아이가 이야기 이어 말하기","이야기를 그림 3장으로 그리기"],"WHO도 앉아 있는 시간엔 같이 이야기하기를 권해요. 이야기 끝에 \"119에 전화할 땐 뭐라고 말할까?\"를 넣어 보세요.",[]],
+ ["video","g","story","목도리 인형 그림자극","손전등 극장","털실 목도리 인형을 나무젓가락에 붙여 불 끈 방 벽에 손전등으로 비추고, 인형이 겨울을 맞는 이야기를 해요.",["15분","화면 없음"],["목도리 종이 인형","나무젓가락","손전등"],["인형 뒤에 나무젓가락을 테이프로 붙이기","엄마가 벽 쪽으로 손전등을 비추기","아이가 \"첫눈이 오는 날…\"처럼 이야기하며 인형 움직이기"],"손전등을 가까이 대면 그림자가 커지고 멀리 대면 작아지는 것도 같이 발견해 보세요.",[]],
+
+ ["go","all","","동네 비상구·소화기 찾기","불조심 강조의 달 미션","아파트 복도·계단, 도서관이나 마트에서 초록색 비상구 표시와 빨간 소화기를 찾아 몇 개인지 세요.",["주말 30분","준비물 없음"],["휴대폰 카메라"],["\"초록 비상구에 사람이 어느 쪽으로 달려가?\" 표시 살펴보기","소화기를 찾으면 사진 찍고 세기","우리 집에서 제일 가까운 계단·비상구를 아이가 앞장서 걸어 보기"],"소방의 날(11.9) 하루 전 미션이에요. 엘리베이터 말고 계단으로 내려가는 길을 아이가 기억하게 해 주세요.",[["소방의 날","https://www.yugacrew.com/crewletter/firefighters-day-november-9"]],1],
+ ["go","b","","놀이터 구조대 미션","미끄럼틀 인형 구조","인형을 놀이터 미끄럼틀 위나 정글짐 칸에 \"구조 요청\" 상태로 두고, 아이가 올라가 안고 내려와요.",["30분"],["작은 인형 2~3개","가방"],["엄마가 인형을 놀이터 곳곳에 두기","\"구조 출동!\" 하면 하나씩 구해 오기","구한 인형 수 세고, 어디서 구했는지 말하기 (위·아래·안)"],"올라갈 땐 손 두 개, 발 하나를 붙이는 \"세 점 잡기\"를 알려 주세요. 위치 말하기는 말로만 설계도 배움과 이어져요.",[]],
+ ["go","g","","바람 탐정 산책","입동 바람 찾기","리본 끈을 막대나 손에 묶고 공원을 걸으며 바람이 어느 쪽으로 부는지, 어디서 세고 어디서 약한지 찾아요.",["30분"],["리본 끈 한 줄","나뭇가지나 빨대"],["리본을 막대 끝에 묶어 바람 깃발 만들기","나무 아래, 넓은 곳, 건물 옆에서 리본이 얼마나 날리나 비교","\"바람이 제일 센 곳\"을 아이가 정하고 이유 말하기"],"입동 무렵이라 바람이 차요. 모자를 챙기고, 낙엽이 쌓인 풀숲엔 들어가지 않아요.",[]],
+ ["go","all","","겨울 준비 찾기 산책","입동 동네 관찰","동네를 걸으며 겨울을 준비하는 것을 찾아요. 두꺼운 옷 입은 사람, 나무에 감은 띠나 짚, 가게 앞 배추 더미, 잎이 다 떨어진 나무….",["주말 30분"],["작은 종이와 연필"],["찾을 것 3가지를 그림으로 그려 \"찾기 카드\" 만들기","찾을 때마다 카드에 동그라미","집에 와서 \"사람·나무·동물은 겨울을 어떻게 준비할까?\" 이야기"],"가게 앞 배추를 보면 \"우리 토요일에 배추 롤 만들자!\" 하고 도전 재료와 이어 주세요.",[]],
+
+ ["grow","all","","만 4세 이맘때 발달","이번 주 살펴볼 것","2~3단계 지시를 따르고, 같은 것·다른 것을 구별하며, 10 이상까지 셀 수 있어요. 네 단어 이상의 문장으로 하루 일을 말하고, 위험을 피하는 규칙(계단에서 뛰지 않기 등)을 따르기 시작해요. 큰 공을 잡고 한 발로 뛰어요.",["발달"],[],[],"대피 놀이에서 \"수건 막고, 기어서, 비상구까지\" 세 단계를 한 번에 말해 주고 기억해서 하는지 보세요.",[["4세 발달","https://www.kidshealth.org/en/parents/development-4yrs.html"]],1],
+ ["grow","all","","2027학년도 유치원 우선모집","이번 주 11.2~4 · 일반모집 11.17~23","교육청 발표에 따르면 유보통합 포털에서 받고, 희망 유치원 최대 3곳까지 지원해 자동 추첨해요. 모집 대상은 2021~2023년생이라 2022년생도 해당돼요.",["행사","이번 주"],[],[],"온라인이 어려우면 유치원에 직접 방문해 접수할 수 있어요. 지역마다 일정이 다를 수 있으니 우리 지역 교육청 안내를 꼭 확인해 주세요.",[["모집 일정","https://kbmaeil.com/article/20261028500282"]],1],
+ ["grow","all","","불조심 강조의 달 · 대피 연습","11월 한 달 · 11.9 소방의 날","11월은 불조심 강조의 달이에요. 불을 보면 크게 외치고, 연기 속에선 팔·무릎으로 낮게 기고, 젖은 수건으로 코와 입을 막아요. 엘리베이터 대신 계단으로 나가요.",["안전","이번 주"],[],[],"무서워서 옷장이나 침대 밑에 숨는 아이가 많대요. \"숨지 말고 밖으로!\"를 꼭 알려 주고, 집 소화기 위치를 같이 확인해 두세요.",[["어린이 대피 요령","https://mois.go.kr/chd/sub/a06/fire/screen.do"],["불조심 강조의 달","https://news.seoul.go.kr/safe/?p=515318"]]],
+ ["grow","all","","독감 유행 중 · 무료접종","생후 6개월~14세 · 2027.4.30까지","2026-27절기 인플루엔자 유행주의보가 9월 11일 발령됐어요. 처음 맞거나 이전에 1회만 맞은 9세 미만은 4주 간격 2회가 필요해요.",["접종"],[],[],"손 씻기 30초, 기침은 옷소매에, 실내 자주 환기하기. 열이나 기침이 있으면 기관에 보내지 말고 진료를 받아요.",[["질병관리청","https://www.kdca.go.kr/bbs/kdca/41/312308/artclView.do"],["유행주의보","https://www.kpanews.co.kr/news/articleView.html?idxno=543735"]]],
+ ["grow","all","","영유아 건강검진·구강검진","생일에 따라 차수 확인","2022년생은 생일에 따라 건강검진 6차(42~48개월) 또는 7차(54~60개월), 구강검진 3차(42~53개월) 또는 4차(54~65개월)예요.",["건강"],[],[],"'The건강보험' 앱에서 우리 아이 검진 기간과 검진기관을 확인하세요. 기간 끝 무렵엔 예약이 몰려요.",[["검진 시기","https://secretlinker.co.kr/?p=5733"]]],
+ ["grow","all","","영상은 하루 1시간 이내로","WHO 3~4세 권고","WHO는 3~4세 아이의 영상 시청을 하루 1시간 이내로, 적을수록 좋다고 권해요. 하루에 걸쳐 180분 이상 몸을 움직이고, 10~13시간 자는 것도 함께 권해요.",["생활"],[],[],"해가 짧아져 바깥 놀이가 줄기 쉬운 때예요. 대피 놀이·뱀 줄 넘기처럼 실내 몸놀이로 움직이는 시간을 채워 주세요.",[["WHO 권고","https://www.who.int/news/item/24-04-2019-to-grow-up-healthy-children-need-to-sit-less-and-play-more"]]]
+];
+let tab="play",who="all",subj="all";
+try{const s=JSON.parse(localStorage.getItem("tiger22")||"{}");if(s.tab)tab=s.tab;if(s.who)who=s.who}catch(e){}
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pass=r=>who==="all"?true:who==="together"?r[1]==="all":(r[1]===who||r[1]==="all");
+function render(){
+  $("tabs").innerHTML=TABS.map(t=>`<button class="tab" role="tab" aria-selected="${t.id===tab}" data-tab="${t.id}"><span class="ti">${t.ic}</span>${t.name}<small>${D.filter(r=>r[0]===t.id&&pass(r)).length}개</small></button>`).join("");
+  $("subj").className="seg"+(tab==="learn"?" on":"");
+  $("subj").innerHTML=SUBJ.map(([k,l])=>`<button aria-pressed="${k===subj}" data-subj="${k}">${l}</button>`).join("");
+  $("seg").innerHTML=[["all","✨ 전체"],["b","👦 남아"],["g","👧 여아"],["together","🤝 공통만"]].map(([k,l])=>`<button aria-pressed="${k===who}" data-who="${k}">${l}</button>`).join("");
+  const rows=D.filter(r=>r[0]===tab&&pass(r)&&(tab!=="learn"||subj==="all"||r[2]===subj)).sort((a,b)=>(b[11]||0)-(a[11]||0));
+  const T=TABS.find(t=>t.id===tab);
+  $("lead").innerHTML=`<b>${T.ic} ${T.name} · ${rows.length}개</b>${LEAD[tab]}`;
+  $("grid").innerHTML=rows.map(r=>`<article class="card${r[11]?" hot":""}">
+    ${r[12]?`<a class="thumb" href="https://www.youtube.com/watch?v=${esc(r[12])}" target="_blank" rel="noopener" aria-label="${esc(r[3])} 유튜브에서 보기"><img src="https://i.ytimg.com/vi/${esc(r[12])}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"></a>`:""}
+    <div class="top">${r[11]?'<span class="star">이번 주 픽</span>':""}<span class="who ${r[1]}">${WHO[r[1]]}</span>${r[2]?`<span class="kind">${KIND[r[2]]}</span>`:""}${r[6].map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
+    <h3>${esc(r[3])}</h3><div class="by">${esc(r[4])}</div>${r[13]?`<div class="ch">📺 ${esc(r[13])}</div>`:""}<p>${esc(r[5])}</p>
+    ${r[7].length?`<div class="mats">${r[7].map(m=>`<span>${esc(m)}</span>`).join("")}</div>`:""}
+    ${r[8].length?`<ol class="steps">${r[8].map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`:""}
+    ${r[9]?`<div class="tip"><b>💡 ${r[12]?"보고 나서":"엄마 팁"}</b> ${esc(r[9])}</div>`:""}
+    ${r[10].length?`<div class="links">${r[10].map(([l,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div>`:""}
+  </article>`).join("")||`<p class="note">이번 주엔 이 조합의 내용이 없어요.</p>`;
+  try{localStorage.setItem("tiger22",JSON.stringify({tab,who}))}catch(e){}
+}
+$("srclist").innerHTML=SRC.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join("");
+document.addEventListener("click",e=>{const b=e.target.closest("[data-tab],[data-who],[data-subj]");if(!b)return;
+  if(b.dataset.tab)tab=b.dataset.tab;else if(b.dataset.subj)subj=b.dataset.subj;else who=b.dataset.who;render();
+  if(b.dataset.tab)$("lead").scrollIntoView({block:"nearest"});});
+render();
+</script>
+
+</body>
+</html>
