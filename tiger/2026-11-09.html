@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light only">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>11월 2주차 아기호랑이와 함께</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+/* Layout: 표지 → 이번 주 픽(남아·여아·공통) → 한눈에 보는 7일 → 도전 재료 → 탭(놀이·영상·나들이·건강) + 남아/여아/공통 필터 → 장보기 → 달력 → 출처 */
+:root{
+  color-scheme:only light;
+  --bg:#fff8f1; --paper:#ffffff; --fg:#3a3040; --muted:#857a88; --line:#f1e4dc;
+  --coral:#ff7f6e; --coral-soft:#ffe6e1; --sky:#4fa3e8; --sky-soft:#e1f0fd; --leaf:#3fb37f; --leaf-soft:#dff6ea; --sun:#ffbf3c; --sun-soft:#fff3d4; --grape:#a98bff; --grape-soft:#efe9ff;
+  --display:"Jua","Gowun Dodum",system-ui,sans-serif;
+  --body:"Gowun Dodum",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
+  --r:24px; --shadow:0 4px 14px rgba(255,127,110,.12);
+}
+*{box-sizing:border-box}
+body{background:var(--bg) radial-gradient(circle,#ffd9cf 1.4px,transparent 1.6px) 0 0/22px 22px;color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:8px}
+
+/* 표지 */
+.cover{background:linear-gradient(160deg,#fff 0%,#fff1ec 60%,#fff6dc 100%);border-radius:30px;padding:30px 22px 24px;position:relative;overflow:hidden;border:2px solid #ffd6cc;box-shadow:var(--shadow)}
+.floaty{position:absolute;font-size:26px;opacity:.9;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.floaty{animation:bob 3.2s ease-in-out infinite}.floaty:nth-of-type(2n){animation-delay:-1.4s}}
+@keyframes bob{50%{transform:translateY(-6px) rotate(6deg)}}
+.cover::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;
+  background:linear-gradient(90deg,var(--coral) 0 20%,var(--sun) 20% 40%,var(--leaf) 40% 60%,var(--sky) 60% 80%,var(--grape) 80% 100%)}
+.issue{padding-right:90px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.pill{display:inline-block;border-radius:999px;padding:2px 12px;font-size:12px;background:var(--coral-soft);color:var(--fg)}
+.cover h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,10vw,58px);line-height:1;margin:12px 0 6px;letter-spacing:-.01em}
+.cover h1 span{color:var(--coral)}
+.cover h1 .nw{font-style:normal;white-space:nowrap}
+.cover p{margin:0;color:var(--muted);max-width:46ch;position:relative;z-index:1;padding-right:64px}
+.deco{position:absolute;right:-8px;bottom:-16px;width:104px;height:104px;pointer-events:none;opacity:.95}
+@media (min-width:560px){.cover p{padding-right:0}.deco{width:128px;height:128px}}
+
+h2{font-family:var(--display);font-weight:400;font-size:23px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+h2 .e{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--paper);box-shadow:var(--shadow);font-size:18px}
+.cap{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* 세 아이 */
+.kids{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.kid{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;min-width:0}
+.kid .dot{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:26px;line-height:1}
+.kid b{font-family:var(--display);font-weight:400;font-size:17px;display:block;line-height:1.3}
+.kid small{display:block;color:var(--muted);font-size:12px;margin-bottom:2px}
+.kid p{margin:2px 0 0;font-size:14px}
+
+/* 요일표 */
+.plan ul{margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.plan li{list-style:none;display:grid;grid-template-columns:62px 1fr;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:9px 14px;align-items:baseline}
+.plan li{box-shadow:var(--shadow)}
+.plan li.we{background:var(--sun-soft)}
+.plan .d{font-family:var(--display);font-size:16px;color:var(--coral);white-space:nowrap}
+.plan .d small{display:block;font-family:var(--body);font-size:11px;color:var(--muted)}
+.plan .t{font-size:14px;min-width:0}
+.plan .t i{font-style:normal;font-size:11px;border-radius:999px;padding:0 7px;margin-right:4px;white-space:nowrap}
+.ib{background:var(--sky-soft)} .ig{background:var(--coral-soft)} .iall{background:var(--leaf-soft)}
+
+/* 탭 */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:8px;display:flex;flex-direction:column;gap:8px}
+.tabrow{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.tab .ti{display:block;font-size:20px;line-height:1.2;margin-bottom:1px}
+#subj{display:none}#subj.on{display:flex}
+#subj button[aria-pressed="true"]{background:var(--sky);border-color:var(--sky);color:#fff}
+.tab{all:unset;cursor:pointer;text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:8px 1px;font-family:var(--display);font-size:14px;line-height:1.2;min-width:0}
+.tab small{display:block;font-family:var(--body);font-size:11px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 4px 0 #e5604f}
+.tab[aria-selected="true"] small{color:var(--paper);opacity:.9}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{all:unset;cursor:pointer;font-size:13px;padding:4px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper)}
+.seg button[aria-pressed="true"]{background:var(--grape);border-color:var(--grape);color:#fff}
+
+.lead{background:var(--grape-soft);border-radius:var(--r);padding:14px 16px;font-size:14px}
+.lead b{font-family:var(--display);font-weight:400;font-size:18px;display:block}
+
+/* 카드 */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card .top{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.who{font-size:11px;border-radius:999px;padding:1px 9px}
+.who.b{background:var(--sky-soft)} .who.g{background:var(--coral-soft)} .who.all{background:var(--leaf-soft)}
+.kind{font-size:11px;border-radius:999px;padding:1px 9px;background:var(--sun-soft)}
+.tag{font-size:11px;border-radius:999px;padding:1px 9px;border:1px dashed var(--line);color:var(--muted)}
+.card h3{font-family:var(--display);font-weight:400;font-size:19px;line-height:1.3;margin:0;overflow-wrap:anywhere}
+.card .by{font-size:13px;color:var(--muted);margin-top:-4px}
+.card p{margin:0;font-size:14px}
+.mats{display:flex;flex-wrap:wrap;gap:5px}
+.mats span{font-size:12px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:1px 8px}
+.steps{margin:0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:2px}
+.tip{font-size:13px;background:var(--bg);border-radius:12px;padding:8px 10px}
+.tip b{font-weight:400;color:var(--coral)}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.links a{font-size:13px;text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+.links a:hover{border-color:var(--coral)}
+.hot{border:2px solid var(--coral)}
+.hot .star{font-size:11px;color:#fff;background:linear-gradient(90deg,var(--coral),var(--sun));border-radius:999px;padding:1px 9px}
+
+/* 장보기 */
+.shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.shop div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;min-width:0}
+.shop b{font-family:var(--display);font-weight:400;font-size:17px;display:block;margin-bottom:4px}
+.shop ul{margin:0;padding-left:18px;font-size:14px}
+
+/* 달력 */
+.cal ul{margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.cal li{list-style:none;display:grid;grid-template-columns:84px 1fr;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:10px 14px}
+.cal .d{font-family:var(--display);color:var(--coral);font-variant-numeric:tabular-nums}
+.cal a{color:var(--sky)}
+
+.sources{font-size:13px;color:var(--muted)}
+.sources ul{padding-left:18px;margin:6px 0 0;display:flex;flex-direction:column;gap:3px}
+.sources a{color:var(--sky)}
+.note{font-size:12px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
+.dare .dcard{background:var(--sun-soft);border:2px solid var(--sun);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px}
+.dhead{display:flex;gap:12px;align-items:center}.demo{font-size:34px;line-height:1}
+.dhead small{display:block;color:var(--muted);font-size:12px}.dhead b{font-family:var(--display);font-weight:400;font-size:26px}
+.dare p{margin:0;font-size:14px}.dare h3{font-family:var(--display);font-weight:400;font-size:19px;margin:4px 0 0}.dare h3 span{font-family:var(--body);font-size:12px;color:var(--muted)}
+.ladder{display:flex;flex-wrap:wrap;gap:6px}.ladder span{font-size:13px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.thumb{display:block;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/9;background:var(--sun-soft)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb::after{content:"▶";position:absolute;inset:0;margin:auto;width:48px;height:48px;border-radius:50%;background:rgba(255,127,110,.92);color:#fff;display:grid;place-items:center;font-size:18px;padding-left:3px;box-sizing:border-box}
+.card .ch{font-size:12px;color:var(--muted)}
+/* 폰 브라우저 강제 다크모드에서도 밝게 */
+html,body{color-scheme:only light;forced-color-adjust:none;}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header class="cover">
+  <div class="issue"><span class="pill">VOL.04</span><span>2026년 11월 9일(월) – 11월 15일(일)</span></div>
+  <span class="floaty" style="right:20px;top:30px">🚦</span><span class="floaty" style="right:58px;top:72px">🌾</span><span class="floaty" style="right:16px;top:104px">🌿</span>
+  <h1><em class="nw"><span>11월 2주차</span></em><br><em class="nw">아기호랑이와</em> <em class="nw">함께🐯</em></h1>
+  <p>월요일(11.9)은 소방의 날, 수요일(11.11)은 농업인의 날(가래떡데이)이자 보행자의 날이에요. 상자 신호등·횡단보도 몸놀이, 클레이 떡집, 겨울 시금치 도전, 받침 ㄹ·ㄱ과 10 + 몇까지 한 장에 모았어요.</p>
+  <svg class="deco" viewBox="0 0 128 128" aria-hidden="true">
+    <rect x="42" y="14" width="44" height="96" rx="14" fill="#fffbe6" stroke="var(--fg)" stroke-width="3"/>
+    <circle cx="64" cy="38" r="11" fill="var(--coral)"/>
+    <circle cx="64" cy="62" r="11" fill="var(--sun)"/>
+    <circle cx="64" cy="86" r="11" fill="var(--leaf)"/>
+    <rect x="60" y="110" width="8" height="18" fill="var(--fg)"/>
+  </svg>
+</header>
+
+<section aria-label="이번 주 우리 아이">
+  <h2><span class="e">🧒</span>이번 주 우리 아이</h2>
+  <div class="kids">
+    <div class="kid"><span class="dot" style="background:var(--sun-soft)">🌟</span><div><small>2022년생 · 2026학년도 만4세반</small><b>규칙을 알고, 이유를 말해 보는 시기</b><p>"빨간불이면 멈춰. 왜? 차가 오니까!"처럼 규칙과 이유를 짝지어 말해 주세요. 이번 주 신호등 몸놀이와 "만약에" 질문이 그 연습이에요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--sky-soft)">👦</span><div><small>남아 이번 주 픽</small><b>상자 신호등 만들기</b><p>작은 상자에 빨강·노랑·초록 창을 내고 뒤에서 손전등을 비추면 진짜처럼 켜져요. 11.11 보행자의 날에 맞춰 만들어요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--coral-soft)">👧</span><div><small>여아 이번 주 픽</small><b>클레이 가래떡 떡집</b><p>11.11 가래떡데이에 맞춰 반죽을 길게 굴려 가래떡을 뽑고, 썰어서 떡국 떡·떡꼬치를 만들어 팔아요. 10개씩 묶어 세기도 해요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--leaf-soft)">🤝</span><div><small>모두 함께</small><b>멈춰! 신호등 몸놀이 + 초록 달걀 컵</b><p>수요일엔 거실 횡단보도에서 길 건너기 약속을, 토요일엔 직접 뜯은 시금치로 만든 달걀 컵으로 한 입 도전해요.</p></div></div>
+  </div>
+  <p class="cap">👦·👧 표시는 좋아하는 아이가 많은 쪽을 표시한 거예요. 아이 취향대로 마음껏 바꿔서 골라 주세요.</p>
+</section>
+
+<section class="plan" aria-label="한눈에 보는 이번 주">
+  <h2><span class="e">🗓️</span>한눈에 보는 이번 주</h2>
+  <ul>
+    <li><span class="d">월<small>11.9</small></span><span class="t"><i class="iall">🤝 공통</i>🌿 시금치 초록 물감 (만지기·냄새) · 📚 받침 ㄹ · 소방의 날</span></li>
+    <li><span class="d">화<small>11.10</small></span><span class="t"><i class="ib">👦 남아</i>병뚜껑 컬링 <i class="ig">👧 여아</i>데칼코마니 장갑 짝 · 📚 10 + 몇</span></li>
+    <li><span class="d">수<small>11.11</small></span><span class="t"><i class="iall">🤝 공통</i>멈춰! 신호등 몸놀이 · 쌀알 그림 · 농업인의 날·가래떡데이·보행자의 날</span></li>
+    <li><span class="d">목<small>11.12</small></span><span class="t"><i class="ib">👦 남아</i>막대 투석기 <i class="ig">👧 여아</i>휴지심 펭귄 가족 · 📚 M·N·O</span></li>
+    <li><span class="d">금<small>11.13</small></span><span class="t"><i class="iall">🤝 공통</i>풍선 정전기 마술 · 📚 2씩 뛰어 세기</span></li>
+    <li class="we"><span class="d">토<small>11.14</small></span><span class="t"><i class="iall">🤝 공통</i>🌿 초록 달걀 컵 <i class="ib">👦 남아</i>상자 신호등 <i class="ig">👧 여아</i>클레이 떡집</span></li>
+    <li class="we"><span class="d">일<small>11.15</small></span><span class="t"><i class="iall">🤝 공통</i>동네 횡단보도 탐험 산책 · 다음 주 유치원 일반모집(11.17~23) 준비</span></li>
+  </ul>
+  <p class="cap">평일은 저녁 20분 안쪽 놀이로, 손이 많이 가는 건 주말로 몰았어요. 우선모집 추첨 결과 발표일은 지역마다 다를 수 있으니 교육청·유보통합포털 안내로 확인해 주세요.</p>
+</section>
+
+<section class="dare" aria-label="이번 주 도전 재료">
+  <h2><span class="e">🥄</span>이번 주 도전 재료</h2>
+  <div class="dcard">
+    <div class="dhead"><span class="demo">🌿</span><div><small>가을에 씨 뿌려 겨울에 거두는 겨울 시금치 · 추위 속에서 단맛이 올라요</small><b>시금치</b></div></div>
+    <p>나물로만 만나 "초록 건 싫어!" 하는 대표 채소예요. 겨울 시금치는 추위를 견디려고 잎 속 전분을 당으로 바꿔서 더 달고, 떫은맛을 내는 성분은 줄어든대요. 월요일엔 잎을 문질러 초록 물감으로 만지고 냄새 맡고, 토요일엔 아이가 직접 잎을 뜯어 넣은 달걀 컵으로 "한 입"에 도전해요.</p>
+    <h3>🌿 초록 달걀 컵 <span>20분 · 전자레인지</span></h3>
+    <div class="mats"><span>시금치 한 줌</span><span>달걀 2개</span><span>우유 2큰술</span><span>슬라이스 치즈 1장</span><span>소금 조금</span><span>전자레인지용 컵 2~3개</span></div>
+    <ol class="steps"><li>엄마: 시금치를 씻어 뿌리를 자르고 끓는 물에 살짝 데쳐 물기 꼭 짜기</li><li>아이: 데친 시금치를 손으로 잘게 뜯고, 치즈도 조각조각 찢기</li><li>아이: 볼에 달걀을 깨고 우유·소금을 넣어 포크로 휘휘 젓기 → 시금치·치즈 넣고 컵에 나눠 붓기</li><li>엄마: 전자레인지에 30초씩 끊어 돌리며 한 번씩 저어 다 익히기 → 아이: 케첩으로 얼굴 그리기</li></ol>
+    <div class="tip"><b>편식 팁</b> 새 음식은 여러 번 만나야 익숙해지는 경우가 많아요. 처음엔 뜯기·젓기만 해도 충분하고, 엄마가 맛있게 먹는 모습을 보여 주세요. 초록이 싫다면 시금치를 아주 잘게 뜯어 "초록 별 몇 개 보여?" 하고 찾아보게 하세요. 줄기보다 연한 잎 끝부터 도전하면 쉬워요.</div>
+    <div class="ladder"><span>👀 보기</span><span>✋ 만지기</span><span>👃 냄새</span><span>👅 핥아보기</span><span>😋 한 입</span></div>
+    <p class="cap">데치기와 전자레인지에서 꺼내기는 엄마가 하고(김이 뜨거워요), 뜯기·깨기·젓기·붓기는 아이에게 맡겨 주세요. 남은 시금치는 다음 날 된장국에 넣어 한 번 더 만나요.</p>
+  </div>
+</section>
+
+<nav class="tabs" aria-label="섹션">
+  <div class="tabrow" role="tablist" id="tabs"></div>
+  <div class="seg" id="seg"></div>
+  <div class="seg" id="subj"></div>
+</nav>
+
+<div class="lead" id="lead"></div>
+<div class="grid" id="grid"></div>
+
+<section aria-label="이번 주 장보기">
+  <h2><span class="e">🧺</span>이번 주 장보기</h2>
+  <div class="shop">
+    <div><b>🛒 마트</b><ul><li>시금치 1단 (초록 물감 + 달걀 컵)</li><li>달걀 · 우유 · 슬라이스 치즈 · 케첩</li><li>쌀 한 줌 (쌀알 그림)</li><li>가래떡 조금 (보고 만져 보기용, 선택)</li></ul></div>
+    <div><b>✏️ 문구</b><ul><li>작은 상자, 빨강·노랑·초록 셀로판지(없으면 색종이), 손전등</li><li>아이스크림 막대 7개(또는 나무젓가락), 고무줄, 병뚜껑, 폼폼</li><li>병뚜껑 6개 이상, 마스킹테이프</li><li>흰 클레이(또는 밀가루·소금 반죽), 빨대</li><li>물감, 도화지, 휴지심 3~4개, 검정·흰·주황 색종이</li><li>풍선 2개, 목공풀</li></ul></div>
+    <div><b>🧥 집에서 꺼내 두기</b><ul><li>공 (던져 받기), 줄넘기 줄이나 끈 (멀리뛰기 출발선)</li><li>흰 천이나 검정 테이프 (거실 횡단보도)</li><li>장난감 자동차 (라디오 교통 뉴스)</li><li>모자·장갑 (주말 산책)</li></ul></div>
+  </div>
+</section>
+
+<section class="cal" aria-label="이번 주 달력">
+  <h2><span class="e">📌</span>이번 주 달력</h2>
+  <ul>
+    <li><span class="d">11.9 (월)</span><span>소방의 날. 지난주 연습한 대피 길을 한 번 더 걸어 봐요. 일부 교육청은 이날 유치원 우선모집 추첨 결과를 발표해요(대구 기준). <a href="https://www.yugacrew.com/crewletter/november-anniversaries-2026" target="_blank" rel="noopener">11월 기념일</a> · <a href="https://kbmaeil.com/article/20261101500507" target="_blank" rel="noopener">모집 일정</a></span></li>
+    <li><span class="d">11.11 (수)</span><span>농업인의 날·가래떡데이. 十(십)과 一(일)을 합치면 흙 土(토)가 된다는 데서 날짜를 정했대요. <a href="https://www.korea.kr/news/policyNewsView.do?newsId=148866401" target="_blank" rel="noopener">농업인의 날</a></span></li>
+    <li><span class="d">11.11 (수)</span><span>보행자의 날. 안전한 걸음, 건강한 걸음을 생각하는 날이에요. 아이와 길 건너기 약속을 다시 정해 봐요. <a href="https://newsseoul.co.kr/news/view/1065568210655720" target="_blank" rel="noopener">보행자의 날</a></span></li>
+    <li><span class="d">11.17~23 (다음 주)</span><span>2027학년도 유치원 일반모집(유보통합포털, 최대 3곳, 추첨). 결과는 26일 발표, 추가모집은 12.1부터예요. 교육청 발표 기준이라 우리 지역 일정은 꼭 다시 확인해요. <a href="https://kbmaeil.com/article/20261028500282" target="_blank" rel="noopener">모집 일정</a></span></li>
+  </ul>
+</section>
+
+<section class="sources" aria-label="출처">
+  <h2><span class="e">🔗</span>이번 호를 만든 자료</h2>
+  <ul id="srclist"></ul>
+  <p class="note">놀이는 집에 있는 재료로 Claude가 짠 거예요. 이번 주도 영상의 제목·채널 확인 단계를 마치지 못해 영상을 싣지 않았어요. 건강 탭의 접종·검진·영상 시간 안내는 이번 주에 출처 페이지를 다시 열어 보지 못해 링크 없이 일반적인 안내만 적었으니, 정확한 내용은 질병관리청·건강보험 앱에서 확인해 주세요. 나머지 링크는 모두 열어 확인했어요. 발달 내용은 일반적인 기준이라 아이마다 빠르고 느릴 수 있어요. 걱정되는 점은 소아청소년과와 상담해 주세요. 반은 출생연도로 계산해서 매년 3월에 자동으로 올라가요.</p>
+</section>
+</div>
+
+<script>
+const SRC=[
+ ["2026년 11월 기념일 (소방의 날 11.9 · 농업인의 날 11.11)","https://www.yugacrew.com/crewletter/november-anniversaries-2026"],
+ ["농업인의 날과 가래떡데이 (대한민국 정책브리핑)","https://www.korea.kr/news/policyNewsView.do?newsId=148866401"],
+ ["11월 11일 보행자의 날 (국토교통부 기사)","https://newsseoul.co.kr/news/view/1065568210655720"],
+ ["겨울 시금치가 단 이유·섬초와 포항초 (레이디경향)","https://lady.khan.co.kr/cooking/article/202601161348011"],
+ ["2027학년도 유치원 모집 일정·유보통합 포털 (경북매일)","https://kbmaeil.com/article/20261028500282"],
+ ["유치원 우선모집 결과 발표·일반모집 일정 (경북매일, 대구시교육청)","https://kbmaeil.com/article/20261101500507"]
+];
+const TABS=[{id:"play",ic:"🎨",name:"놀이"},{id:"learn",ic:"📚",name:"배움"},{id:"video",ic:"📺",name:"영상"},{id:"go",ic:"🍂",name:"나들이"},{id:"grow",ic:"🌱",name:"건강"}];
+const SUBJ=[["all","전체"],["hangul","🔤 한글"],["math","🔢 수학"],["idea","💡 창의력"],["en","🌍 영어"],["pe","🤸 체육"]];
+const WHO={b:"👦 남아",g:"👧 여아",all:"🤝 공통"};
+const KIND={hangul:"🔤 한글",math:"🔢 수학",idea:"💡 창의력",en:"🌍 영어",pe:"🤸 체육",make:"✂️ 만들기",cook:"🍳 요리",sci:"🔬 수·과학",move:"🏃 몸놀이",song:"🎵 동요",eng:"🔤 영어",know:"🔍 지식",story:"📖 이야기",how:"✂️ 만들기 영상"};
+const LEAD={
+ play:"수요일 11.11이 농업인의 날(가래떡데이)이자 보행자의 날이라 신호등·횡단보도 놀이와 쌀·떡 만들기, 겨울 준비 만들기로 짰어요. 형제·친구와 같이 할 땐 재료를 아이 수만큼 따로 준비하면 다툼이 줄어요.",
+ video:"이번 주도 영상의 제목·채널을 확인하는 단계를 마치지 못해서, 확인된 영상만 싣는다는 원칙대로 영상을 쉬어 가요. 대신 화면 없이 귀와 입으로 즐기는 이야기 시간 두 가지를 넣었어요. WHO는 3~4세 영상 시청을 하루 1시간 이내(적을수록 좋음)로 권해요.",
+ go:"멀리 가지 않아도 동네 횡단보도·공원·시장이 탐험 장소예요. 어느 지역에서나 할 수 있는 미션으로 골랐어요. 아침저녁이 차니 모자와 장갑을 챙겨요.",
+ learn:"지난주에서 한 단계 이었어요. 한글은 받침 ㅁ·ㄴ 다음으로 받침 ㄹ·ㄱ(달·국)과 시금치·신호등·가래떡, 수학은 11~20 순서 → 10 + 몇 덧셈식·수 크기 비교·2씩 뛰어 세기, 영어는 M·N·O와 \"I can ___.\", 창의력은 가래떡이 되는 순서와 \"만약에\" 이유 말하기, 체육은 바로 던진 공 받기·스킵·두 발 멀리뛰기예요. 과목별로 하루 10~15분, 한 단계 도전(★★, 가끔 ★★★) 수준이에요. 🖨️ 인쇄용 학습지 PDF(A4 2쪽)가 소식지와 함께 올라와요. 어려워하면 한 단계 내려도 괜찮아요.",
+ grow:"우선모집 결과를 확인하고 다음 주 일반모집(11.17~23)을 준비하는 주예요. 보행자의 날을 맞아 길 건너기 약속도 다시 정해 보세요."
+};
+// [탭, 대상(b|g|all), 종류, 제목, 부제, 설명, 태그[], 준비물[], 순서[], 팁, 링크[[라벨,URL]], 픽, 유튜브ID, 채널]
+const D=[
+ ["play","b","make","상자 신호등 만들기","불이 켜지는 신호등 · 보행자의 날","작은 상자에 동그란 창 3개를 내고 빨강·노랑·초록 셀로판지를 붙여요. 상자 안에서 손전등을 비추면 신호등이 켜져요.",["주말 40분","보통"],["작은 상자 (휴지 상자도 좋아요)","빨강·노랑·초록 셀로판지 (없으면 얇은 색종이)","손전등","검정 색종이","테이프"],["엄마: 상자 앞면에 동그란 창 3개를 위아래로 오려 주기","아이: 상자를 검정 색종이로 감싸고 창 안쪽에 셀로판지를 순서대로 붙이기 (위 빨강·가운데 노랑·아래 초록)","아이: 상자 뒤로 손전등을 넣어 한 칸씩 비추며 \"빨강 멈춰! 초록 건너!\""],"\"왜 빨강이 맨 위에 있을까?\" 같이 생각해 보세요. 완성하면 수요일 신호등 몸놀이와 일요일 횡단보도 산책에 신호등 담당으로 데려가요.",[["보행자의 날","https://newsseoul.co.kr/news/view/1065568210655720"]],1],
+ ["play","b","sci","아이스크림 막대 투석기","고무줄 힘 · 멀리 날리기","막대를 고무줄로 묶어 지렛대를 만들고, 병뚜껑 바구니에 폼폼을 올려 꾹 눌렀다 놓으면 휙 날아가요.",["평일 저녁 20분","보통"],["아이스크림 막대 7개 (또는 나무젓가락)","고무줄 4~5개","병뚜껑 1개","폼폼이나 구긴 종이","글루건 대신 양면테이프"],["엄마: 막대 5개를 겹쳐 양 끝을 고무줄로 묶어 받침 만들기","막대 2개를 한쪽 끝만 묶어 벌리고, 받침을 사이에 끼워 고무줄로 열십자 고정","아이: 위 막대 끝에 병뚜껑을 붙이고 폼폼 올려 눌렀다 놓기 → 떨어진 곳에 표시"],"\"세게 누르면? 살짝 누르면?\" 비교하고 이유를 말해 보세요. 사람 얼굴 쪽으로는 쏘지 않기 약속을 먼저 해요.",[]],
+ ["play","b","move","병뚜껑 컬링","손가락으로 튕기기 · 점수 더하기","바닥에 테이프로 과녁 동그라미 3개를 그리고, 병뚜껑을 손가락으로 튕겨 가운데로 보내요. 칸마다 1·2·3점이에요.",["평일 저녁 15분","쉬움"],["병뚜껑 6개 이상 (두 가지 색)","마스킹테이프","종이와 연필 (점수판)"],["엄마: 바닥에 큰·중간·작은 동그라미를 테이프로 붙여 과녁 만들기 (바깥 1점, 가운데 3점)","출발선에서 번갈아 3개씩 튕기기","멈춘 칸의 점수를 더하기 → 누가 이겼나 비교"],"\"3 + 2 + 1은?\" 손가락으로 더해 보세요. 10점을 넘으면 \"10이랑 몇\"으로 말해 보는 것도 이번 주 배움과 이어져요.",[]],
+ ["play","g","make","클레이 가래떡 떡집","11.11 가래떡데이 소꿉","흰 클레이나 밀가루 반죽을 길게 굴려 가래떡을 뽑고, 썰어서 떡국 떡과 빨대 떡꼬치를 만들어 \"떡집\"을 열어요.",["주말 30분","쉬움"],["흰 클레이 (또는 밀가루 1컵 + 소금 반 컵 + 물 조금)","플라스틱 칼","빨대","쟁반·접시","종이 (가격표)"],["엄마: 밀가루·소금·물로 말랑한 반죽 만들기 (클레이면 생략)","아이: 반죽을 두 손으로 길게 굴려 가래떡 뽑기 → 플라스틱 칼로 어슷 썰어 떡국 떡","아이: 빨대에 떡을 꿰어 떡꼬치, 10개씩 묶어 진열하고 가격표 붙이기"],"\"떡 10개 한 묶음이랑 3개 주세요!\" 손님 놀이로 10 + 몇을 연습해요. 반죽은 먹지 않기로 약속하고 놀이 후 손을 씻어요.",[["가래떡데이","https://www.korea.kr/news/policyNewsView.do?newsId=148866401"]],1],
+ ["play","g","make","데칼코마니 장갑 짝","반 접어 찍으면 똑같은 한 쌍","도화지를 반 접고 한쪽에 장갑 모양을 그려 물감을 짜 바른 뒤, 접어 꾹 누르면 반대쪽에 똑같은 장갑이 생겨요.",["평일 저녁 20분","쉬움"],["도화지","물감 2~3색","연필","가위 (엄마)"],["아이: 도화지를 반 접고 접힌 선에 손을 대고 장갑 모양 따라 그리기","아이: 장갑 안에 물감을 점점이 짜고 접어서 손바닥으로 문지르기","펼쳐서 말린 뒤 엄마가 오려 주면 \"오른손·왼손\" 짝 맞추기"],"\"왼쪽 장갑이랑 오른쪽 장갑, 뭐가 같고 뭐가 달라?\" 물어보세요. 집에 있는 장갑·양말 짝 맞추기로 이어가도 좋아요.",[]],
+ ["play","g","make","휴지심 펭귄 가족","겨울 동물 · 크기 순서","휴지심을 검정·흰 종이로 감싸 펭귄을 만들고, 휴지심 길이를 다르게 잘라 아빠·엄마·나·아기 펭귄 가족을 만들어요.",["평일 저녁 20분","쉬움"],["휴지심 3~4개","검정·흰·주황 색종이","풀","눈 스티커 (없으면 그리기)"],["엄마: 휴지심을 길이가 다르게 잘라 주기","아이: 검정 종이로 감싸고 배에 흰 종이 동그라미, 주황 부리·발 붙이기","키 순서대로 줄 세우기 → \"제일 큰 건? 두 번째는?\""],"펭귄 가족으로 영상 탭의 \"펭귄 라디오 인형극\"을 해 보세요. \"크다·작다\" 비교는 이번 주 수 크기 비교와 짝이에요.",[]],
+ ["play","all","move","멈춰! 신호등 몸놀이","거실 횡단보도 · 길 건너기 약속","거실 바닥에 테이프로 횡단보도를 만들고, 엄마가 빨강·초록 카드를 들면 아이가 멈추거나 건너요. 건널 땐 손 들고 왼쪽·오른쪽을 봐요.",["평일 저녁 20분","쉬움"],["흰 천이나 마스킹테이프 (횡단보도 줄)","빨강·노랑·초록 종이 카드","장난감 자동차"],["아이: 테이프를 나란히 붙여 횡단보도 만들기","엄마가 빨강 → 멈춤, 노랑 → 천천히 제자리 걸음, 초록 → 손 들고 좌우 보고 건너기","역할 바꿔 아이가 신호등, 엄마는 자동차 운전사"],"초록불이 깜빡이면 다음 신호를 기다린다는 것도 알려 주세요. 상자 신호등을 만들었다면 그걸로 해요.",[["보행자의 날","https://newsseoul.co.kr/news/view/1065568210655720"]],1],
+ ["play","all","sci","시금치 초록 물감","도전 재료 미리 만지기","시금치 잎을 흰 종이에 꾹꾹 문지르면 초록 물이 들어요. 잎을 찧어 물을 조금 넣으면 붓으로 그리는 초록 물감이 돼요.",["평일 저녁 15분","쉬움"],["시금치 잎 5~6장","흰 도화지","절구나 숟가락·그릇","붓","물"],["아이: 시금치 잎을 만지고 냄새 맡아 보기 (\"무슨 냄새 같아?\")","잎을 종이에 대고 숟가락으로 문질러 잎 모양 찍기","남은 잎을 찧어 물 한 숟가락 → 붓으로 나무·풀 그리기"],"만지고 냄새 맡은 것만으로도 도전 사다리 두 칸을 올라간 거예요. 손에 묻은 초록을 보며 \"이게 토요일에 달걀이랑 만날 거야\" 하고 기대를 만들어 주세요.",[]],
+ ["play","all","make","쌀알 그림","가래떡은 쌀로 만들어요","도화지에 그림을 그리고 목공풀을 바른 뒤 쌀알을 올려 붙여요. 농업인의 날에 쌀이 어디서 오는지 이야기해요.",["평일 저녁 20분","쉬움"],["쌀 한 줌","목공풀","두꺼운 도화지","크레파스"],["아이: 도화지에 눈사람이나 구름처럼 하얀 것 그리기","목공풀을 그림 안에 바르기","쌀알을 솔솔 뿌리고 꾹 누른 뒤 털어 내기 → 말리기"],"\"쌀로 또 뭘 만들까? 밥, 떡, 과자…\" 함께 꼽아 보세요. 쌀은 작아서 입에 넣지 않도록 지켜봐 주세요.",[["농업인의 날","https://www.korea.kr/news/policyNewsView.do?newsId=148866401"]]],
+ ["play","all","sci","풍선 정전기 마술","머리카락이 쭈뼛!","풍선을 머리카락이나 옷에 문지른 뒤 잘게 찢은 휴지 조각에 가까이 대면 휴지가 풍선에 달라붙어요.",["평일 저녁 15분","쉬움"],["풍선 2개","휴지","털옷이나 머리카락"],["아이: 휴지를 손톱만 하게 잘게 찢어 바닥에 뿌리기","풍선을 머리에 10번 문지르기 (같이 세요!)","풍선을 휴지 조각 위에 천천히 가져가기 → 벽에 붙여 보기"],"\"5번 문지르면? 10번 문지르면?\" 비교해 보세요. 풍선이 터지면 조각은 바로 치워 주세요(삼킬 위험).",[]],
+
+ ["learn","all","hangul","받침 ㄹ·ㄱ 붙이기: 다 + ㄹ = 달","받침 있는 글자 넓히기","지난주 받침 ㅁ·ㄴ 다음 단계예요. 받침 ㄹ은 혀끝을 위로 살짝 올려 \"을\", 받침 ㄱ은 목 안쪽에서 \"윽\" 하고 멈춰요. 다+ㄹ=달, 벼+ㄹ=별, 구+ㄱ=국, 채+ㄱ=책처럼 읽어요.",["10분","난이도 ★★"],["글자 카드 다·무·바·벼·구·채","받침 카드 ㄹ·ㄱ"],["\"다\" 아래에 ㄹ을 놓고 \"다~을 → 달!\" 소리 늘이기","무+ㄹ=물, 바+ㄹ=발, 벼+ㄹ=별 → 구+ㄱ=국, 채+ㄱ=책 읽기","같은 글자에 ㅁ·ㄴ·ㄹ·ㄱ을 바꿔 붙여 보기 (밤·반·발·박)"],"받침만 바꿔도 뜻이 달라지는 걸 놀이처럼 찾아보세요. 가래떡의 \"떡\"도 받침 ㄱ인데 ㄸ까지 있어 어려운 글자(★★★)라 읽기만 해도 충분해요. 🖨️ 학습지 1쪽과 이어져요.",[],1],
+ ["learn","all","hangul","시금치·신호등·가래떡 읽고 쓰기","이번 주 낱말 · 받침 복습","이번 주 놀이에 나오는 세 글자 낱말을 따라 써요. 시금치의 \"금\"(받침 ㅁ), 신호등의 \"신\"·\"등\"(받침 ㄴ·ㅇ)은 복습, 가래떡의 \"떡\"은 도전이에요.",["10분","난이도 ★★"],["학습지 또는 종이","색연필"],["회색 글씨 위로 따라 쓰기","받침 있는 글자에 동그라미 (금·신·등·떡)","마트나 길에서 \"신호등\"·\"시금치\" 글자 찾아 읽기"],"세 글자 낱말은 처음이라 한 줄씩 나눠 해도 돼요. 다 쓰면 \"받침 몇 개 찾았어?\" 세어 보세요.",[]],
+ ["learn","b","math","가래떡 10 + 몇","덧셈식으로 써 보기","10개 묶음 하나와 낱개를 보고 \"10 + 3 = 13\"처럼 식으로 써요. 지난주 11~20 수 순서를 더하기로 이은 단계예요.",["10분","난이도 ★★"],["블록이나 떡 모양 반죽 20개","학습지"],["블록 10개를 한 줄로 묶어 \"10\" 만들기","낱개를 몇 개 더 놓고 \"10 + 몇 = ?\" 말하기","학습지에 식 완성 → 반대로 \"14는 10이랑 몇?\" 묻기"],"떡집 놀이에서 \"10개 묶음 하나랑 4개 주세요\" 주문을 하면 그대로 연습이 돼요.",[],1],
+ ["learn","g","math","누가 더 클까? 11~20","두 수 크기 비교","두 수 중 더 큰 수에 동그라미 해요. 13과 17이면 \"10은 같고 낱개가 7이 더 많으니까 17!\"처럼 이유를 말해요.",["10분","난이도 ★★"],["숫자 카드 11~20","학습지"],["카드 두 장을 뽑아 큰 수 맞히기","블록 탑을 쌓아 정말 큰지 확인","세 장 뽑아 작은 수부터 줄 세우기"],"펭귄 가족 키 순서 놀이와 짝이에요. 헷갈리면 수 순서 사다리에서 \"뒤에 있는 수가 더 커\"를 보여 주세요.",[]],
+ ["learn","all","math","2씩 뛰어 세기 징검다리","2, 4, 6 … 20","징검다리를 하나씩 건너뛰며 \"2, 4, 6, 8…\" 2씩 커지는 수를 말해요. 빈 돌에 들어갈 수를 채워요.",["10분","난이도 ★★★"],["학습지","바닥에 종이 징검다리 10장"],["종이 10장에 1~20 중 짝수만 써서 바닥에 놓기","\"2, 4, 6…\" 말하며 한 칸씩 건너기","학습지 빈칸 채우기 → 양말·장갑 짝을 2씩 세기"],"양말 짝처럼 \"둘씩\" 있는 물건으로 세면 쉬워요. 어려우면 1부터 세며 짝수에서만 손뼉 쳐도 좋아요.",[]],
+ ["learn","all","idea","쌀이 가래떡이 되기까지","순서 말하기 + 왜","벼 베기 → 쌀 씻어 불리기 → 빻아서 쌀가루 → 쪄서 길게 뽑기. 카드 4장을 순서대로 놓고, 왜 그 순서인지 말해요.",["10분","난이도 ★★"],["학습지 순서 카드"],["카드를 섞어 놓고 \"맨 처음은?\" 묻기","순서대로 놓고 번호 쓰기","\"쌀을 왜 물에 불릴까?\", \"왜 쪄야 할까?\" 이유 말하기"],"정답보다 자기 말로 이유를 붙이는 게 목표예요. 떡집 놀이를 한 다음에 하면 더 잘해요.",[["가래떡데이","https://www.korea.kr/news/policyNewsView.do?newsId=148866401"]],1],
+ ["learn","all","idea","만약에 신호등이 없다면?","\"만약에\" 상상하고 이유 대기","\"만약에 신호등이 없으면 어떻게 될까?\", \"만약에 겨울이 안 오면?\"처럼 질문하고, 생각을 세 가지 말해요.",["10분","난이도 ★★★"],["없음 (이동 중에도 좋아요)"],["엄마가 \"만약에…\" 질문 하나 던지기","아이가 생각 1개 말하면 \"또 있을까?\" 세 개까지","아이가 엄마에게 \"만약에\" 질문 내기"],"지난주 대피 순서의 \"왜\"에서 한 단계 나아가, 일어날 일을 상상하는 연습이에요. 엉뚱한 답도 이유가 있으면 칭찬해 주세요.",[]],
+ ["learn","all","en","M is for Milk","알파벳 M·N·O 첫소리","J·K·L 다음 순서로 M(milk), N(nose), O(orange)의 이름과 첫소리를 말하고 따라 써요.",["10분","난이도 ★★"],["알파벳 카드 M·N·O"],["카드 보며 \"M says /m/, milk!\" 소리 내기","A부터 O까지 순서대로 카드 놓기","학습지 영어 칸 따라 쓰기"],"M은 입술을 다물고 \"음-\", N은 혀끝을 윗잇몸에 대고 \"은-\" 하는 소리예요. 한글 받침 ㅁ·ㄴ 소리와 비슷해서 지난주와 이어져요.",[],1],
+ ["learn","all","en","I can ___.","할 수 있는 걸 문장으로","\"I can jump!\" \"I can run!\"처럼 할 수 있는 동작을 문장으로 말하고 몸으로 보여 줘요.",["5분","난이도 ★★"],["동작 그림 카드 (jump·run·hop)"],["엄마가 \"I can jump!\" 하며 점프 시범","아이가 카드를 뽑아 \"I can ___!\" 말하고 동작하기","\"Can you hop?\" 물으면 \"Yes, I can!\" 대답"],"체육 배움의 스킵·멀리뛰기와 같이 하면 좋아요. 처음엔 동작 단어만 말해도 칭찬해 주세요.",[]],
+ ["learn","b","pe","던진 공 바로 받기","튕기지 않고 두 손으로","지난주 튕긴 공 받기 다음 단계예요. 엄마가 아래에서 위로 살살 던져 주면 바닥에 튕기기 전에 두 손으로 받아요.",["10분","난이도 ★★"],["큰 고무공이나 비치볼"],["2걸음 거리에서 엄마가 아래로 던져 주면 받기 10번","팔을 앞으로 내밀고 공이 오면 가슴 쪽으로 끌어안기","3걸음으로 늘리기 → 아이가 엄마에게 던져 주기"],"공을 끝까지 보라고 해 주세요. 무서워하면 가벼운 비치볼이나 풍선부터 시작해요.",[]],
+ ["learn","g","pe","깡충깡충 스킵","한 발씩 번갈아 깡충","지난주 발 바꿔 깨금발 다음 단계예요. \"오른발 깡충-왼발 깡충\" 번갈아 리듬 있게 앞으로 가요.",["5분","난이도 ★★★"],["바닥 테이프 (출발·도착선)"],["제자리에서 오른발 한 번 깡충 → 왼발 한 번 깡충","엄마 손을 잡고 천천히 앞으로 스킵","\"깡-충, 깡-충\" 구호에 맞춰 도착선까지"],"처음엔 걷다가 한 발씩 깡충 해도 충분해요. 신나는 박수 리듬에 맞추면 더 잘 돼요.",[]],
+ ["learn","all","pe","두 발 멀리뛰기 기록","팔 흔들고 두 발로 착지","출발선에서 팔을 뒤로 흔들었다 앞으로 뻗으며 두 발로 멀리 뛰어요. 착지한 곳에 테이프로 표시하고 기록을 재요.",["10분","난이도 ★★"],["마스킹테이프","블록 (길이 재기)"],["무릎 굽히고 팔 뒤로 → \"하나, 둘, 셋!\" 앞으로 뛰기","두 발 모아 착지, 뒤꿈치 자리에 테이프 표시","3번 뛰고 가장 먼 기록을 블록으로 재기"],"\"I can jump!\" 영어 문장과 같이 해요. 미끄러운 매트 위에선 하지 말고 맨발로 해요.",[],1],
+
+ ["video","all","know","이번 주 영상은 쉬어 가요","확인된 영상만 싣는 원칙","영상은 제목과 채널을 직접 확인한 것만 싣고 있어요. 이번 주도 그 확인을 마치지 못해서 영상을 넣지 않았어요. 대신 아래 화면 없는 이야기 시간을 해 보세요.",["안내"],[],[],"영상은 하루 1시간 이내, 한 편 보고 끄기를 미리 약속해 두면 좋아요. 다음 주에 확인된 영상으로 다시 채워 볼게요.",[],1],
+ ["video","b","story","라디오 교통 뉴스","아이가 리포터","장난감 자동차로 거실 도로를 만들고, 아이가 \"여기는 신호등 앞입니다!\" 하고 라디오 리포터처럼 교통 상황을 전해요.",["10분","화면 없음"],["장난감 자동차","상자 신호등 (있으면)","휴지심 마이크"],["엄마가 자동차를 움직이면 아이가 중계하기 (\"빨간불이라 멈췄어요!\")","\"그다음엔 어떻게 됐을까?\" 이야기 이어 말하기","뉴스 끝에 \"길 건널 땐 손 들기!\" 안전 한마디"],"이야기 속에 \"왜 멈췄을까요?\"를 넣으면 창의력 배움의 이유 말하기와 이어져요.",[]],
+ ["video","g","story","펭귄 가족 라디오 인형극","목소리로만 하는 이야기","휴지심 펭귄 가족을 들고 이불 뒤에 숨어 목소리만으로 \"펭귄 가족의 겨울 소풍\" 이야기를 들려줘요.",["15분","화면 없음"],["휴지심 펭귄 가족","이불이나 상자 (무대)"],["펭귄마다 목소리 정하기 (아빠는 굵게, 아기는 가늘게)","아이가 \"추운 날 펭귄들이…\"로 이야기 시작","엄마가 \"그때 바람이 휘잉!\" 사건 하나 넣기 → 아이가 마무리"],"키 순서대로 펭귄이 등장하게 하면 크기 비교 연습도 돼요.",[]],
+
+ ["go","all","","동네 횡단보도 탐험","보행자의 날 미션","동네 횡단보도에서 신호등을 함께 보며 길 건너기 약속을 연습해요. 초록불이 켜져도 좌우를 보고, 깜빡이면 다음 신호를 기다려요.",["주말 30분","준비물 없음"],["모자·장갑"],["횡단보도 앞에서 한 걸음 물러서서 기다리기","초록불 → 손 들고 왼쪽·오른쪽 보고 건너기","\"초록불이 몇 초 동안 켜져 있었을까?\" 같이 세기"],"보행자의 날(11.11) 주간 미션이에요. 아이가 앞장서되 손은 꼭 잡아요.",[["보행자의 날","https://newsseoul.co.kr/news/view/1065568210655720"]],1],
+ ["go","b","","보도블록 2칸 점프","2씩 뛰어 세기 산책","보도블록이나 계단을 한 칸 건너 두 칸씩 뛰며 \"2, 4, 6…\" 세요. 20까지 가면 성공!",["20분"],["없음"],["평평한 보도블록 길 찾기","두 칸씩 두 발 점프하며 2씩 세기","돌아올 땐 \"20, 18, 16…\" 거꾸로"],"차가 다니지 않는 공원 길에서 해요. 낙엽이 젖은 곳은 미끄러우니 피해 주세요.",[]],
+ ["go","g","","나뭇가지 겨울눈 찾기","잎 떨어진 가지 관찰","잎이 떨어진 나뭇가지 끝을 보면 내년 봄에 필 작고 볼록한 눈이 있어요. 공원 나무마다 눈 모양을 비교해요.",["30분"],["돋보기 (있으면)","종이와 연필"],["잎이 다 떨어진 나무 찾기","가지 끝의 볼록한 눈을 돋보기로 보기","눈 모양을 그려 오고 \"뾰족해? 동그래?\" 비교"],"가지는 꺾지 말고 보기만 해요. 바람이 차니 모자를 챙겨요.",[]],
+ ["go","all","","시장·마트 초록 잎 고르기","도전 재료 직접 고르기","장 보러 가서 아이가 직접 시금치를 골라요. \"잎이 제일 초록인 걸 찾아 줘!\" 하고 맡기면 먹을 마음이 커져요.",["주말 장보기"],["장바구니"],["채소 코너에서 시금치 찾기","잎이 싱싱하고 진한 초록인 것 고르기","계산대에서 아이가 직접 건네기 → 집에서 씻기 도와주기"],"떡집이 있으면 가래떡이 뽑혀 나오는 모습도 구경해요. 자기가 고른 재료는 한 입 도전 확률이 올라가요.",[["겨울 시금치","https://lady.khan.co.kr/cooking/article/202601161348011"]]],
+
+ ["grow","all","","만 4세 이맘때 발달","이번 주 살펴볼 것","놀이 규칙을 이해하고 지키려 하고, \"왜?\"에 자기 생각으로 이유를 붙이기 시작해요. 같은 것·다른 것을 구별하고, 공을 잡고 한 발로 뛰는 등 몸 조절도 늘어요.",["발달"],[],[],"신호등 몸놀이에서 \"빨간불엔 왜 멈춰?\"를 물어보고, 규칙을 자기 말로 설명하는지 보세요.",[],1],
+ ["grow","all","","유치원 우선모집 결과 · 일반모집 준비","다음 주 11.17~23","대구시교육청 발표 기준 우선모집 추첨 결과는 11.9, 일반모집은 11.17~23(결과 26일), 추가모집은 12.1부터예요. 희망 유치원 3곳까지, 유보통합포털에서 지원해요. 2021~2023년생 대상이라 2022년생도 해당돼요.",["행사","이번 주"],[],[],"지역마다 일정이 다를 수 있으니 우리 지역 교육청 안내를 꼭 확인해 주세요. 우선모집에서 결과가 나왔다면 등록 기간도 놓치지 마세요.",[["모집 일정","https://kbmaeil.com/article/20261028500282"],["결과 발표일","https://kbmaeil.com/article/20261101500507"]],1],
+ ["grow","all","","보행자의 날 · 길 건너기 약속","11.11","11월 11일은 보행자의 날이에요. 아이와 \"멈추기 → 손 들기 → 좌우 보기 → 건너기\" 약속을 정하고, 초록불이 깜빡이면 기다리는 연습을 해요.",["안전","이번 주"],[],[],"아이는 키가 작아 운전자 눈에 잘 안 보여요. 해가 짧아진 요즘엔 밝은 색 겉옷을 입혀 주세요.",[["보행자의 날","https://newsseoul.co.kr/news/view/1065568210655720"]]],
+ ["grow","all","","독감 철 · 손 씻기","접종 여부 확인","독감 유행 철이에요. 아직 접종 전이라면 다니는 소아청소년과에 문의해 보세요. 처음 맞는 어린 아이는 2회 접종이 필요할 수 있어요.",["접종"],[],[],"손 씻기 30초, 기침은 옷소매에, 실내 자주 환기하기. 열이나 기침이 있으면 기관에 보내지 말고 진료를 받아요.",[]],
+ ["grow","all","","영유아 건강검진·구강검진","생일에 따라 차수 확인","2022년생은 생일에 따라 영유아 건강검진 6차 또는 7차, 구강검진 3차 또는 4차 시기예요.",["건강"],[],[],"'The건강보험' 앱에서 우리 아이 검진 기간과 검진기관을 확인하세요. 기간 끝 무렵엔 예약이 몰려요.",[]],
+ ["grow","all","","영상은 하루 1시간 이내로","WHO 3~4세 권고","WHO는 3~4세 아이의 영상 시청을 하루 1시간 이내로, 적을수록 좋다고 권해요. 몸을 많이 움직이고 충분히 자는 것도 함께 권해요.",["생활"],[],[],"해가 짧아져 바깥 놀이가 줄기 쉬운 때예요. 신호등 몸놀이·멀리뛰기처럼 실내 몸놀이로 움직이는 시간을 채워 주세요.",[]]
+];
+let tab="play",who="all",subj="all";
+try{const s=JSON.parse(localStorage.getItem("tiger22")||"{}");if(s.tab)tab=s.tab;if(s.who)who=s.who}catch(e){}
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pass=r=>who==="all"?true:who==="together"?r[1]==="all":(r[1]===who||r[1]==="all");
+function render(){
+  $("tabs").innerHTML=TABS.map(t=>`<button class="tab" role="tab" aria-selected="${t.id===tab}" data-tab="${t.id}"><span class="ti">${t.ic}</span>${t.name}<small>${D.filter(r=>r[0]===t.id&&pass(r)).length}개</small></button>`).join("");
+  $("subj").className="seg"+(tab==="learn"?" on":"");
+  $("subj").innerHTML=SUBJ.map(([k,l])=>`<button aria-pressed="${k===subj}" data-subj="${k}">${l}</button>`).join("");
+  $("seg").innerHTML=[["all","✨ 전체"],["b","👦 남아"],["g","👧 여아"],["together","🤝 공통만"]].map(([k,l])=>`<button aria-pressed="${k===who}" data-who="${k}">${l}</button>`).join("");
+  const rows=D.filter(r=>r[0]===tab&&pass(r)&&(tab!=="learn"||subj==="all"||r[2]===subj)).sort((a,b)=>(b[11]||0)-(a[11]||0));
+  const T=TABS.find(t=>t.id===tab);
+  $("lead").innerHTML=`<b>${T.ic} ${T.name} · ${rows.length}개</b>${LEAD[tab]}`;
+  $("grid").innerHTML=rows.map(r=>`<article class="card${r[11]?" hot":""}">
+    ${r[12]?`<a class="thumb" href="https://www.youtube.com/watch?v=${esc(r[12])}" target="_blank" rel="noopener" aria-label="${esc(r[3])} 유튜브에서 보기"><img src="https://i.ytimg.com/vi/${esc(r[12])}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"></a>`:""}
+    <div class="top">${r[11]?'<span class="star">이번 주 픽</span>':""}<span class="who ${r[1]}">${WHO[r[1]]}</span>${r[2]?`<span class="kind">${KIND[r[2]]}</span>`:""}${r[6].map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
+    <h3>${esc(r[3])}</h3><div class="by">${esc(r[4])}</div>${r[13]?`<div class="ch">📺 ${esc(r[13])}</div>`:""}<p>${esc(r[5])}</p>
+    ${r[7].length?`<div class="mats">${r[7].map(m=>`<span>${esc(m)}</span>`).join("")}</div>`:""}
+    ${r[8].length?`<ol class="steps">${r[8].map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`:""}
+    ${r[9]?`<div class="tip"><b>💡 ${r[12]?"보고 나서":"엄마 팁"}</b> ${esc(r[9])}</div>`:""}
+    ${r[10].length?`<div class="links">${r[10].map(([l,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div>`:""}
+  </article>`).join("")||`<p class="note">이번 주엔 이 조합의 내용이 없어요.</p>`;
+  try{localStorage.setItem("tiger22",JSON.stringify({tab,who}))}catch(e){}
+}
+$("srclist").innerHTML=SRC.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join("");
+document.addEventListener("click",e=>{const b=e.target.closest("[data-tab],[data-who],[data-subj]");if(!b)return;
+  if(b.dataset.tab)tab=b.dataset.tab;else if(b.dataset.subj)subj=b.dataset.subj;else who=b.dataset.who;render();
+  if(b.dataset.tab)$("lead").scrollIntoView({block:"nearest"});});
+render();
+</script>
+
+</body>
+</html>
