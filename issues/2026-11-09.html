@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light only">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>11월 2주차 다다다</title>
+<!-- 발송 2026-11-08 VOL.04 -->
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+/* Layout: 크레용 띠 표지 → 세 아이 요약 → 한눈에 보는 이번 주(요일표) → 도전 재료 → 고정 탭(놀이·영상·체험·건강) + 아이별 토글 → 둥근 카드 → 장보기 목록 → 달력 → 출처 */
+:root{
+  color-scheme:only light;
+  --bg:#fff8f1; --paper:#ffffff; --fg:#3a3040; --muted:#857a88; --line:#f1e4dc;
+  --coral:#ff7f6e; --coral-soft:#ffe6e1; --sky:#4fa3e8; --sky-soft:#e1f0fd; --leaf:#3fb37f; --leaf-soft:#dff6ea; --sun:#ffbf3c; --sun-soft:#fff3d4; --grape:#a98bff; --grape-soft:#efe9ff;
+  --display:"Jua","Gowun Dodum",system-ui,sans-serif;
+  --body:"Gowun Dodum",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
+  --r:24px; --shadow:0 4px 14px rgba(255,127,110,.12);
+}
+*{box-sizing:border-box}
+body{background:var(--bg) radial-gradient(circle,#ffd9cf 1.4px,transparent 1.6px) 0 0/22px 22px;color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:8px}
+
+/* 표지 */
+.cover{background:linear-gradient(160deg,#fff 0%,#fff1ec 60%,#fff6dc 100%);border-radius:30px;padding:30px 22px 24px;position:relative;overflow:hidden;border:2px solid #ffd6cc;box-shadow:var(--shadow)}
+.floaty{position:absolute;font-size:26px;opacity:.9;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.floaty{animation:bob 3.2s ease-in-out infinite}.floaty:nth-of-type(2n){animation-delay:-1.4s}}
+@keyframes bob{50%{transform:translateY(-6px) rotate(6deg)}}
+.cover::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;
+  background:linear-gradient(90deg,var(--coral) 0 20%,var(--sun) 20% 40%,var(--leaf) 40% 60%,var(--sky) 60% 80%,var(--grape) 80% 100%)}
+.issue{padding-right:90px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.pill{display:inline-block;border-radius:999px;padding:2px 12px;font-size:12px;background:var(--coral-soft);color:var(--fg)}
+.cover h1{font-family:var(--display);font-weight:400;font-size:clamp(36px,10vw,58px);line-height:1;margin:12px 0 6px;letter-spacing:-.01em}
+.cover h1 span{color:var(--coral)}
+.cover p{margin:0;color:var(--muted);max-width:46ch;position:relative;z-index:1;padding-right:64px}
+.deco{position:absolute;right:-8px;bottom:-16px;width:104px;height:104px;pointer-events:none;opacity:.95}
+@media (min-width:560px){.cover p{padding-right:0}.deco{width:128px;height:128px}}
+
+h2{font-family:var(--display);font-weight:400;font-size:23px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+h2 .e{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--paper);box-shadow:var(--shadow);font-size:18px}
+.cap{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* 세 아이 */
+.kids{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.kid{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;min-width:0}
+.kid .dot{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:26px;line-height:1}
+.kid b{font-family:var(--display);font-weight:400;font-size:17px;display:block;line-height:1.3}
+.kid small{display:block;color:var(--muted);font-size:12px;margin-bottom:2px}
+.kid p{margin:2px 0 0;font-size:14px}
+
+/* 요일표 */
+.plan ul{margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.plan li{list-style:none;display:grid;grid-template-columns:62px 1fr;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:9px 14px;align-items:baseline}
+.plan li{box-shadow:var(--shadow)}
+.plan li.we{background:var(--sun-soft)}
+.plan .d{font-family:var(--display);font-size:16px;color:var(--coral);white-space:nowrap}
+.plan .d small{display:block;font-family:var(--body);font-size:11px;color:var(--muted)}
+.plan .t{font-size:14px;min-width:0}
+.plan .t i{font-style:normal;font-size:11px;border-radius:999px;padding:0 7px;margin-right:4px;white-space:nowrap}
+.i4{background:var(--coral-soft)} .i9{background:var(--sky-soft)} .iall{background:var(--leaf-soft)}
+
+/* 탭 */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:8px;display:flex;flex-direction:column;gap:8px}
+.tabrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.tab{all:unset;cursor:pointer;text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:10px 2px;font-family:var(--display);font-size:15px;line-height:1.2;min-width:0}
+.tab small{display:block;font-family:var(--body);font-size:11px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 4px 0 #e5604f}
+.tab[aria-selected="true"] small{color:var(--paper);opacity:.9}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{all:unset;cursor:pointer;font-size:13px;padding:4px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper)}
+.seg button[aria-pressed="true"]{background:var(--grape);border-color:var(--grape);color:#fff}
+
+.lead{background:var(--grape-soft);border-radius:var(--r);padding:14px 16px;font-size:14px}
+.lead b{font-family:var(--display);font-weight:400;font-size:18px;display:block}
+
+/* 카드 */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card .top{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.who{font-size:11px;border-radius:999px;padding:1px 9px}
+.who.k4{background:var(--coral-soft)} .who.k9{background:var(--sky-soft)} .who.all{background:var(--leaf-soft)}
+.kind{font-size:11px;border-radius:999px;padding:1px 9px;background:var(--sun-soft)}
+.tag{font-size:11px;border-radius:999px;padding:1px 9px;border:1px dashed var(--line);color:var(--muted)}
+.card h3{font-family:var(--display);font-weight:400;font-size:19px;line-height:1.3;margin:0;overflow-wrap:anywhere}
+.card .by{font-size:13px;color:var(--muted);margin-top:-4px}
+.card p{margin:0;font-size:14px}
+.mats{display:flex;flex-wrap:wrap;gap:5px}
+.mats span{font-size:12px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:1px 8px}
+.steps{margin:0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:2px}
+.tip{font-size:13px;background:var(--bg);border-radius:12px;padding:8px 10px}
+.tip b{font-weight:400;color:var(--coral)}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.links a{font-size:13px;text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+.links a:hover{border-color:var(--coral)}
+.hot{border:2px solid var(--coral)}
+.hot .star{font-size:11px;color:#fff;background:linear-gradient(90deg,var(--coral),var(--sun));border-radius:999px;padding:1px 9px}
+
+/* 장보기 */
+.shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.shop div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;min-width:0}
+.shop b{font-family:var(--display);font-weight:400;font-size:17px;display:block;margin-bottom:4px}
+.shop ul{margin:0;padding-left:18px;font-size:14px}
+
+/* 달력 */
+.cal ul{margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.cal li{list-style:none;display:grid;grid-template-columns:84px 1fr;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:10px 14px}
+.cal .d{font-family:var(--display);color:var(--coral);font-variant-numeric:tabular-nums}
+.cal a{color:var(--sky)}
+
+.sources{font-size:13px;color:var(--muted)}
+.sources ul{padding-left:18px;margin:6px 0 0;display:flex;flex-direction:column;gap:3px}
+.sources a{color:var(--sky)}
+.note{font-size:12px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
+.dare .dcard{background:var(--sun-soft);border:2px solid var(--sun);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px}
+.dhead{display:flex;gap:12px;align-items:center}.demo{font-size:34px;line-height:1}
+.dhead small{display:block;color:var(--muted);font-size:12px}.dhead b{font-family:var(--display);font-weight:400;font-size:26px}
+.dare p{margin:0;font-size:14px}.dare h3{font-family:var(--display);font-weight:400;font-size:19px;margin:4px 0 0}.dare h3 span{font-family:var(--body);font-size:12px;color:var(--muted)}
+.ladder{display:flex;flex-wrap:wrap;gap:6px}.ladder span{font-size:13px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.thumb{display:block;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/9;background:var(--sun-soft)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb::after{content:"▶";position:absolute;inset:0;margin:auto;width:48px;height:48px;border-radius:50%;background:rgba(255,127,110,.92);color:#fff;display:grid;place-items:center;font-size:18px;padding-left:3px;box-sizing:border-box}
+.card .ch{font-size:12px;color:var(--muted)}
+/* 폰 브라우저 강제 다크모드에서도 밝게 */
+html,body{color-scheme:only light;forced-color-adjust:none;}
+</style>
+
+<body>
+
+
+<div class="wrap">
+<header class="cover">
+  <div class="issue"><span class="pill">VOL.04</span><span>2026년 11월 9일(월) – 11월 15일(일)</span></div>
+  <span class="floaty" style="right:20px;top:30px">🚒</span><span class="floaty" style="right:58px;top:72px">🦆</span><span class="floaty" style="right:16px;top:104px">🥦</span>
+  <h1>11월 2주차<br><span>다다다</span>❤️</h1>
+  <p>월요일이 소방의 날이에요. 집에서 하는 119 대피 훈련, 우리 집 안전 지도, 도전 재료 브로콜리, 일요일 서산 국화 미로와 겨울 철새, 난방철에 챙길 건강을 한 장에 모았어요.</p>
+  <svg class="deco" viewBox="0 0 128 128" aria-hidden="true">
+    <path d="M56 70 L52 112 L76 112 L72 70 Z" fill="var(--leaf-soft)" stroke="var(--leaf)" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="44" cy="58" r="18" fill="var(--leaf-soft)" stroke="var(--leaf)" stroke-width="3"/>
+    <circle cx="84" cy="58" r="18" fill="var(--leaf-soft)" stroke="var(--leaf)" stroke-width="3"/>
+    <circle cx="64" cy="42" r="22" fill="var(--leaf-soft)" stroke="var(--leaf)" stroke-width="3"/>
+    <circle cx="57" cy="40" r="3" fill="var(--leaf)"/><circle cx="71" cy="46" r="3" fill="var(--leaf)"/><circle cx="44" cy="60" r="3" fill="var(--leaf)"/><circle cx="85" cy="58" r="3" fill="var(--leaf)"/>
+  </svg>
+</header>
+
+<section aria-label="이번 주 세 아이">
+  <h2><span class="e">👧</span>이번 주 세 아이</h2>
+  <div class="kids">
+    <div class="kid"><span class="dot" style="background:var(--coral-soft)">👭</span><div><small>다솔·다정 · 2022년생 쌍둥이 · 만4세반</small><b>꼬마 소방관이 되는 주</b><p>종이상자 소방차를 각자 하나씩 만들어 이름을 붙이고, 분무기로 종이 불꽃을 꺼요. 금요일엔 종이접시 철새를 만들어 일요일 새 구경을 준비해요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--sky-soft)">🎒</span><div><small>다연 · 2017년생 · 초등 3학년</small><b>우리 집 안전 지도 그리는 주</b><p>집 평면도에 나가는 길 두 개와 모이는 곳을 표시하고, 모양이 다른 컵에 물을 옮겨 담아 어느 컵이 더 많이 들어가는지 재 봐요.</p></div></div>
+    <div class="kid"><span class="dot" style="background:var(--leaf-soft)">💛</span><div><small>이번 주 함께하는 것</small><b>목요일 브로콜리 들깨무침</b><p>다솔·다정이는 작은 나무 떼기, 다연이는 계량컵으로 물·식초 재기 담당이에요.</p></div></div>
+  </div>
+</section>
+
+<section class="plan" aria-label="한눈에 보는 이번 주">
+  <h2><span class="e">🗓️</span>한눈에 보는 이번 주</h2>
+  <ul>
+    <li><span class="d">월<small>11.9</small></span><span class="t"><i class="iall">🚒 소방의 날</i> <i class="i4">👭 다솔·다정</i>종이상자 소방차 <i class="i9">🎒 다연</i>우리 집 안전 지도</span></li>
+    <li><span class="d">화<small>11.10</small></span><span class="t"><i class="iall">💛 셋이</i>"불이야!" 우리 집 대피 훈련 놀이</span></li>
+    <li><span class="d">수<small>11.11</small></span><span class="t"><i class="i4">👭 다솔·다정</i>분무기로 종이 불꽃 끄기 <i class="i9">🎒 다연</i>컵 들이 대결 · 브로콜리 사 오기</span></li>
+    <li><span class="d">목<small>11.12</small></span><span class="t"><i class="iall">💛 셋이</i>🥦 도전 재료 브로콜리 들깨무침</span></li>
+    <li><span class="d">금<small>11.13</small></span><span class="t"><i class="i4">👭 다솔·다정</i>종이접시 철새 · 집 전기장판 KC 마크 확인</span></li>
+    <li class="we"><span class="d">토<small>11.14</small></span><span class="t"><i class="iall">💛 셋이</i>온양민속박물관 + 아산도서관 '소방의 날' 책 전시 <i class="i9">🎒 다연</i>종이비행기 기록 대회 · 기러기 줄 날기 놀이</span></li>
+    <li class="we"><span class="d">일<small>11.15</small></span><span class="t"><i class="iall">💛 셋이</i>🌼 서산국화축제 마지막 날 + 🦆 서산버드랜드 철새</span></li>
+  </ul>
+  <p class="cap">평일은 저녁 20분 안쪽 놀이로, 나들이는 주말로 몰았어요. 월요일에 그린 안전 지도가 화요일 대피 훈련으로, 수요일 컵 들이 대결이 목요일 요리 계량으로, 금요일 철새가 일요일 버드랜드로 이어져요.</p>
+</section>
+
+<section class="dare" aria-label="이번 주 도전 재료">
+  <h2><span class="e">🥄</span>이번 주 도전 재료</h2>
+  <div class="dcard">
+    <div class="dhead"><span class="demo">🥦</span><div><small>브로콜리는 겨울부터 이듬해 봄까지가 맛과 영양이 가장 좋은 제철이에요</small><b>브로콜리</b></div></div>
+    <p>무와 배추로 하얀·연두 채소를 만났으니, 이번엔 한 단계 더 진한 초록이에요. 브로콜리는 생김새가 '작은 나무' 같아서 손으로 떼고 세워 보며 친해지기 좋아요. 목표는 "다 먹기"가 아니라 "내가 뗀 나무 한 입"이에요.</p>
+    <h3>🌳 작은 나무 브로콜리 들깨무침 <span>15~20분 · 데치기는 10초</span></h3>
+    <div class="mats"><span>브로콜리 1송이</span><span>들깨가루 2큰술</span><span>멸치액젓 (원래 2큰술)</span><span>소금 한 꼬집</span><span>식초 1큰술 + 물 500mL</span><span>계량컵·계량스푼</span><span>위생장갑 3켤레</span></div>
+    <ol class="steps"><li>다솔·다정: 엄마가 줄기에서 잘라 준 브로콜리를 손으로 작은 나무처럼 하나씩 떼어 각자 그릇에 모으기</li><li>다연: 계량컵으로 물 500mL를 재고 식초 1큰술을 넣어 식초물 만들기. 다솔·다정이와 함께 브로콜리를 퐁당 넣고 10분 담가 두기</li><li>엄마: 흐르는 물에 씻어 건지고, 소금 한 꼬집 넣은 끓는 물에 10초만 데친 뒤 찬물에 헹궈 물기를 꽉 짜기</li><li>셋이: 위생장갑을 끼고 액젓을 넣어 버무린 뒤, 다연이가 잰 들깨가루 2큰술을 솔솔 뿌려 한 번 더 버무리기. 원래 레시피는 멸치액젓 2큰술이에요. 아이 입맛엔 1큰술 + 소금 1작은술로 바꿔도 된다고 나와 있고, 처음엔 그보다 적게 넣고 맛을 보며 더해도 돼요</li></ol>
+    <div class="tip"><b>편식 팁</b> 데치기 전 생 브로콜리 한 송이와 데친 브로콜리 한 송이를 나란히 놓고 "색이 어떻게 달라졌지?" 찾아보게 해요. 접시에 브로콜리를 세워 '우리 숲'을 만들고, 각자 뗀 나무에 이름을 붙여 줘요. 안 먹어도 "숲을 만들었네!", "냄새까지 왔네!" 하고 칭찬해 주세요.</div>
+    <div class="ladder"><span>👀 작은 나무 보기</span><span>✋ 떼고 담그기</span><span>👃 냄새</span><span>👅 핥아보기</span><span>😋 한 입</span></div>
+    <p class="cap">세 아이가 어디까지 왔는지 사다리에서 짚어 보며 칭찬해 주세요.</p>
+  </div>
+</section>
+
+<nav class="tabs" aria-label="섹션">
+  <div class="tabrow" role="tablist" id="tabs"></div>
+  <div class="seg" id="seg"></div>
+</nav>
+
+<div class="lead" id="lead"></div>
+<div class="grid" id="grid"></div>
+
+<section aria-label="이번 주 장보기">
+  <h2><span class="e">🧺</span>이번 주 장보기</h2>
+  <div class="shop">
+    <div><b>🛒 마트</b><ul><li>브로콜리 1송이 (도전 재료)</li><li>들깨가루 · 멸치액젓 · 식초</li><li>위생장갑</li><li>모양 다른 컵·그릇 4개 (집에 있는 것으로)</li></ul></div>
+    <div><b>✏️ 문구</b><ul><li>작은 종이상자 2개, 빨강·검정 색종이, 병뚜껑 8개, 빨대 2개 (소방차)</li><li>분무기 2개, 빨강·주황 색종이, 마스킹테이프 (불꽃 끄기)</li><li>종이접시 2장, 깃털 또는 색종이, 할핀 (철새)</li><li>모눈종이 또는 A4, 색연필 (안전 지도)</li><li>줄자 (종이비행기 대회)</li></ul></div>
+    <div><b>🔥 난방철 미리</b><ul><li>전기장판·매트에 KC 안전인증 마크 있는지 보기</li><li>일요일 서산 나들이용 따뜻한 겉옷·장갑</li><li>쌍안경 (있으면, 철새 구경)</li></ul></div>
+  </div>
+</section>
+
+<section class="cal" aria-label="이번 주 달력">
+  <h2><span class="e">📌</span>이번 주 달력</h2>
+  <ul>
+    <li><span class="d">11.9 (월)</span><span>제64주년 소방의 날 <a href="https://www.asiae.co.kr/article/2026110409223455515" target="_blank" rel="noopener">아시아경제</a></span></li>
+    <li><span class="d">~ 11.30</span><span>아산도서관 입구 로비 도서 전시 &lt;소방의 날: 우리 곁의 영웅&gt; (11.2~30) <a href="https://asanwhat.kr/catalog/exhibitions" target="_blank" rel="noopener">아산왓</a></span></li>
+    <li><span class="d">11.14 (토)</span><span>아산아트홀(아산시평생학습관) 공연 &lt;아기 돼지 삼형제&gt;. 시간·요금·관람 나이는 상세 안내에서 확인해 주세요 <a href="https://asanwhat.kr/catalog/exhibitions" target="_blank" rel="noopener">아산왓</a></span></li>
+    <li><span class="d">11.14~15</span><span>2026 은행나무길 거리예술제 &lt;아트 스트리트&gt; 13:00~17:00 <a href="https://culture.asan.go.kr/_culture/new/index.asp" target="_blank" rel="noopener">아산문화재단</a></span></li>
+    <li><span class="d">~ 11.15 (일)</span><span>제26회 서산국화축제 (11.6~15, 서산 고북면) <a href="https://www.m-i.kr/news/articleView.html?idxno=2013497" target="_blank" rel="noopener">매일일보</a></span></li>
+    <li><span class="d">지금</span><span>독감 환자가 2주 연속 늘었고 7~12세가 가장 많아요 <a href="https://www.medifonews.com/news/article.html?no=218534" target="_blank" rel="noopener">메디포뉴스</a></span></li>
+  </ul>
+</section>
+
+<section class="sources" aria-label="출처">
+  <h2><span class="e">🔗</span>이번 호를 만든 자료</h2>
+  <ul id="srclist"></ul>
+  <p class="note">놀이는 집에 있는 재료로 Claude가 짠 거예요. 요금·운영 시간은 출처 기준이라 바뀔 수 있으니 출발 전에 한 번 더 확인해 주세요. 발달·건강 내용은 일반적인 기준이라 아이마다 다를 수 있어요. 걱정되는 점은 소아청소년과와 상담해 주세요. 반과 학년은 출생연도로 계산하고 매년 3월에 자동으로 올라가요.</p>
+</section>
+</div>
+
+<script>
+const SRC=[
+ ["경기도 소방의 날 안전축제 · 제64주년 소방의 날 (아시아경제, 2026.11.4)","https://www.asiae.co.kr/article/2026110409223455515"],
+ ["화재 발생 시 요령 (행정안전부 어린이 안전 배움터)","https://mois.go.kr/chd/sub/a06/fire/screen.do"],
+ ["저온화상 예방 (정책브리핑, 소방청)","https://www.korea.kr/news/policyNewsView.do?newsId=148896730"],
+ ["겨울철 전기장판류 화재·화상 주의 (산업일보, 2014)","https://kidd.co.kr/news/177757"],
+ ["인플루엔자 의사환자 다시 증가, 44주 22.8명 (메디포뉴스, 2026.11.6)","https://www.medifonews.com/news/article.html?no=218534"],
+ ["제26회 서산국화축제 개막 (매일일보, 2026.11.3)","https://www.m-i.kr/news/articleView.html?idxno=2013497"],
+ ["제26회 충남 서산국화축제 (충청매일, 2026.11.3)","https://www.ccdn.co.kr/news/articleView.html?idxno=1108552"],
+ ["서산국화축제 국화 미로 정원 (더페어, 2026.11.3)","https://www.thefairnews.co.kr/news/articleView.html?idxno=92805"],
+ ["서산버드랜드 요금·운영 (맘맘)","https://mom-mom.net/travel/places/6332b33c1331f6c47de3e0ac"],
+ ["온양민속박물관 관람 안내 (육아크루)","https://www.yugacrew.com/chungnam/asan/museum/206_12"],
+ ["대전 119시민체험센터 방문기 (트래블로그, 2026.9)","https://www.trvlogue.com/ko/daejeon-119-safety-center"],
+ ["아산 전시·관람 일정 (아산왓)","https://asanwhat.kr/catalog/exhibitions"],
+ ["아산문화재단 공연·행사","https://culture.asan.go.kr/_culture/new/index.asp"],
+ ["브로콜리 들깨무침 아이반찬 (만개의레시피)","https://www.10000recipe.com/recipe/6954539"],
+ ["브로콜리 데치기와 제철 (만개의레시피)","https://www.10000recipe.com/recipe/5756613"]
+];
+const TABS=[{id:"play",name:"🎨 놀이",sub:"만들기·실험"},{id:"video",name:"📺 영상",sub:"유튜브"},{id:"go",name:"🚗 체험",sub:"나들이"},{id:"grow",name:"🌱 건강",sub:"챙길 것"}];
+const WHO={k4:"👭 다솔·다정",k9:"🎒 다연",all:"💛 셋이 함께"};
+const KIND={make:"✂️ 만들기",cook:"🍳 요리",sci:"🔬 수학·실험",move:"🏃 몸놀이",know:"🔍 지식",story:"📖 이야기",how:"✂️ 만들기 영상"};
+const LEAD={
+ play:"월요일 소방의 날과 일요일 철새 나들이로 짠 한 주예요. 다연이는 우리 집 안전 지도와 컵 들이 대결을, 다솔·다정이는 소방차·불꽃 끄기·철새 만들기를 해요. 다솔·다정이 놀이는 재료를 두 세트 준비하면 다툼이 줄어요.",
+ video:"이번 주도 영상을 쉬어 가요. 영상마다 유튜브 공식 확인(oembed)으로 제목·채널을 확인한 것만 싣는데, 이번에도 그 확인 창구가 열리지 않아 확인 안 된 링크는 넣지 않았어요. 확인되는 대로 다시 골라 올게요.",
+ go:"일요일은 국화축제 마지막 날이라 서산으로 가요. 국화 미로를 걷고, 같은 서산의 버드랜드에서 천수만 겨울 철새를 만나요. 토요일엔 가까운 아산에서 옛 생활 박물관과 도서관 '소방의 날' 책 전시를 묶었어요.",
+ grow:"독감이 2주 연속 늘었고 초등학생 나이에서 가장 많아요. 소방의 날을 맞아 집에서 불이 났을 때 어떻게 하는지 같이 연습하고, 전기장판을 꺼내는 철이라 저온화상도 한 번 챙겨 주세요."
+};
+// [탭, 대상, 종류, 제목, 부제, 설명, 태그[], 준비물[], 순서[], 팁, 링크[[라벨,URL]], 픽, 유튜브ID, 채널]
+const D=[
+ ["play","k4","make","종이상자 소방차","소방의 날 · 만들기","작은 종이상자에 빨간 색종이를 붙이고 병뚜껑 바퀴와 빨대 호스를 달아 나만의 소방차를 만들어요.",["평일 저녁 20분","쉬움"],["작은 종이상자 2개","빨강·검정 색종이","병뚜껑 8개","빨대 2개","딱풀·테이프","크레파스"],["상자 겉면에 빨간 색종이를 붙이고, 검정 색종이로 창문 붙이기","병뚜껑 4개를 테이프로 붙여 바퀴 만들기 (엄마가 도와주기)","빨대를 옆에 붙여 소방 호스를 달고, 차 옆에 '119'와 각자 이름 쓰기"],"\"소방차는 어떤 소리를 내며 달려갈까?\" 하고 사이렌 소리를 함께 내 봐요. 수요일 불꽃 끄기와 화요일 대피 훈련 때 이 소방차가 출동해요.",[]],
+ ["play","k4","move","분무기로 종이 불꽃 끄기","꼬마 소방관 · 화장실·베란다에서","벽에 빨강·주황 색종이로 '불꽃'을 붙이고, 분무기로 물을 뿌려 불꽃을 맞혀 떨어뜨려요.",["평일 저녁 15분","물 놀이"],["분무기 2개","빨강·주황 색종이","마스킹테이프","수건"],["엄마가 색종이를 불꽃 모양으로 찢어 화장실 타일에 테이프로 살짝 붙이기","다솔·다정이가 각자 분무기를 들고 \"출동!\" 외친 뒤 물을 뿌려 불꽃 맞히기","물에 젖어 떨어진 불꽃을 세어 보고, 마지막엔 둘이 함께 바닥 정리하기"],"진짜 불은 아이가 끄는 게 아니라 \"불이야!\" 외치고 밖으로 나가는 거라고 놀이 끝에 꼭 짚어 줘요. 바닥이 미끄러우니 맨발로 해요.",[]],
+ ["play","k4","make","종이접시 철새","일요일 버드랜드 미리 보기","종이접시를 반으로 접어 몸통을 만들고, 날개를 할핀으로 달아 위아래로 펄럭이는 철새를 만들어요.",["평일 저녁 20분","보통"],["종이접시 2장","깃털 또는 색종이","할핀 4개","눈 스티커","크레파스","가위"],["종이접시를 반으로 접어 몸통으로 쓰고, 다른 접시에서 날개 두 장 오려 내기 (엄마)","날개에 깃털이나 찢은 색종이를 붙이고, 눈 스티커로 얼굴 만들기","할핀으로 날개를 몸통에 달고 (엄마), 몸통에 각자 이름 쓰기"],"일요일 버드랜드에 가져가서 \"우리 새랑 닮은 새가 있나?\" 찾아보게 해요. 토요일 기러기 줄 날기 놀이 때 손에 들고 날아요.",[]],
+ ["play","k9","make","우리 집 안전 지도","소방의 날 · 평면도 그리기","모눈종이에 우리 집을 위에서 내려다본 모양으로 그리고, 방마다 나가는 길과 밖에서 모이는 곳을 표시해요.",["평일 저녁 20분","보통"],["모눈종이 또는 A4","자","색연필 (빨강·초록)"],["현관·방·거실·베란다를 칸으로 나눠 위에서 본 모양으로 그리기","방마다 현관으로 나가는 길을 초록 화살표로, 다른 길이 있으면 한 가지 더 그리기","소화기·계단 위치를 찾아 그려 넣고, 밖에서 가족이 모일 곳을 정해 별표 하기"],"행정안전부 안내처럼 엘리베이터 대신 계단으로 가는 길을 그리게 해요. 다 그린 지도는 현관에 붙이고 화요일 대피 훈련 때 다연이가 길잡이를 해요.",[["화재 시 요령","https://mois.go.kr/chd/sub/a06/fire/screen.do"]]],
+ ["play","k9","sci","컵 들이 대결","어느 컵에 물이 더 많이 들어갈까?","길쭉한 컵, 넓적한 그릇처럼 모양이 다른 컵 4개에 들어가는 물의 양을 먼저 예상하고, 계량컵으로 재서 순서를 맞혀 봐요.",["평일 저녁 20분","쉬움"],["모양 다른 컵·그릇 4개","계량컵","물","쟁반","기록 종이"],["컵 4개를 늘어놓고 \"가장 많이 들어갈 것 같은 순서\"를 먼저 적기","컵마다 물을 가득 채운 뒤 계량컵에 부어 몇 mL인지 재서 적기","예상과 실제 순서를 비교하고, 키가 큰 컵이 꼭 더 많이 들어갔는지 이야기하기"],"정답보다 \"왜 그렇게 예상했어?\"를 물어봐 주세요. 목요일 브로콜리 요리 때 물 500mL와 식초 1큰술을 다연이가 재요.",[]],
+ ["play","k9","sci","종이비행기 기록 대회","토요일 · 줄자로 재기","종이비행기를 세 가지 모양으로 접어 날리고, 줄자로 날아간 거리를 재서 어떤 모양이 가장 멀리 가는지 찾아요.",["주말 25분","보통"],["A4 종이 3장","줄자","마스킹테이프","기록 종이"],["바닥에 마스킹테이프로 출발선 붙이기","모양이 다른 종이비행기 3개를 접어 각각 세 번씩 날리기","줄자로 거리를 재서 m·cm로 적고, 가장 멀리 간 비행기를 뽑기"],"다솔·다정이에게는 비행기가 떨어진 자리에 스티커를 붙이는 '심판'을 맡겨 주세요. 같은 비행기도 매번 거리가 달라지는 걸 함께 봐요.",[]],
+ ["play","all","move","\"불이야!\" 우리 집 대피 훈련","화요일 저녁 · 셋이 함께","월요일에 그린 안전 지도를 보며, \"불이야!\" 외치기부터 낮은 자세로 나가 모이는 곳까지 놀이처럼 연습해요.",["평일 저녁 15분","준비물 간단"],["다연이 안전 지도","의자 2개","줄 또는 마스킹테이프","소방차"],["의자 두 개 사이에 줄을 걸어 '연기'를 만들고, 그 밑으로 배가 바닥에 닿지 않게 기어가기 연습","엄마가 \"불이야!\" 하면 셋이 함께 크게 따라 외치고, 다연이 지도대로 현관까지 낮은 자세로 이동","문을 열기 전 손잡이 만져 보기 흉내, 현관 밖 모이는 곳까지 가서 인원 세기"],"행정안전부는 아이들이 겁이 나면 옷장이나 침대 밑에 숨기 쉽다고 해요. \"불이 나면 숨지 않고 밖으로 나가요\"를 셋이 함께 외치며 마무리해요.",[["화재 시 요령","https://mois.go.kr/chd/sub/a06/fire/screen.do"]],1],
+ ["play","all","move","기러기 줄 날기 놀이","토요일 · 거실 몸놀이","셋이 한 줄로 서서 팔을 날개처럼 펴고, 맨 앞 '대장 새'가 움직이는 대로 따라 날아요. 신호가 오면 대장을 바꿔요.",["주말 15분","준비물 간단"],["종이접시 철새 (있으면)","쿠션 몇 개"],["거실에 쿠션을 놓아 '산'과 '호수'를 만들기","맨 앞 새가 천천히, 빠르게, 낮게 날면 뒤의 새들이 똑같이 따라 하기","엄마가 \"바람이 바뀐다!\" 하면 맨 뒤 새가 앞으로 와서 대장 하기"],"다솔·다정이도 꼭 한 번씩 대장을 하게 해 주세요. 일요일 버드랜드에서 진짜 새들이 어떻게 줄지어 나는지 같이 찾아봐요.",[]],
+
+ ["go","all","","서산국화축제","서산 고북면 복남골길 31-1 · ~11.15(일) 마지막 날","국화로 만든 미로 정원을 걸으며 숨은 글자를 찾고, 국화꽃 따기와 알타리무 수확 체험도 해요. 하트 조형물, 산책로, 과수원 길도 있어요.",["11.6~15","입장료·시간은 기사에 없음"],[],[],"기사에 입장료와 운영 시간이 나오지 않아 출발 전에 서산시 안내를 한 번 더 확인해 주세요. 미로에서 찾은 글자를 다연이가 적고, 다솔·다정이는 국화꽃 따기를 해요. 같은 날 버드랜드와 묶으면 하루 코스가 돼요.",[["축제 안내","https://www.m-i.kr/news/articleView.html?idxno=2013497"],["국화 미로","https://www.thefairnews.co.kr/news/articleView.html?idxno=92805"]],1],
+ ["go","all","","서산버드랜드","서산 부석면 천수만로 655-73 · 겨울 철새","천수만 철새를 소개하는 철새전시관과 4D영상관, 둥지전망대, 관찰데크, 숲속놀이터가 있어요. 금요일에 만든 종이접시 철새를 가져가 닮은 새를 찾아봐요.",["어린이 무료 · 성인 3,000원","월요일 휴관 · 11~2월 10~17시"],[],[],"요금·시간은 2025년에 고친 안내 기준이라 바뀌었을 수 있어요. 4D영상(성인 2,000원·청소년 1,000원)과 철새탐조투어(5,000원)는 따로 내요. 유모차 대여와 기저귀 교환대는 없다고 나와 있어요. 문의 041-661-8054.",[["요금·운영","https://mom-mom.net/travel/places/6332b33c1331f6c47de3e0ac"]]],
+ ["go","all","","온양민속박물관","아산 충무로 123 · 옛 생활 살림","옛날 사람들이 쓰던 살림과 생활 도구를 볼 수 있는 아산의 민속박물관이에요. 날이 추운 토요일 오전, 가까운 곳에서 다녀오기 좋아요.",["어린이 1,500원 · 어른 5,000원","월요일 휴관 · 10:00~17:30"],[],[],"아산시민·문화가 있는 날 할인이 있어요. 안내는 2026년 9월 아산시 공공데이터 기준이에요. 다녀와서 \"옛날엔 불을 어떻게 껐을까?\" 이야기하며 소방의 날과 이어 봐요. 문의 041-542-6001.",[["관람 안내","https://www.yugacrew.com/chungnam/asan/museum/206_12"]]],
+ ["go","all","","아산도서관 '소방의 날: 우리 곁의 영웅'","아산도서관 입구 로비 · 11.2~30","소방의 날을 맞아 꾸민 도서 전시예요. 토요일 박물관 가는 길에 들러 전시를 보고, 어린이 자료실에서 소방차·소방관 그림책을 골라 와요.",["11.2~30","도서관 로비"],[],[],"같은 날(11.14) 아산도서관에서 열리는 인형극 체험은 접수가 이미 마감됐다고 나와 있어요. 빌려 온 책은 화요일 대피 훈련 전에 읽어 주면 좋아요.",[["아산왓 일정","https://asanwhat.kr/catalog/exhibitions"]]],
+ ["go","k9","","대전 119시민체험센터","대전 서구 복수서로 63 · 다음을 위해 예약해 두기","화재 대피, 완강기, 지진, 심폐소생술을 직접 해 보는 무료 체험관이에요. 6세 이상만 들어갈 수 있어서 지금은 다연이만 가능해요.",["무료 · 온라인 예약","화~토 09:30·13:30 두 번 · 일·월 휴관"],[],[],"방문기(2026.9) 기준으로 예약은 대전시 OK예약서비스에서만 받고, 석 달 치 자리가 한꺼번에 열린다고 해요. 운동화와 편한 옷이 좋아요. 다솔·다정이가 6세가 되면 셋이 함께 가요. 문의 042-270-1140.",[["방문기","https://www.trvlogue.com/ko/daejeon-119-safety-center"]]],
+
+ ["grow","k9","","독감, 7~12세가 가장 많아요","10.25~31 외래 1천 명당 22.8명","질병관리청 표본감시에서 독감 의심 환자가 2주 연속 늘었어요. 나이별로는 7~12세가 1천 명당 60.9명으로 가장 높았고, 1~6세는 33.1명이었어요.",["접종","학교"],[],[],"아직 안 맞았다면 이번 주에 예약해요. 열이 나면 학교·유치원에 보내기 전에 선생님께 먼저 연락하고, 집에 오면 손부터 씻어요.",[["기사 보기","https://www.medifonews.com/news/article.html?no=218534"]]],
+ ["grow","k4","","불이 나면 숨지 말고 \"불이야!\"","행정안전부 어린이 안전 배움터","아이들은 무서우면 옷장이나 침대 밑에 숨기 쉬워요. 불을 보면 \"불이야!\" 크게 외치고, 엘리베이터 대신 계단으로, 연기가 있으면 몸을 낮추고 젖은 수건으로 코와 입을 막고 나가요.",["안전","소방의 날"],[],[],"밖으로 나온 뒤엔 절대 다시 들어가지 않아요. 옷에 불이 붙으면 두 손으로 눈과 입을 가리고 멈춰서, 엎드려, 굴러요. 화요일 놀이로 몸에 익혀요.",[["화재 시 요령","https://mois.go.kr/chd/sub/a06/fire/screen.do"]]],
+ ["grow","all","","전기장판 꺼낼 때 저온화상 조심","40~50℃에 오래 닿아도 화상","소방청은 체온보다 조금 높은 40~50℃ 열에 오래 닿아도 저온화상이 생긴다고 안내해요. 전기장판을 높은 온도로 켠 채 자지 말고, 피부와 장판 사이에 이불을 깔아요.",["계절 건강","난방"],[],[],"KC 안전인증 마크가 있는지 보고, 장판 위에 두꺼운 이불이나 매트를 덮지 말고, 쓰지 않을 땐 플러그를 뽑아요. 아이들은 오래 쓰지 않게 해 주세요. 온열기는 1m 이상 떨어뜨려요.",[["소방청 안내","https://www.korea.kr/news/policyNewsView.do?newsId=148896730"],["전기장판 주의","https://kidd.co.kr/news/177757"]]]
+];
+let tab="play",who="all";
+try{const s=JSON.parse(localStorage.getItem("dadada")||"{}");if(s.tab)tab=s.tab;if(s.who)who=s.who}catch(e){}
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pass=r=>who==="all"?true:who==="together"?r[1]==="all":(r[1]===who||r[1]==="all");
+function render(){
+  $("tabs").innerHTML=TABS.map(t=>`<button class="tab" role="tab" aria-selected="${t.id===tab}" data-tab="${t.id}">${t.name}<small>${t.sub} · ${D.filter(r=>r[0]===t.id&&pass(r)).length}</small></button>`).join("");
+  $("seg").innerHTML=[["all","✨ 전체"],["k4","👭 다솔·다정"],["k9","🎒 다연"],["together","💛 셋이"]].map(([k,l])=>`<button aria-pressed="${k===who}" data-who="${k}">${l}</button>`).join("");
+  const rows=D.filter(r=>r[0]===tab&&pass(r)).sort((a,b)=>(b[11]||0)-(a[11]||0));
+  const T=TABS.find(t=>t.id===tab);
+  $("lead").innerHTML=`<b>${T.name} · ${rows.length}개</b>${LEAD[tab]}`;
+  $("grid").innerHTML=rows.map(r=>`<article class="card${r[11]?" hot":""}">
+    ${r[12]?`<a class="thumb" href="https://www.youtube.com/watch?v=${esc(r[12])}" target="_blank" rel="noopener" aria-label="${esc(r[3])} 유튜브에서 보기"><img src="https://i.ytimg.com/vi/${esc(r[12])}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"></a>`:""}
+    <div class="top">${r[11]?'<span class="star">이번 주 픽</span>':""}<span class="who ${r[1]}">${WHO[r[1]]}</span>${r[2]?`<span class="kind">${KIND[r[2]]}</span>`:""}${r[6].map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
+    <h3>${esc(r[3])}</h3><div class="by">${esc(r[4])}</div>${r[13]?`<div class="ch">📺 ${esc(r[13])}</div>`:""}<p>${esc(r[5])}</p>
+    ${r[7].length?`<div class="mats">${r[7].map(m=>`<span>${esc(m)}</span>`).join("")}</div>`:""}
+    ${r[8].length?`<ol class="steps">${r[8].map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`:""}
+    ${r[9]?`<div class="tip"><b>💡 ${r[0]==="video"?"보고 나서":"엄마 팁"}</b> ${esc(r[9])}</div>`:""}
+    ${r[10].length?`<div class="links">${r[10].map(([l,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div>`:""}
+  </article>`).join("")||`<p class="note">이번 주엔 이 조합의 내용이 없어요.</p>`;
+  try{localStorage.setItem("dadada",JSON.stringify({tab,who}))}catch(e){}
+}
+$("srclist").innerHTML=SRC.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join("");
+document.addEventListener("click",e=>{const b=e.target.closest("[data-tab],[data-who]");if(!b)return;
+  if(b.dataset.tab)tab=b.dataset.tab;else who=b.dataset.who;render();
+  if(b.dataset.tab)$("lead").scrollIntoView({block:"nearest"});});
+render();
+</script>
+
+</body>
+</html>
